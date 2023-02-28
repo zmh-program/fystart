@@ -1,2 +1,2 @@
 # fystart
-A simple and intuitive browser start page using vue and elementPlus
+A simple and intuitive browser start page using vue and element-plus
