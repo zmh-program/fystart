@@ -91,9 +91,19 @@ main .background.focus {
 #input-container .search-icon {
   position: absolute;
   opacity: 1;
+  right: 5px;
   height: 42px;
+  width: 42px;
   transition: .2s;
-  transition-delay: .25s;
+  transition-delay: .05s;
+}
+
+#input-container .search-icon svg {
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  margin: 6px;
+  border-radius: 50%;
 }
 
 #input-container .search-icon.focus {
@@ -150,7 +160,9 @@ main .background.focus {
   </div>
   <div class="horizontal-center" id="input-container" :class="{'focus': focus}">
     <input placeholder="search" @focusin="setFocus(true)" @focusout="setFocus(false)" size="30" type="text">
-    <div class="search-icon" :class="{'focus': (!focus)}">asdf</div>
+    <div class="search-icon" :class="{'focus': (!focus)}">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="#70C001" stroke-miterlimit="10" stroke-width="42"/><path fill="none" stroke="#70C001" stroke-linecap="round" stroke-miterlimit="10" stroke-width="42" d="M338.29 338.29L448 448"/></svg>
+    </div>
   </div>
   <div id="tool-container" :class="{'focus': focus}" :style="{'transform': `translateX(${transform}px)`}">
     <a class="tool" href="https://github.com">
