@@ -27,7 +27,7 @@ export class TypingEffect {
             this.ref.value = this.operation.substring( 0, this.index ) + ( this.cursor ? "|" : "&nbsp;" );
             this.delayerCall(Math.random() * (this.enableCursor ? 200 : 100));
         } else {
-            if (this.enableCursor && this.asLoading <= 11) {
+            if (this.enableCursor && this.asLoading <= 5) {
                 this.ref.value = this.operation + ( this.asLoading % 2 === 1 ? "|" : "&nbsp;" );
                 this.asLoading += 1;
                 this.delayerCall(800);

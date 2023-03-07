@@ -96,6 +96,7 @@ main .background.focus {
   width: 42px;
   transition: .2s;
   transition-delay: .05s;
+  cursor: pointer;
 }
 
 #input-container .search-icon svg {
@@ -104,7 +105,12 @@ main .background.focus {
   padding: 6px;
   margin: 6px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,.2);
+  transition: .25s;
+}
+
+#input-container .search-icon:hover svg {
+  background: rgba(0,0,0,.4);
 }
 
 #input-container .search-icon.focus {
@@ -158,9 +164,9 @@ main .background.focus {
   left: 50%;
   transform: translateX(-50%);
   color: rgba(255,255,255,0.8);
-  font-family: monospace;
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 360;
+  letter-spacing: 0.01cm;
   text-decoration: none;
   transition: .25s;
 }
@@ -183,17 +189,28 @@ main .background.focus {
 }
 
 .quote {
-  top: 300px;
+  top: 400px;
   position: absolute;
   text-align: center;
   opacity: 0;
   max-width: min(80%, 360px);
   color: #fff;
-  transition: .25s;
+  transition: .45s;
+  backdrop-filter: blur(2px);
+  text-shadow: 0 2px 20px rgba(0,0,0,.8);
+  background: rgba(60,60,60,0.1);
+  border-radius: 8px;
+  padding: 4px 6px;
+  user-select: none;
 }
 
 .quote.focus {
   opacity: 1;
+}
+
+.quote.focus:hover {
+  text-shadow: 0 2px 20px rgba(0,0,0,.9);
+  background: rgba(60,60,60,0.2);
 }
 
 @media (max-height: 520px) {
@@ -250,7 +267,7 @@ import { uptime, search, transformTools } from "@/assets/script/utils";
 import { TypingEffect } from "@/assets/script/typing";
 
 const time: Ref<string> = uptime();
-const content = new TypingEffect("The Linux philosophy is 'Laugh in the face of danger'. Oops, Wrong One. 'Do it yourself'. Yes, that's it.", 1000, true).run();
+const content = new TypingEffect("「 Where there is a will, there is a way. 」", 800, true).run();
 
 const focusRef = ref();
 onMounted(() => focusRef.value.focus());
