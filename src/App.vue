@@ -1,4 +1,4 @@
-<style scoped>
+<style>
 main {
   overflow: hidden;
 }
@@ -113,9 +113,16 @@ main .background.focus {
   transition: .25s;
 }
 
+@keyframes size-animation {
+  0% {scale: 1}
+  50% {scale: 0.6}
+  100% {scale: 1}
+}
+
 #input-container .engine-icon:hover svg,
 #input-container .search-icon:hover svg {
   background: rgba(0,0,0,.4);
+  animation: size-animation .5s;
 }
 
 #input-container .engine-icon.focus,
@@ -144,7 +151,9 @@ main .background.focus {
 }
 
 .suggestion {
+  color: #fff;
   padding: 2px 4px;
+  text-decoration: none;
   transition: .3s;
   cursor: pointer;
 }
@@ -268,13 +277,17 @@ main .background.focus {
     <div class="horizontal-center" id="time">
       <span>{{ time }}</span>
     </div>
-    <div class="horizontal-center" id="input-container" :class="{'focus': focus}">
-      <div class="engine-icon" :class="{'focus': focus}"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Baidu</title><path d="M9.154 0C7.71 0 6.54 1.658 6.54 3.707c0 2.051 1.171 3.71 2.615 3.71 1.446 0 2.614-1.659 2.614-3.71C11.768 1.658 10.6 0 9.154 0zm7.025.594C14.86.58 13.347 2.589 13.2 3.927c-.187 1.745.25 3.487 2.179 3.735 1.933.25 3.175-1.806 3.422-3.364.252-1.555-.995-3.364-2.362-3.674a1.218 1.218 0 0 0-.261-.03zM3.582 5.535a2.811 2.811 0 0 0-.156.008c-2.118.19-2.428 3.24-2.428 3.24-.287 1.41.686 4.425 3.297 3.864 2.617-.561 2.262-3.68 2.183-4.362-.125-1.018-1.292-2.773-2.896-2.75zm16.534 1.753c-2.308 0-2.617 2.119-2.617 3.616 0 1.43.121 3.425 2.988 3.362 2.867-.063 2.553-3.238 2.553-3.988 0-.745-.62-2.99-2.924-2.99zm-8.264 2.478c-1.424.014-2.708.925-3.323 1.947-1.118 1.868-2.863 3.05-3.112 3.363-.25.309-3.61 2.116-2.864 5.42.746 3.301 3.365 3.237 3.365 3.237s1.93.19 4.171-.31c2.24-.495 4.17.123 4.17.123s5.233 1.748 6.665-1.616c1.43-3.364-.808-5.109-.808-5.109s-2.99-2.306-4.736-4.798c-1.072-1.665-2.348-2.268-3.528-2.257zm-2.234 3.84l1.542.024v8.197H7.758c-1.47-.291-2.055-1.292-2.13-1.462-.072-.173-.488-.976-.268-2.343.635-2.049 2.447-2.196 2.447-2.196h1.81zm3.964 2.39v3.881c.096.413.612.488.612.488h1.614v-4.343h1.689v5.782h-3.915c-1.517-.39-1.59-1.465-1.59-1.465v-4.317zm-5.458 1.147c-.66.197-.978.708-1.05.928-.076.22-.247.78-.1 1.269.294 1.095 1.248 1.144 1.248 1.144h1.37v-3.34z"/></svg></div>
-      <input placeholder="search" ref="focusRef" v-model="input" @focusin="setFocus(true)" @focusout="setFocus(false)" size="30" type="text">
-      <a class="search-icon" :class="{'focus': focus}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="#70C001" stroke-miterlimit="10" stroke-width="42"/><path fill="none" stroke="#70C001" stroke-linecap="round" stroke-miterlimit="10" stroke-width="42" d="M338.29 338.29L448 448"/></svg></a>
-      <div class="search-result" :class="{'focus': focus && (!notSearching)}">
-        <template v-for="(suggest, idx) in suggestion">
-          <div class="suggestion">{{ suggest }}</div>
+    <div class="horizontal-center" id="input-container" :class="{'focus': focus}" @focusin="setFocus(true)" @focusout="setFocus(false)" @click="setFocus(true)">
+      <input placeholder="search" ref="focusRef" @keyup="listener" v-model="input" size="30" type="text">
+      <div class="engine-icon" :class="{'focus': focus}" @click="toggle" v-html="engineIcon" />
+      <a class="search-icon" :class="{'focus': focus}" :href="mixURI(input)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="#70C001" stroke-miterlimit="10" stroke-width="42"/><path fill="none" stroke="#70C001" stroke-linecap="round" stroke-miterlimit="10" stroke-width="42" d="M338.29 338.29L448 448"/></svg></a>
+      <div class="search-result" :class="{'focus': focus && (!notSearching) && input}">
+        <a class="suggestion" :href="'https://www.deepl.com/translator#en/zh/'+ decodeURI(input)">
+          <svg role="img" style="width: 16px; height: 16px; fill: rgba(255,255,255,.8); transform: translateY(2px)" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7 1.62-4.33L19.12 17h-3.24z"></path></svg>
+          &nbsp;&nbsp;<span style="color: rgba(255,255,255,.95)">{{ input }}</span>
+        </a><br>
+        <template v-for="suggest in suggestion">
+          <a class="suggestion" :href="mixURI(suggest)">{{ suggest }}</a><br>
         </template>
       </div>
     </div>
@@ -301,6 +314,7 @@ import {computed, onMounted, ref, watch} from "vue";
 import type { Ref } from "vue";
 import { uptime, search, transformTools } from "@/assets/script/utils";
 import { TypingEffect } from "@/assets/script/typing";
+import {engineIcon, mixURI, toggle} from "@/assets/script/engine";
 
 const time: Ref<string> = uptime();
 const content = new TypingEffect("「 Where there is a will, there is a way. 」", 800, true).run();
@@ -318,4 +332,9 @@ const notSearching = computed(() => (!input.value.trim().length) && (!suggestion
 watch(input, function() {
   search(input.value, (arr: string[]) => suggestion.value = arr);
 })
+
+const listener = (ev: KeyboardEvent): void => {
+  if (ev.key === "Enter") window.location.href = mixURI(input.value);
+};
+
 </script>
