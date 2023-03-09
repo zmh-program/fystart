@@ -8,6 +8,7 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>if (navigator.serviceWorker) navigator.serviceWorker.register('/service.js').then(() => 0)</script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
