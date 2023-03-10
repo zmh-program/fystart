@@ -1,4 +1,5 @@
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
 main {
   overflow: hidden;
 }
@@ -269,11 +270,102 @@ main .background.focus {
     opacity: 0;
   }
 }
+
+.settings {
+  position: absolute;
+  cursor: pointer;
+  padding: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  backdrop-filter: blur(10px);
+  top: 26px;
+  right: 26px;
+  transition: .45s;
+}
+
+.settings:hover {
+  background: rgba(255,255,255,.1);
+  rotate: 90deg;
+}
+
+#setting-window {
+  position: absolute;
+  padding: 26px;
+  top: 50%;
+  left: 50%;
+  transition: .35s;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 52px);
+  height: calc(100% - 52px);
+  background: rgba(24,24,24,.8);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  max-width: 640px;
+  z-index: -64;
+  opacity: 0;
+}
+
+#setting-window.active {
+  z-index: 64;
+  opacity: 1;
+}
+
+#setting-window * {
+  color: #fff;
+  user-select: none;
+  font-family:  "Nunito", monospace;
+}
+
+#setting-window .row {
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+}
+
+#setting-window .row .column {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+#setting-window label {
+  width: max-content;
+  text-wrap: none;
+  transform: translateY(14px);
+}
+
+#setting-window input {
+  background: #181818;
+  margin: 10px 4px;
+  border: none;
+  padding: 16px;
+  width: 100%;
+  height: 36px;
+  border-radius: 16px;
+  outline: none;
+  letter-spacing: 1px;
+}
 </style>
 
 <template>
   <main>
-    <img class="background" src="/background.jpg" :class="{'focus': focus}" alt>
+    <div id="setting-window" :class="{'active': settings}">
+      <h1 align="center">Settings</h1><br>
+      <div class="row">
+        <div class="column">
+          <label>Background</label>
+          <input type="url" placeholder="Input your background url">
+        </div>
+        <div class="column">
+          <label>Background</label>
+          <input type="url" placeholder="Input your background url">
+        </div>
+      </div>
+    </div>
+    <svg class="settings" @click="settings = true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Settings</title><path d="M262.29 192.31a64 64 0 1057.4 57.4 64.13 64.13 0 00-57.4-57.4zM416.39 256a154.34 154.34 0 01-1.53 20.79l45.21 35.46a10.81 10.81 0 012.45 13.75l-42.77 74a10.81 10.81 0 01-13.14 4.59l-44.9-18.08a16.11 16.11 0 00-15.17 1.75A164.48 164.48 0 01325 400.8a15.94 15.94 0 00-8.82 12.14l-6.73 47.89a11.08 11.08 0 01-10.68 9.17h-85.54a11.11 11.11 0 01-10.69-8.87l-6.72-47.82a16.07 16.07 0 00-9-12.22 155.3 155.3 0 01-21.46-12.57 16 16 0 00-15.11-1.71l-44.89 18.07a10.81 10.81 0 01-13.14-4.58l-42.77-74a10.8 10.8 0 012.45-13.75l38.21-30a16.05 16.05 0 006-14.08c-.36-4.17-.58-8.33-.58-12.5s.21-8.27.58-12.35a16 16 0 00-6.07-13.94l-38.19-30A10.81 10.81 0 0149.48 186l42.77-74a10.81 10.81 0 0113.14-4.59l44.9 18.08a16.11 16.11 0 0015.17-1.75A164.48 164.48 0 01187 111.2a15.94 15.94 0 008.82-12.14l6.73-47.89A11.08 11.08 0 01213.23 42h85.54a11.11 11.11 0 0110.69 8.87l6.72 47.82a16.07 16.07 0 009 12.22 155.3 155.3 0 0121.46 12.57 16 16 0 0015.11 1.71l44.89-18.07a10.81 10.81 0 0113.14 4.58l42.77 74a10.8 10.8 0 01-2.45 13.75l-38.21 30a16.05 16.05 0 00-6.05 14.08c.33 4.14.55 8.3.55 12.47z" fill="none" stroke="rgba(255,255,255,.9)" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+    <img class="background" :src="background" :class="{'focus': focus}" alt>
     <div class="horizontal-center" id="time">
       <span>{{ time }}</span>
     </div>
@@ -316,6 +408,8 @@ import { uptime, search, transformTools } from "@/assets/script/utils";
 import { TypingEffect } from "@/assets/script/typing";
 import {engineIcon, mixURI, toggle} from "@/assets/script/engine";
 
+const background: string = localStorage.getItem("background") || "/background.jpg";
+const settings: Ref<boolean> = ref(false);
 const time: Ref<string> = uptime();
 const content = new TypingEffect("「 Where there is a will, there is a way. 」", 800, true).run();
 
