@@ -31,7 +31,7 @@ main .background.focus {
 
 #time span {
   color: #fff;
-  font-family: monospace;
+  font-family: "Nunito", monospace;
   font-weight: 400;
   font-size: 42px;
   text-shadow: 0 0 20px rgba(0, 0, 0, .35);
@@ -202,13 +202,13 @@ main .background.focus {
 
 .about {
   position: absolute;
+  z-index: -1;
   bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
   color: rgba(255,255,255,0.8);
   font-size: 14px;
-  font-weight: 360;
-  letter-spacing: 0.01cm;
+  font-family: "Nunito", monospace;
   text-decoration: none;
   transition: .25s;
 }
@@ -244,6 +244,7 @@ main .background.focus {
   border-radius: 8px;
   padding: 4px 6px;
   user-select: none;
+  font-family: "Nunito", "Comic Sans MS", Consolas, monospace, sans-serif;
 }
 
 .quote.focus {
