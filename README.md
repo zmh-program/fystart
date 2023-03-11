@@ -14,3 +14,5 @@
 ![main](/screenshot/main.png)
 
 ![search](/screenshot/search.png)
+
+![customize](/screenshot/customize.png)
