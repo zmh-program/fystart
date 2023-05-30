@@ -8,16 +8,18 @@ export class TypingEffect {
     public ref: Ref<string>;
     private cursor: boolean;
     private index: number;
-    private asLoading: number;
+    protected running: boolean;
+    private offset: number;
 
-    constructor(operation: string, timeout: number = 800, enableCursor: boolean = false) {
+    constructor(operation: string, timeout: number = 800, enableCursor: boolean = false, selectRef?: Ref<string>) {
         this.operation = operation;
         this.timeout = timeout;
         this.enableCursor = enableCursor;
-        this.ref = ref("");
+        this.ref = selectRef || ref("");
         this.cursor = true;
         this.index = 0;
-        this.asLoading = 0;
+        this.running = true;
+        this.offset = 0;
     }
 
     private getTimeout(): number {
@@ -27,13 +29,16 @@ export class TypingEffect {
     protected count(): void {
         this.index += 1;
         this.cursor = !this.cursor;
+        if (!this.running) {
+            return;
+        }
         if (this.index <= this.operation.length) {
-            this.ref.value = this.operation.substring( 0, this.index ) + ( this.cursor ? "|" : "&nbsp;" );
+            this.ref.value = this.operation.substring( 0, this.index ) + ( this.cursor ? "|" : " " );
             this.delayerCall(Math.random() * (this.enableCursor ? 200 : 100));
         } else {
-            if (this.enableCursor && this.asLoading <= 5) {
-                this.ref.value = this.operation + ( this.asLoading % 2 === 1 ? "|" : "&nbsp;" );
-                this.asLoading += 1;
+            if (this.enableCursor && this.offset <= 5) {
+                this.ref.value = this.operation + ( this.offset % 2 === 1 ? "|" : " " );
+                this.offset += 1;
                 this.delayerCall(this.getTimeout());
             } else {
                 this.ref.value = this.operation;
@@ -49,5 +54,11 @@ export class TypingEffect {
     public run(): Ref<string> {
         this.delayerCall(this.getTimeout());
         return this.ref;
+    }
+
+    public stop(): boolean {
+        const status = this.running;
+        this.running = false;
+        return status;
     }
 }

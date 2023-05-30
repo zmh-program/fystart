@@ -1,7 +1,7 @@
 import {computed, ref} from "vue";
 import type { Ref } from "vue";
 
-export function wrap(f: (...arg: any[]) => any, t: number): (...arg: any) => any {
+export function wrap(f: (...arg: any[]) => any, t?: number): (...arg: any) => any {
     /**
      * @param {function} f - function
      * @param {number} t - timeout
@@ -11,7 +11,7 @@ export function wrap(f: (...arg: any[]) => any, t: number): (...arg: any) => any
     return function (...arg: any[]): void {
         clearTimeout(timeout);
         timeout = setTimeout(
-            () => f(...arg), t
+            () => f(...arg), t || 400
         )
     }
 }
@@ -52,7 +52,7 @@ export function uri(query: string): string {
     return urls[engines[current.value]] + decodeURI(query);
 }
 
-export function search(content: string, callback: (res: string[]) => any): void {
+export const search = wrap((content: string, callback: (res: string[]) => any): void => {
     content = content.trim();
     if (!content.length) return;
     const script = document.createElement("script");
@@ -67,7 +67,7 @@ export function search(content: string, callback: (res: string[]) => any): void 
             return
         }
     }
-}
+})
 
 
 export namespace addition {

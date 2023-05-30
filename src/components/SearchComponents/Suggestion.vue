@@ -10,6 +10,7 @@ const props = defineProps<{
   <a class="suggestion" :class="{'intelligence': (!!props.svg)}" :href="props.href">
     <p v-if="props.svg" v-html="props.svg" />
     <span>{{ props.content }}</span>
+    <slot />
   </a><br>
 </template>
 

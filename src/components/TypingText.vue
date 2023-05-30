@@ -5,7 +5,7 @@ const effect = new TypingEffect("「 Where there is a will, there is a way. 」"
 </script>
 
 <template>
-  <div class="quote" :class="{'focus': true}" v-html="effect" />
+  <div class="quote" :class="{'focus': true}">{{ effect }}</div>
 </template>
 
 <style scoped>
