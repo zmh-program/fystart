@@ -1,0 +1,40 @@
+@keyframes size-animation {
+    0% {scale: 1}
+    50% {scale: 0.6}
+    100% {scale: 1}
+}
+.search-icon,
+.engine-icon {
+    position: absolute;
+    opacity: 0;
+    height: 42px;
+    width: 42px;
+    transition: .2s;
+    transition-delay: .05s;
+    cursor: pointer;
+}
+.engine-icon {left: 2px}
+.search-icon {right: 2px}
+.engine-icon svg {fill: #fff}
+
+.engine-icon svg,
+.search-icon svg {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    margin: 6px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.2);
+    transition: .25s;
+}
+
+.engine-icon:hover svg,
+.search-icon:hover svg {
+    background: rgba(0,0,0,.4);
+    animation: size-animation .5s;
+}
+
+.engine-icon.focus,
+.search-icon.focus {
+    opacity: 1;
+}

@@ -5,13 +5,15 @@ const effect = new TypingEffect("「 Where there is a will, there is a way. 」"
 </script>
 
 <template>
-  <div class="quote horizontal-center" :class="{'focus': true}" v-html="effect" />
+  <div class="quote" :class="{'focus': true}" v-html="effect" />
 </template>
 
 <style scoped>
 .quote {
   top: 80vh;
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   opacity: 0;
   max-width: min(80%, 360px);
