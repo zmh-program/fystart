@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { uptime } from "@/assets/script/utils";
+import { ref } from "vue";
 
-const time = uptime();
+const time = ref(new Date().toLocaleTimeString());
+setInterval(() =>
+    time.value = new Date().toLocaleTimeString(), 500);
 </script>
 
 <template>
