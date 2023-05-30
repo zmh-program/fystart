@@ -1,6 +1,6 @@
 @keyframes size-animation {
     0% {scale: 1}
-    50% {scale: 0.6}
+    50% {scale: 0.8}
     100% {scale: 1}
 }
 .search-icon,
@@ -25,13 +25,17 @@
     margin: 6px;
     border-radius: 50%;
     background: rgba(0,0,0,.2);
-    transition: .25s;
+    transition: .25s ease;
 }
 
-.engine-icon:hover svg,
-.search-icon:hover svg {
+.engine-icon:active svg,
+.search-icon:active svg {
     background: rgba(0,0,0,.4);
-    animation: size-animation .5s;
+    scale: 0.8;
+}
+
+.engine-icon.clicked {
+    animation: size-animation .25s ease;
 }
 
 .engine-icon.focus,
