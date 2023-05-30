@@ -3,12 +3,23 @@
 ![fystart](/public/favicon.ico)
 # [Fystart](https://fystart.deeptrain.net/)
 
-#### A simple and intuitive browser start page based on vue3.
-#### 一个基于vue3的简洁的起始页
-###### 灵感来源于[青柠起始页](https://limestart.cn)
+#### A simple and intuitive browser start page
+#### 一个简洁的起始页
 
 </div>
 
+
+## Features | 功能
+- 🍏 一言 
+  - 🍏 Quotes
+- 🍋 设置 (自定义背景，自定义搜索引擎) 
+  - 🍋 Settings (Custom Background, Custom Search Engine)
+- 🍎 ChatGPT 支持
+  - 🍎 ChatGPT Support 
+- 🍉 翻译 / Github 搜索
+  - 🍉 Translation / GitHub Search
+- 🍐 搜索引擎建议
+  - 🍐 Search Engine Suggestions
 
 ## ScreenShot | 快照
 ![main](/screenshot/main.png)
