@@ -32,9 +32,7 @@ const active = ref(false);
 function clicked(): void {
   active.value = true;
   toggle();
-  setTimeout(() => {
-    active.value = false;
-  }, 250)
+  setTimeout(() => active.value = false, 250);
 }
 
 const listener = (ev: KeyboardEvent): void => {  // listening for the enter event
