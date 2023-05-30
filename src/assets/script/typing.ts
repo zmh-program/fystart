@@ -20,6 +20,10 @@ export class TypingEffect {
         this.asLoading = 0;
     }
 
+    private getTimeout(): number {
+        return Math.random() * this.timeout;
+    }
+
     protected count(): void {
         this.index += 1;
         this.cursor = !this.cursor;
@@ -30,7 +34,7 @@ export class TypingEffect {
             if (this.enableCursor && this.asLoading <= 5) {
                 this.ref.value = this.operation + ( this.asLoading % 2 === 1 ? "|" : "&nbsp;" );
                 this.asLoading += 1;
-                this.delayerCall(800);
+                this.delayerCall(this.getTimeout());
             } else {
                 this.ref.value = this.operation;
             }
@@ -43,7 +47,7 @@ export class TypingEffect {
     }
 
     public run(): Ref<string> {
-        this.delayerCall(this.timeout);
+        this.delayerCall(this.getTimeout());
         return this.ref;
     }
 }
