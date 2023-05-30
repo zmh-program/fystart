@@ -136,27 +136,4 @@ const status = ref(false);
   outline: none;
   letter-spacing: 0.01cm;
 }
-
-.window .engine svg {
-  padding: 6px;
-  margin: 4px 6px;
-  width: 34px;
-  height: 34px;
-  background: #fff;
-  fill: #000;
-  backdrop-filter: blur(2px);
-  border-radius: 6px;
-  transition: .25s;
-}
-
-.window .engine svg:hover {
-  padding: 5px;
-}
-
-.window div.engine.selected svg {
-  background: #000 !important;
-  fill: #fff !important;
-  width: 36px;
-  height: 36px;
-}
 </style>
