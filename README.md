@@ -20,6 +20,8 @@
   - 🍉 Translation / GitHub Search
 - 🍐 搜索引擎建议
   - 🍐 Search Engine Suggestions
+- ✨ 离线访问 (Service Worker)
+  - ✨ Offline Requests (Service Worker)
 
 ## ScreenShot | 快照
 ![main](/screenshot/main.png)
