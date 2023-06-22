@@ -33,6 +33,11 @@ updated();
 
 <template>
   <div class="tool-container" :class="{'focus': props.focus}" :style="{'transform': `translateX(${flexible}px)`}">
+    <svg xmlns="http://www.w3.org/2000/svg" height="0" style="position: absolute">
+      <filter id="blur-filter">
+        <feGaussianBlur stdDeviation="5" />
+      </filter>
+    </svg>
     <a class="tool"
        v-for="(tool, idx) in tools"
        :href="`https://${tool.link}`"
@@ -56,10 +61,11 @@ updated();
 
 .tool-container.focus {
   opacity: 0;
-  z-index: -2;
 }
 
 .tool {
+  position: relative;
+  backdrop-filter: blur(6px);
   display: inline-block;
   background: rgba(0,0,0,0.4);
   width: 60px;
@@ -68,18 +74,6 @@ updated();
   transition: .3s;
   border-radius: 6px;
   overflow: hidden;
-}
-
-.tool::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-image: url("/background.jpg");
-  z-index: -1;
-  filter: blur(5px);
 }
 
 .tool svg {
