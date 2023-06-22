@@ -2,6 +2,9 @@
 import { TypingEffect } from "@/assets/script/typing";
 import { ref } from "vue";
 
+const props = defineProps<{
+  focus: boolean,
+}>();
 const effect = ref("");
 const verse = ref("");
 function run(content: string, hook?: () => any) {
@@ -21,7 +24,7 @@ fetch("https://v1.hitokoto.cn?c=i")
 </script>
 
 <template>
-  <div class="quote focus">
+  <div class="quote" :class="{'focus': props.focus}">
     <p>{{ effect }}</p>
     <p class="from">{{ verse }}</p>
   </div>
@@ -45,6 +48,7 @@ fetch("https://v1.hitokoto.cn?c=i")
   user-select: none;
   font-family: "PingFang SC", "Microsoft Yahei", "Segoe UI", Roboto, "Helvetica Neue", Arial,
   "Nunito", "Comic Sans MS", Consolas, monospace, sans-serif;
+  opacity: 0;
 }
 
 .quote:hover {
@@ -58,6 +62,10 @@ fetch("https://v1.hitokoto.cn?c=i")
 }
 
 .quote:hover .from {
+  opacity: 1;
+}
+
+.focus {
   opacity: 1;
 }
 </style>

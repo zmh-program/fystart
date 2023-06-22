@@ -18,7 +18,7 @@ const focus = ref(true);
     <TimeWidget />
     <InputBox v-model="focus" />
     <ToolBox :focus="focus" />
-    <Quote />
+    <Quote :focus="focus" />
     <About />
   </main>
 </template>
