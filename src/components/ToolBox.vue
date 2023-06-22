@@ -67,7 +67,19 @@ updated();
   margin: 15px 15px 30px 15px;
   transition: .3s;
   border-radius: 6px;
-  backdrop-filter: blur(5px);
+  overflow: hidden;
+}
+
+.tool::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-image: url("/background.jpg");
+  z-index: -1;
+  filter: blur(5px);
 }
 
 .tool svg {
