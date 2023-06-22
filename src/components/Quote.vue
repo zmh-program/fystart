@@ -37,7 +37,8 @@ fetch("https://v1.hitokoto.cn?c=i")
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  opacity: 1;
+  opacity: 0;
+  z-index: 0;
   max-width: min(80%, 360px);
   color: #fff;
   transition: .45s;
@@ -48,7 +49,6 @@ fetch("https://v1.hitokoto.cn?c=i")
   user-select: none;
   font-family: "PingFang SC", "Microsoft Yahei", "Segoe UI", Roboto, "Helvetica Neue", Arial,
   "Nunito", "Comic Sans MS", Consolas, monospace, sans-serif;
-  opacity: 0;
 }
 
 .quote:hover {
