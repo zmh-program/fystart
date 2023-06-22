@@ -38,7 +38,7 @@ fetch("https://v1.hitokoto.cn?c=i")
   transform: translateX(-50%);
   text-align: center;
   opacity: 0;
-  z-index: -2;
+  z-index: -1;
   max-width: min(80%, 360px);
   color: #fff;
   transition: .45s;
