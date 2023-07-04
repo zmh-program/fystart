@@ -1,14 +1,18 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": [
-    "env.d.ts", "src/**/*", "src/**/*.vue"],
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/types/**/*.d.ts"
+  ],
   "compilerOptions": {
     "baseUrl": "../fystart",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "strict": true
   },
-
   "references": [
     {
       "path": "./tsconfig.node.json"

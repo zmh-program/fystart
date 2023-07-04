@@ -45,7 +45,7 @@ fetch("https://v1.hitokoto.cn?c=i")
   backdrop-filter: blur(2px);
   text-shadow: 0 2px 20px rgba(0,0,0,.8);
   border-radius: 8px;
-  padding: 4px 6px;
+  padding: 8px 12px;
   user-select: none;
   font-family: "PingFang SC", "Microsoft Yahei", "Segoe UI", Roboto, "Helvetica Neue", Arial,
   "Nunito", "Comic Sans MS", Consolas, monospace, sans-serif;
