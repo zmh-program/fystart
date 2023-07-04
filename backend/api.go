@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	"net/http"
 	"time"
 )
 
@@ -46,4 +48,21 @@ func GetResponseWithCache(c context.Context, message string) (string, error) {
 		return res, nil
 	}
 	return res, nil
+}
+
+func ChatGPTAPI(c *gin.Context, message string) {
+	res, err := GetResponseWithCache(c, message)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": res,
+			"reason":  err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status":  true,
+		"message": res,
+		"reason":  "",
+	})
 }
