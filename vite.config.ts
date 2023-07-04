@@ -2,14 +2,35 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import service from './plugins/service'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    service(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'icon.png', '*.webp'],
+      manifest: {
+        name: 'Fystart',
+        short_name: 'Fystart',
+        theme_color: '#1E1E1EFF',
+        icons: [{
+            src: 'icon.png',
+            sizes: '192x192',
+            type: 'image/png',
+          }],
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,webp,png}'],
+        globDirectory: 'dist',
+        swDest: 'dist/service.js',
+      },
+      devOptions: {
+        enabled: true,
+      }
+    }),
     createHtmlPlugin({
       minify: true,
     }),
