@@ -27,12 +27,14 @@ const props = defineProps<{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
+  position: fixed;
   z-index: -1;
   transition: .25s;
   opacity: 0;
   animation: FadeInAnimation .8s ease-in forwards;
   will-change: opacity;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .background.focus {

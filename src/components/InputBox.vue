@@ -76,7 +76,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 .container:focus,
 .container:active,
 .container.focus {
-  background: rgba(15,15,15,.6);
+  background: rgba(15,15,15,.8);
   width: 530px;
 }
 .container.focus {
@@ -103,13 +103,12 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   display: flex;
   flex-direction: column;
   opacity: 0;
-  margin: 0 24px;
   padding: 18px 36px;
   transition: .35s;
   background: rgba(15,15,15,.2);
   backdrop-filter: blur(12px);
   pointer-events: none;
-  width: calc(100% - 48px);
+  width: 100%;
   top: 48px;
   border-radius: 16px;
   height: max-content;
