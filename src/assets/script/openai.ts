@@ -4,10 +4,10 @@ import type { Ref } from "vue";
 import {TypingEffect} from "@/assets/script/typing";
 
 const ask = wrap(async (message: string, callback: (response: string) => any) => {
-    const resp = await fetch(`https://chatgpt.deeptrain.net/gpt`, {
+    const resp = await fetch(`https://www.fystart.cn/gpt`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: message }),
+        body: JSON.stringify({ message }),
     })
     const data = await resp.json();
     callback(data.message);

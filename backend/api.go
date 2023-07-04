@@ -27,6 +27,7 @@ func GetResponse(message string) (string, error) {
 				Content: message,
 			},
 		},
+		"max_tokens": 150,
 	})
 	if err != nil {
 		return "", err

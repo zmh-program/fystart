@@ -21,7 +21,7 @@ func main() {
 	app.POST("/gpt", func(c *gin.Context) {
 		ChatGPTAPI(c, c.PostForm("message"))
 	})
-	err := app.Run(":8080")
+	err := app.Run(":8001")
 	if err != nil {
 		panic(err)
 	}

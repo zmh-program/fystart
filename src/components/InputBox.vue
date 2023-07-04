@@ -12,7 +12,7 @@ const emit = defineEmits(['update:modelValue']);
 function setFocus(status: boolean): void {
   emit('update:modelValue', status);
 }
-const object = ref();  // the dom of the input element
+const object = ref<HTMLElement>();  // the dom of the input element
 onMounted(() => object.value.focus());  // focus the input element
 
 const input: Ref<string> = ref("");
