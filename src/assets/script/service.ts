@@ -2,7 +2,7 @@
 import { useRegisterSW } from "virtual:pwa-register/vue";
 import { ref, watch } from "vue";
 
-const version = "1.0.1";
+const version = "1.0.2";
 
 export const updater = ref<boolean>(false);
 
@@ -25,6 +25,7 @@ async function updateServiceVersion(r: ServiceWorkerRegistration) {
 }
 const updateServiceWorker = useRegisterSW({
   onRegistered(r) {
+    r && updateServiceVersion(r);
     r && setInterval(async () => {
       await updateServiceVersion(r);
     }, 1000 * 10);
