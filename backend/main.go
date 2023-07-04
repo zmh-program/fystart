@@ -5,7 +5,8 @@ import "github.com/gin-gonic/gin"
 func main() {
 	app := gin.Default()
 	cache := ConnectRedis()
-	
+
+	app.Use(CORSMiddleware())
 	app.GET("/", func(c *gin.Context) {
 
 	})

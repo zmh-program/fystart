@@ -30,5 +30,7 @@
   padding: 10px 20px;
   border-radius: 50px;
   animation: FloatInOut 5s ease-in-out forwards;
+  text-wrap: none;
+  white-space: nowrap;
 }
 </style>

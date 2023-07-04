@@ -66,3 +66,12 @@ func PostForm(uri string, body map[string]interface{}) (data map[string]interfac
 
 	return data, nil
 }
+
+func Contains[T comparable](value T, slice []T) bool {
+	for _, item := range slice {
+		if item == value {
+			return true
+		}
+	}
+	return false
+}
