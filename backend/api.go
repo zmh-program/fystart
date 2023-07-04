@@ -1,7 +1,10 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"github.com/spf13/viper"
+	"time"
 )
 
 type ChatGPTMessage struct {
@@ -27,4 +30,20 @@ func GetResponse(message string) (string, error) {
 	}
 	data := res.(map[string]interface{})["choices"].([]interface{})[0].(map[string]interface{})["message"].(map[string]interface{})["content"]
 	return data.(string), nil
+}
+
+func GetResponseWithCache(c context.Context, message string) (string, error) {
+	res, err := Cache.Get(c, fmt.Sprintf(":chatgpt:%s", message)).Result()
+	if err != nil {
+		return "There was something wrong...", err
+	}
+	if len(res) == 0 {
+		res, err := GetResponse(message)
+		if err != nil {
+			return "There was something wrong...", err
+		}
+		Cache.Set(c, fmt.Sprintf(":chatgpt:%s", message), res, time.Hour*6)
+		return res, nil
+	}
+	return res, nil
 }
