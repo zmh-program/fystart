@@ -17,6 +17,13 @@ func main() {
 	}
 
 	ConnectRedis()
+
+	if viper.GetBool("debug") {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	app := gin.Default()
 
 	app.Use(CORSMiddleware())

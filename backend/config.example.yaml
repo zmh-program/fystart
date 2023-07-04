@@ -1,3 +1,4 @@
+debug: true
 api_key: 'sk-...'
 redis:
   host: "localhost"
