@@ -20,8 +20,12 @@
   - 🍉 Translation / GitHub Search
 - 🍐 搜索引擎建议
   - 🍐 Search Engine Suggestions
+- 🎃 PWA 应用
+  - 🎃 PWA Application
 - ✨ 离线访问 (Service Worker)
   - ✨ Offline Requests (Service Worker)
+- ⚡ 搜索引擎优化
+  - ⚡ SEO (Search Engine Optimization) 
 
 ## ScreenShot | 快照
 ![main](/screenshot/main.png)
