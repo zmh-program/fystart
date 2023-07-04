@@ -41,7 +41,7 @@ export default function serviceWorkerPlugin(): Plugin {
             fs.readFile('./dist/manifest.json', 'utf8', (err, data) => {
                 if (err) throw err; /** @ts-ignore **/
                 const caches = Object.values(JSON.parse(data)).map((data: {file: string}) => data['file']);
-                caches.push("background.jpg", "favicon.ico", "index");
+                caches.push("background.webp", "favicon.ico", "index");
                 writeServiceWorker(caches);
             })
         }
