@@ -8,6 +8,7 @@ const props = defineProps<{
 
 <template>
   <img class="background" :src="background" :class="{'focus': props.focus}" alt>
+  <div class="cover" />
 </template>
 
 <style scoped>
@@ -37,5 +38,21 @@ const props = defineProps<{
 .background.focus {
   scale: 1.1;
   filter: blur(10px);
+}
+
+.cover {
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(0,0,0,0) 0,rgba(0,0,0,.5) 100%),radial-gradient(rgba(0,0,0,0) 33%,rgba(255,255,255,.1) 166%);
+  transition: .25s;
+  opacity: 1;
+}
+
+.cover.focus {
+  opacity: 0;
 }
 </style>
