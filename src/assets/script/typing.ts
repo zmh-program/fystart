@@ -37,7 +37,7 @@ export class TypingEffect {
             return;
         }
         if (this.index <= this.operation.length) {
-            this.ref.value = this.operation.substring( 0, this.index ) + ( this.cursor ? "|" : " " );
+            this.ref.value = this.operation.substring( 0, this.index ) + ( this.cursor && this.enableCursor ? "|" : " " );
             this.delayerCall(Math.random() * (this.enableCursor ? 200 : 100));
         } else {
             if (this.offset === 0) this.finish();

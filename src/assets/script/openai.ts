@@ -25,7 +25,7 @@ export default class OpenAI {
         this.waiting = ref(false);
         watch(this.waiting, () => {
             if (this.waiting.value) {
-                this.effect = new TypingEffect("waiting...", 1000, false, this.ref);
+                this.effect = new TypingEffect("", 1000, false, this.ref);
                 this.effect.run();
             }
         })
