@@ -62,6 +62,8 @@ resize();
 
 .tool-container.focus {
   opacity: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 .tool-container.focus * {
