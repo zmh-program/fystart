@@ -80,3 +80,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.link {
+  text-decoration: none;
+  color: #58a6ff;
+  transition: 0.4s;
+  padding: 1px 2px;
+  margin: 0 1px;
+  border-radius: 0;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    background-color: rgba(88, 166, 255, .2);
+  }
+}
