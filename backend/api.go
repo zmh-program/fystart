@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -36,10 +37,7 @@ func GetResponse(message string) (string, error) {
 
 func GetResponseWithCache(c context.Context, message string) (string, error) {
 	res, err := Cache.Get(c, fmt.Sprintf(":chatgpt:%s", message)).Result()
-	if err != nil {
-		return "There was something wrong...", err
-	}
-	if len(res) == 0 {
+	if err != nil || len(res) == 0 {
 		res, err := GetResponse(message)
 		if err != nil {
 			return "There was something wrong...", err
@@ -51,6 +49,15 @@ func GetResponseWithCache(c context.Context, message string) (string, error) {
 }
 
 func ChatGPTAPI(c *gin.Context, message string) {
+	message = strings.TrimSpace(message)
+	if len(message) == 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  false,
+			"message": "",
+			"reason":  "message is empty",
+		})
+		return
+	}
 	res, err := GetResponseWithCache(c, message)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{

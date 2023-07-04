@@ -1,8 +1,16 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
+)
 
 func main() {
+	viper.SetConfigFile("config.yaml")
+	if err := viper.ReadInConfig(); err != nil {
+		panic(err)
+	}
+
 	ConnectRedis()
 	app := gin.Default()
 
@@ -15,6 +23,6 @@ func main() {
 	})
 	err := app.Run(":8080")
 	if err != nil {
-		return
+		panic(err)
 	}
 }
