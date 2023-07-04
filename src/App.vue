@@ -9,7 +9,10 @@ import Background from "@/components/Background.vue";
 import InputBox from "@/components/InputBox.vue";
 
 
-const focus = ref(true);
+const focus = ref(false);
+window.addEventListener('load', () => {
+  focus.value = true;
+});
 </script>
 <template>
   <main>

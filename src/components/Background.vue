@@ -11,6 +11,17 @@ const props = defineProps<{
 </template>
 
 <style scoped>
+@keyframes FadeInAnimation {
+  from {
+    opacity: .2;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
 .background {
   width: 100%;
   height: 100%;
@@ -18,6 +29,9 @@ const props = defineProps<{
   position: absolute;
   z-index: -1;
   transition: .25s;
+  opacity: 0;
+  animation: FadeInAnimation .8s ease-in forwards;
+  will-change: opacity;
 }
 
 .background.focus {

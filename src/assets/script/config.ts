@@ -1,4 +1,4 @@
-import {ref, watch} from 'vue';
+import { ref, watch } from 'vue';
 export const background = ref(localStorage.getItem("background") || "/background.webp");
 
 
