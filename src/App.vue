@@ -7,6 +7,7 @@ import TimeWidget from "@/components/TimeWidget.vue";
 import ToolBox from "@/components/ToolBox.vue";
 import Background from "@/components/Background.vue";
 import InputBox from "@/components/InputBox.vue";
+import Notification from "@/components/Notification.vue";
 
 
 const focus = ref(false);
@@ -17,6 +18,9 @@ window.addEventListener('load', () => {
 <template>
   <main>
     <Background :focus="focus" />
+    <Notification>
+      欢迎回来！
+    </Notification>
     <SettingWindow />
     <TimeWidget />
     <InputBox v-model="focus" />

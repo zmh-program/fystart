@@ -11,6 +11,7 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: 'inline',
       includeAssets: ['favicon.ico', 'icon.png', '*.webp'],
       manifest: {
         name: 'Fystart',
@@ -37,6 +38,12 @@ export default defineConfig({
   ],
   build: {
     manifest: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name].[hash].js`,
+        chunkFileNames: `assets/[name].[hash].js`,
+      },
+    },
   },
   resolve: {
     alias: {

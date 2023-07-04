@@ -4,14 +4,17 @@
     "env.d.ts",
     "src/**/*",
     "src/**/*.vue",
-    "src/types/**/*.d.ts"
+    "src/types/*.d.ts"
   ],
   "compilerOptions": {
     "baseUrl": "../fystart",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "strict": true
+    "strict": true,
+    "types": [
+      "vite-plugin-pwa/client",
+    ]
   },
   "references": [
     {
