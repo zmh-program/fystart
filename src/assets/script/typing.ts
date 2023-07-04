@@ -14,6 +14,7 @@ export class TypingEffect {
     private index: number;
     protected running: boolean;
     private offset: number;
+    private id: number;
     private readonly hook?: (() => any);
     private animationFrameId: number | null;
 
@@ -34,6 +35,11 @@ export class TypingEffect {
         this.offset = 0;
         this.hook = hook;
         this.animationFrameId = null;
+        this.id = Date.now();
+
+        // Using public variables to solve the js thread memory non-sharing problem.
+        // @ts-ignore
+        window['typing'] = this.id;
     }
 
     private getTimeout(): number {
@@ -43,8 +49,9 @@ export class TypingEffect {
 
     protected async count(): Promise<void> {
         this.index += 1;
-        this.cursor = !this.cursor;
-        if (!this.running) {
+        this.cursor = !this.cursor;  // @ts-ignore
+        console.log(window['typing'])// @ts-ignore
+        if (!this.running || window['typing'] !== this.id) {
             return;
         }
         if (this.index <= this.operation.length) {
@@ -76,6 +83,7 @@ export class TypingEffect {
     public stop(): boolean {
         const status = this.running;
         this.running = false;
+        console.log(this.animationFrameId)
         this.animationFrameId && cancelAnimationFrame(this.animationFrameId);
         this.finish();
         return status;
