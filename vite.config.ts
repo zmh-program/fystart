@@ -26,7 +26,6 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,webp,png}'],
         globDirectory: 'dist',
-        swDest: 'dist/service.js',
       },
       devOptions: {
         enabled: true,
