@@ -20,6 +20,6 @@ const updateServiceWorker = useRegisterSW({
   onRegistered(r) {
     r && setInterval(async () => {
       await updateServiceVersion(r);
-    }, 10);
+    }, 1000 * 10);
   }
 });
