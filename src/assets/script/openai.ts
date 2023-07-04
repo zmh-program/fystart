@@ -13,7 +13,6 @@ const ask = wrap(async (message: string, callback: (response: string) => any) =>
     callback(data.message);
 }, 800);
 
-
 export default class OpenAI {
     private readonly ref: Ref<string>;
     private effect: TypingEffect | null;
@@ -39,7 +38,6 @@ export default class OpenAI {
         ask(
             text,
             (response: string): void => {
-                console.debug(response);
                 return _this.callback(response);
             },
         )

@@ -16,11 +16,15 @@ watch(updater, (v) => {
 })
 
 async function updateServiceVersion(r: ServiceWorkerRegistration) {
-  const {  // @ts-ignore
-    onupdatefound
-  } = await r.update();
-  if (onupdatefound) {
-    updater.value = true;
+  try {
+    const {  // @ts-ignore
+      onupdatefound
+    } = await r.update();
+    if (onupdatefound) {
+      updater.value = true;
+    }
+  } catch (e) {
+    console.debug(e);
   }
 }
 const updateServiceWorker = useRegisterSW({
