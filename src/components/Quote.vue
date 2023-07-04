@@ -26,7 +26,7 @@ fetch("https://v1.hitokoto.cn?c=i")
 <template>
   <div class="quote" :class="{'focus': props.focus}">
     <p>{{ effect }}</p>
-    <p class="from">{{ verse }}</p>
+    <p class="from" v-if="verse">{{ verse }}</p>
   </div>
 </template>
 
@@ -56,9 +56,19 @@ fetch("https://v1.hitokoto.cn?c=i")
   background: rgba(60,60,60,0.3);
 }
 
+@keyframes FadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .from {
   opacity: 0;
   transition: .25s ease-in;
+  animation: FadeInAnimation .5s ease-in;
 }
 
 .quote:hover .from {

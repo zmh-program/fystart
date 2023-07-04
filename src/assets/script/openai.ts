@@ -13,7 +13,9 @@ const ask = wrap(async (message: string, callback: (response: string) => any) =>
     callback(data.message);
 }, 800);
 
-export default class OpenAI {
+export const finished = ref<boolean>(false);
+
+export class OpenAI {
     private readonly ref: Ref<string>;
     private effect: TypingEffect | null;
     public readonly waiting: Ref<boolean>;
@@ -22,22 +24,18 @@ export default class OpenAI {
         this.ref = ref("");
         this.effect = null;
         this.waiting = ref(false);
-        watch(this.waiting, () => {
-            if (this.waiting.value) {
-                this.effect = new TypingEffect("", 1000, false, this.ref);
-                this.effect.run();
-            }
-        })
     }
     public getRef(): Ref<string> {
         return this.ref;
     }
+
     public trigger(text: string) {
         const _this = this;
         this.waiting.value = true;
         ask(
             text,
             (response: string): void => {
+                finished.value = false;
                 return _this.callback(response);
             },
         )
@@ -54,6 +52,9 @@ export default class OpenAI {
             50,
             false,
             this.ref,
+            (status: boolean) => {
+                if (status) finished.value = true;
+            },
         );
         this.effect.run();
     }

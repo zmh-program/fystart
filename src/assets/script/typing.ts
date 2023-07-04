@@ -14,8 +14,8 @@ export class TypingEffect {
     private index: number;
     protected running: boolean;
     private offset: number;
-    private id: number;
-    private readonly hook?: (() => any);
+    private readonly id: number;
+    private readonly hook?: ((...args: any) => any);
     private animationFrameId: number | null;
 
     constructor(
@@ -23,7 +23,7 @@ export class TypingEffect {
       timeout: number = 800,
       enableCursor: boolean = false,
       selectRef?: Ref<string>,
-      hook?: () => any
+      hook?: ((...args: any) => any),
     ) {
         this.operation = operation;
         this.timeout = timeout;
@@ -50,7 +50,6 @@ export class TypingEffect {
     protected async count(): Promise<void> {
         this.index += 1;
         this.cursor = !this.cursor;  // @ts-ignore
-        console.log(window['typing'])// @ts-ignore
         if (!this.running || window['typing'] !== this.id) {
             return;
         }
@@ -59,7 +58,7 @@ export class TypingEffect {
             await waitSync(this.getTimeout());
             this.animationFrameId = requestAnimationFrame(() => this.count());
         } else {
-            if (this.offset === 0) this.finish();
+            if (this.offset === 0) this.finish(true);
             if (this.enableCursor && this.offset <= 12) {
                 this.ref.value = this.operation + (this.offset % 5 <= 1 ? "|" : " ");
                 this.offset += 1;
@@ -71,8 +70,8 @@ export class TypingEffect {
         }
     }
 
-    public finish(): void {
-        if (this.hook) this.hook();
+    public finish(status?: boolean): void {
+        if (this.hook) this.hook(status);
     }
 
     public run(): Ref<string> {
@@ -83,9 +82,8 @@ export class TypingEffect {
     public stop(): boolean {
         const status = this.running;
         this.running = false;
-        console.log(this.animationFrameId)
         this.animationFrameId && cancelAnimationFrame(this.animationFrameId);
-        this.finish();
+        this.finish(false);
         return status;
     }
 }

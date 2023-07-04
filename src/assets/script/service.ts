@@ -32,6 +32,6 @@ const updateServiceWorker = useRegisterSW({
     r && updateServiceVersion(r);
     r && setInterval(async () => {
       await updateServiceVersion(r);
-    }, 1000 * 10);
+    }, 1000 * 60 * 60);
   }
 });
