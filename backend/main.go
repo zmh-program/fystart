@@ -15,10 +15,10 @@ func main() {
 	app := gin.Default()
 
 	app.Use(CORSMiddleware())
-	app.GET("/gpt", func(c *gin.Context) {
+	app.Handle("GET", "/gpt", func(c *gin.Context) {
 		ChatGPTAPI(c, c.Query("message"))
 	})
-	app.POST("/gpt", func(c *gin.Context) {
+	app.Handle("POST", "/gpt", func(c *gin.Context) {
 		ChatGPTAPI(c, c.PostForm("message"))
 	})
 	err := app.Run(":8001")
