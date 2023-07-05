@@ -1,14 +1,23 @@
 <script setup lang="ts">
 import { background } from "@/assets/script/config";
 import Cover from "@/components/compositions/Cover.vue";
+import {ref, watch} from "vue";
 
 const props = defineProps<{
   focus: boolean,
 }>();
+
+const object = ref<HTMLElement | null>(null);
+watch(background, () => {
+  object.value?.classList.add("fade");
+  setTimeout(() => {
+    object.value?.classList.remove("fade");
+  }, 500);
+})
 </script>
 
 <template>
-  <img class="background" :src="background" :class="{'focus': props.focus}" alt>
+  <img class="background" ref="object" :src="background" :class="{'focus': props.focus}" alt>
   <Cover :active="true" />
 </template>
 
@@ -41,5 +50,19 @@ const props = defineProps<{
 .background.focus {
   scale: 1.1;
   filter: blur(10px);
+}
+
+@keyframes BackgroundFadeInAnimation {
+  0% {
+    opacity: .2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.background.fade {
+  animation: BackgroundAnimation .8s ease-in forwards, BackgroundFadeInAnimation .5s ease-in;
 }
 </style>

@@ -31,13 +31,14 @@ const images = [
       <label>Background</label>
       <div class="column">
         <div class="builtin">
-          <img
-              v-for="(image, index) in images"
-              :key="index"
-              :src="image"
-              :class="{'selected': background === image}"
-              @click="background = image"
-          />
+          <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
+            <img
+                :src="image"
+                :class="{'selected': background === image}"
+                alt=""
+            />
+            <div class="cover" :class="{'selected': background === image}" />
+          </div>
         </div>
         <input type="url" v-model="background" placeholder="Input the background url.">
       </div>
@@ -116,15 +117,39 @@ const images = [
   height: max-content;
 }
 
-.builtin img {
-  aspect-ratio: 1.5;
+.builtin .cover.selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.2);
+  animation: FadeInAnimation .2s ease-in-out;
+}
+
+.builtin .wallpaper {
   width: 135px;
   height: 90px;
-  object-fit: cover;
   border-radius: 6px;
-  transition: .25s;
   cursor: pointer;
-  margin: 0 auto;
+  overflow: hidden;
+}
+
+.builtin .wallpaper .selected {
+  scale: 1.0 !important;
+}
+
+.builtin img {
+  width: 135px;
+  height: 90px;
+  aspect-ratio: 1.5;
+  object-fit: cover;
+  transition: .15s;
+  background-position: center;
+}
+
+.builtin img:hover {
+  scale: 1.1;
 }
 
 .window svg.close {
