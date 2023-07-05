@@ -13,7 +13,6 @@ const emit = defineEmits(['update:modelValue']);
 
 
 window.addEventListener('click', function (e) {
-  e.preventDefault();
   const target = e.target as HTMLElement;
   const status = contains([
     document.getElementById('input') as HTMLElement,

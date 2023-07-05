@@ -7,7 +7,6 @@ const props = defineProps<{
 
 const context = ref<boolean>(false);
 window.addEventListener('contextmenu', (e) => {
-  e.preventDefault();
   context.value = !context.value;
 });
 
@@ -91,6 +90,7 @@ resize();
   transition: .3s;
   border-radius: 6px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .tool svg {
