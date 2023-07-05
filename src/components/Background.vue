@@ -54,7 +54,7 @@ watch(background, () => {
 
 @keyframes BackgroundFadeInAnimation {
   0% {
-    opacity: .2;
+    opacity: .5;
   }
   100% {
     opacity: 1;

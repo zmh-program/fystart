@@ -5,6 +5,7 @@ import { ref } from "vue";
 import Cover from "@/components/compositions/Cover.vue";
 import Close from "@/components/icons/close.vue";
 import Settings from "@/components/icons/settings.vue";
+import Check from "@/components/icons/check.vue";
 
 const status = ref(false);
 const images = [
@@ -37,7 +38,8 @@ const images = [
                 :class="{'selected': background === image}"
                 alt=""
             />
-            <div class="cover" :class="{'selected': background === image}" />
+            <div class="cover" v-if="background === image" />
+            <check class="check" v-if="background === image" />
           </div>
         </div>
         <input type="url" v-model="background" placeholder="Input the background url.">
@@ -117,14 +119,27 @@ const images = [
   height: max-content;
 }
 
-.builtin .cover.selected {
+.builtin .cover {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,.2);
-  animation: FadeInAnimation .2s ease-in-out;
+  opacity: 0;
+  animation: FadeInAnimation .2s ease-in-out forwards;
+}
+
+.builtin .check {
+  fill: #fff;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  animation: FadeInAnimation .2s ease-in-out forwards;
 }
 
 .builtin .wallpaper {
@@ -184,12 +199,12 @@ const images = [
   margin: 6px;
   width: 100%;
   height: max-content;
-  border-radius: 6px;
-  padding: 6px 12px;
 }
 
 .window .form .column {
   background: rgb(40, 40, 40);
+  padding: 6px 12px;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -197,6 +212,7 @@ const images = [
 }
 
 .window label {
+  font-size: 18px;
   width: max-content;
   text-wrap: none;
   transform: translateY(14px);
