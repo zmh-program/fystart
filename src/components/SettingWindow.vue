@@ -2,24 +2,48 @@
 import { current, icons, set } from "@/assets/script/engine";
 import { background } from "@/assets/script/config";
 import { ref } from "vue";
+import Cover from "@/components/compositions/Cover.vue";
+import Close from "@/components/icons/close.vue";
+import Settings from "@/components/icons/settings.vue";
 
 const status = ref(false);
+const images = [
+    "background.webp",
+    "/background/hills.webp",
+    "/background/lake.webp",
+    "/background/mountain.webp",
+    "/background/morning.webp",
+    "/background/ocean.webp",
+    "/background/snow.webp",
+    "/background/sunshine.webp",
+]
 </script>
 
 <template>
-  <svg class="button" @click="status = true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M262.29 192.31a64 64 0 1057.4 57.4 64.13 64.13 0 00-57.4-57.4zM416.39 256a154.34 154.34 0 01-1.53 20.79l45.21 35.46a10.81 10.81 0 012.45 13.75l-42.77 74a10.81 10.81 0 01-13.14 4.59l-44.9-18.08a16.11 16.11 0 00-15.17 1.75A164.48 164.48 0 01325 400.8a15.94 15.94 0 00-8.82 12.14l-6.73 47.89a11.08 11.08 0 01-10.68 9.17h-85.54a11.11 11.11 0 01-10.69-8.87l-6.72-47.82a16.07 16.07 0 00-9-12.22 155.3 155.3 0 01-21.46-12.57 16 16 0 00-15.11-1.71l-44.89 18.07a10.81 10.81 0 01-13.14-4.58l-42.77-74a10.8 10.8 0 012.45-13.75l38.21-30a16.05 16.05 0 006-14.08c-.36-4.17-.58-8.33-.58-12.5s.21-8.27.58-12.35a16 16 0 00-6.07-13.94l-38.19-30A10.81 10.81 0 0149.48 186l42.77-74a10.81 10.81 0 0113.14-4.59l44.9 18.08a16.11 16.11 0 0015.17-1.75A164.48 164.48 0 01187 111.2a15.94 15.94 0 008.82-12.14l6.73-47.89A11.08 11.08 0 01213.23 42h85.54a11.11 11.11 0 0110.69 8.87l6.72 47.82a16.07 16.07 0 009 12.22 155.3 155.3 0 0121.46 12.57 16 16 0 0015.11 1.71l44.89-18.07a10.81 10.81 0 0113.14 4.58l42.77 74a10.8 10.8 0 01-2.45 13.75l-38.21 30a16.05 16.05 0 00-6.05 14.08c.33 4.14.55 8.3.55 12.47z" fill="none" stroke="#eee" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+  <Cover :active="status" :floor="1" />
+  <settings class="button" @click="status = true" />
   <div class="window" :class="{'active': status}">
     <h1 class="title">Settings</h1>
-    <svg xmlns="http://www.w3.org/2000/svg" class="close" @click="status = false" viewBox="0 0 512 512">
-      <title>Close Settings</title>
-      <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/>
-    </svg><br>
-    <div class="row">
+    <close class="close" @click="status = false" viewBox="0 0 512 512" /><br>
+
+    <div class="form">
+      <label>Background</label>
       <div class="column">
-        <label>Background</label>
+        <div class="builtin">
+          <img
+              v-for="(image, index) in images"
+              :key="index"
+              :src="image"
+              :class="{'selected': background === image}"
+              @click="background = image"
+          />
+        </div>
         <input type="url" v-model="background" placeholder="Input the background url.">
       </div>
-      <div class="column"><label>Search Engine Preference</label></div>
+    </div>
+
+    <div class="form">
+      <label>Search Engine Preference</label>
       <div class="column">
         <div
             class="engine"
@@ -36,6 +60,7 @@ const status = ref(false);
 <style scoped>
 .title {
   text-align: center;
+  font-size: 18px;
 }
 
 .button {
@@ -51,6 +76,7 @@ const status = ref(false);
   top: 26px;
   right: 26px;
   transition: .45s;
+  z-index: 2;
 }
 
 .button:hover {
@@ -65,9 +91,8 @@ const status = ref(false);
   transition: .5s;
   transform: translate(-50%, -50%);
   width: calc(100% - 52px);
-  height: calc(100% - 52px);
-  background: rgba(24,24,24,.9);
-  backdrop-filter: blur(20px);
+  height: min(80%, 540px);
+  background: rgb(30,30,30);
   border-radius: 10px;
   max-width: 640px;
   z-index: -64;
@@ -77,6 +102,28 @@ const status = ref(false);
 .window.active {
   z-index: 64;
   opacity: 1;
+}
+
+.builtin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  justify-content: center;
+  height: max-content;
+}
+
+.builtin img {
+  aspect-ratio: 1.5;
+  width: 135px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: .25s;
+  cursor: pointer;
+  margin: 0 auto;
 }
 
 .window svg.close {
@@ -104,15 +151,21 @@ const status = ref(false);
   font-family:  "Nunito", monospace;
 }
 
-.window .row {
+.window .form {
   display: flex;
   gap: 16px;
   flex-direction: column;
+  margin: 6px;
+  width: 100%;
+  height: max-content;
+  border-radius: 6px;
+  padding: 6px 12px;
 }
 
-.window .row .column {
+.window .form .column {
+  background: rgb(40, 40, 40);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   gap: 4px;
 }

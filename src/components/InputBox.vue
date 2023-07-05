@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import '@/assets/style/engine.css';
-import Suggestion from "@/components/SearchComponents/Suggestion.vue";
+import Suggestion from "@/components/compositions/Suggestion.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import type { Ref } from "vue";
 import { getIcon, uri, toggle, search, addition } from "@/assets/script/engine";
