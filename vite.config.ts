@@ -12,7 +12,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'inline',
-      includeAssets: ['favicon.ico', 'icon.png', '*.webp'],
+      includeAssets: ['favicon.ico', 'icon.png', 'background.webp'],
       manifest: {
         name: 'Fystart',
         short_name: 'Fystart',

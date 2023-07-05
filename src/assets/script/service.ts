@@ -2,7 +2,7 @@
 import { useRegisterSW } from "virtual:pwa-register/vue";
 import { ref, watch } from "vue";
 
-const version = "1.0.6";
+const version = "1.1.0";
 
 export const updater = ref<boolean>(false);
 

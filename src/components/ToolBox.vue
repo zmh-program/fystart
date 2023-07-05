@@ -36,7 +36,10 @@ resize();
 </script>
 
 <template>
-  <div class="tool-container" :class="{'focus': props.focus}">
+  <div class="card-container" v-show="context">
+
+  </div>
+  <div class="tool-container" :class="{'focus': props.focus}" v-else>
     <a class="tool"
        v-for="(tool, idx) in renderer"
        :href="`https://${tool.link}`"
