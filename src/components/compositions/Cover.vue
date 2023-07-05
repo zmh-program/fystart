@@ -9,7 +9,7 @@ const props = defineProps<{
   <div
       class="cover"
       :class="{'active': props.active}"
-      :style="{'z-index': props.floor}"
+      :style="{'z-index': props.active ? props.floor : -1}"
   />
 </template>
 

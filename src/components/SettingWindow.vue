@@ -13,6 +13,7 @@ const images = [
     "/background/lake.webp",
     "/background/mountain.webp",
     "/background/morning.webp",
+    "/background/forest.webp",
     "/background/ocean.webp",
     "/background/snow.webp",
     "/background/sunshine.webp",
