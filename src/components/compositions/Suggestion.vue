@@ -4,11 +4,15 @@ const props = defineProps<{
   href: string,
   svg?: string,
 }>();
+
+function redirect(uri: string) {
+  window.location.href = uri;
+}
 </script>
 
 <template>
   <li class="suggestion" :class="{'intelligence': (!!props.svg)}">
-    <a :href="props.href">
+    <a :href="props.href" @click="redirect(props.href)">
       <p v-if="props.svg" v-html="props.svg" />
       <span>{{ props.content }}</span>
       <slot />
