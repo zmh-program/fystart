@@ -1,13 +1,18 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { context } from "@/assets/script/shared";
 
 const time = ref(new Date().toLocaleTimeString());
 setInterval(() =>
     time.value = new Date().toLocaleTimeString(), 500);
+
+function click() {
+    context.value = !context.value;
+}
 </script>
 
 <template>
-  <div class="time">
+  <div class="time" @click="click">
     <span>{{ time }}</span>
   </div>
 </template>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { context } from "@/assets/script/shared";
+import DateCard from "@/components/cards/DateCard.vue";
 
 const props = defineProps<{
   focus: boolean,
 }>();
 
-const context = ref<boolean>(false);
 window.addEventListener('contextmenu', (e) => {
   e.preventDefault();
   context.value = !context.value;
@@ -41,8 +42,7 @@ resize();
 
 <template>
   <div class="card-container" :class="{'focus': props.focus}" v-if="context">
-    <div class="card">
-    </div>
+    <DateCard />
   </div>
   <div class="tool-container" :class="{'focus': props.focus}" v-else>
     <a class="tool"
