@@ -11,6 +11,7 @@ const props = defineProps(['modelValue']);
 const emit = defineEmits(['update:modelValue']);
 
 function setFocus(status: boolean): void {
+  if (!status) input.value = '';
   emit('update:modelValue', status);
 }
 const object = ref<HTMLElement>();  // the dom of the input element
@@ -23,17 +24,7 @@ const display = computed(() => (!input.value.trim().length) && (!suggestions.val
 watch(input, function() {
   const message: string = input.value.trim();
   if (message) {
-    search(message, (arr: string[]) => {
-      suggestions.value = [];
-      let i = 0;
-      requestAnimationFrame(function loop() {
-        if (i < arr.length) {
-          suggestions.value.push(arr[i]);
-          i++;
-          requestAnimationFrame(loop);
-        }
-      });
-    });
+    search(message, (arr: string[]) => suggestions.value = arr);
     instance.trigger(message);
   }
 })
@@ -64,10 +55,10 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
           {{ answer }}
         </p>
       </div>
-      <div class="search-result" :class="{'focus': props.modelValue && (!display) && input}">
+      <ul class="search-result" :class="{'focus': props.modelValue && (!display) && input}">
         <Suggestion v-for="(_, type, index) in addition.additions" :content="input" :href="addition.uri(type, input)" :svg="addition.svg(type)" :key="index" />
-        <Suggestion v-for="(suggest, index) in suggestions" :content="suggest" :href="uri(suggest)" :key="index" />
-      </div>
+        <Suggestion v-for="(suggest, index) in suggestions" :content="suggest" :svg="addition.search" :href="uri(suggest)" :key="index" />
+      </ul>
     </div>
   </div>
 </template>
@@ -103,7 +94,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 
 .container input {
   margin: 0 auto;
-  width: 100%;
+  width: calc(100% - 56px);
   height: 100%;
   border: none;
   outline: 0;
@@ -126,7 +117,8 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   display: flex;
   flex-direction: column;
   opacity: 0;
-  padding: 18px 36px;
+  padding: 18px 24px;
+  transform-origin: top;
   transition: .55s height, .45s opacity;
   background: rgba(15,15,15,.2);
   backdrop-filter: blur(12px);
@@ -134,6 +126,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   width: 100%;
   border-radius: 16px;
   height: max-content;
+  list-style: none;
 }
 
 .container .search-result.focus {
