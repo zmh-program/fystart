@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { TypingEffect } from "@/assets/script/typing";
 import { ref } from "vue";
+import { input } from "@/assets/script/shared";
 
 const props = defineProps<{
   focus: boolean,
@@ -24,7 +25,7 @@ fetch("https://v1.hitokoto.cn?c=i")
 </script>
 
 <template>
-  <div class="quote" :class="{'focus': props.focus}">
+  <div class="quote" :class="{'focus': props.focus && !input}">
     <p>{{ effect }}</p>
     <p class="from" v-if="verse">{{ verse }}</p>
   </div>

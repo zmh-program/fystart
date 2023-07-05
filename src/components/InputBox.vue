@@ -5,6 +5,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import type { Ref } from "vue";
 import { getIcon, uri, toggle, search, addition } from "@/assets/script/engine";
 import { OpenAI, finished } from "@/assets/script/openai";
+import { input } from "@/assets/script/shared";
 
 const props = defineProps(['modelValue']);
 const emit = defineEmits(['update:modelValue']);
@@ -15,7 +16,6 @@ function setFocus(status: boolean): void {
 const object = ref<HTMLElement>();  // the dom of the input element
 onMounted(() => object.value.focus());  // focus the input element
 
-const input: Ref<string> = ref("");
 const suggestions: Ref<string[]> = ref([]);
 const instance = new OpenAI(), answer = instance.getRef();
 const display = computed(() => (!input.value.trim().length) && (!suggestions.value.length));
@@ -23,7 +23,17 @@ const display = computed(() => (!input.value.trim().length) && (!suggestions.val
 watch(input, function() {
   const message: string = input.value.trim();
   if (message) {
-    search(message, (arr: string[]) => suggestions.value = arr);
+    search(message, (arr: string[]) => {
+      suggestions.value = [];
+      let i = 0;
+      requestAnimationFrame(function loop() {
+        if (i < arr.length) {
+          suggestions.value.push(arr[i]);
+          i++;
+          requestAnimationFrame(loop);
+        }
+      });
+    });
     instance.trigger(message);
   }
 })
@@ -117,7 +127,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   flex-direction: column;
   opacity: 0;
   padding: 18px 36px;
-  transition: .55s;
+  transition: .55s height, .45s opacity;
   background: rgba(15,15,15,.2);
   backdrop-filter: blur(12px);
   pointer-events: none;
