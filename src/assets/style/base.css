@@ -106,3 +106,12 @@ body {
     opacity: 1;
   }
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 120, .5);
+  border-radius: 3px;
+}

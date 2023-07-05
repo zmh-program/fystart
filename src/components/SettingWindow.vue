@@ -27,35 +27,35 @@ const images = [
   <div class="window" :class="{'active': status}">
     <h1 class="title">Settings</h1>
     <close class="close" @click="status = false" viewBox="0 0 512 512" /><br>
-
-    <div class="form">
-      <label>Background</label>
-      <div class="column">
-        <div class="builtin">
-          <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
-            <img
-                :src="image"
-                :class="{'selected': background === image}"
-                alt=""
-            />
-            <div class="cover" v-if="background === image" />
-            <check class="check" v-if="background === image" />
+    <div class="main">
+      <div class="form">
+        <label>Background</label>
+        <div class="column">
+          <div class="builtin">
+            <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
+              <img
+                  :src="image"
+                  :class="{'selected': background === image}"
+                  alt=""
+              />
+              <div class="cover" v-if="background === image" />
+              <check class="check" v-if="background === image" />
+            </div>
           </div>
+          <input type="url" v-model="background" placeholder="Input the background url.">
         </div>
-        <input type="url" v-model="background" placeholder="Input the background url.">
       </div>
-    </div>
-
-    <div class="form">
-      <label>Search Engine Preference</label>
-      <div class="column">
-        <div
-            class="engine"
-            v-for="(inner, name, index) in icons"
-            :class="{'selected': current === index}"
-            v-html="inner"
-            @click="set(index)"
-        ></div>
+      <div class="form">
+        <label>Search Engine Preference</label>
+        <div class="column">
+          <div
+              class="engine"
+              v-for="(inner, name, index) in icons"
+              :class="{'selected': current === index}"
+              v-html="inner"
+              @click="set(index)"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -89,7 +89,8 @@ const images = [
 
 .window {
   position: absolute;
-  padding: 26px;
+  padding: 26px 0;
+  border: 0;
   top: 50%;
   left: 50%;
   transition: .5s;
@@ -101,11 +102,21 @@ const images = [
   max-width: 640px;
   z-index: -64;
   opacity: 0;
+  overflow: hidden;
 }
 
 .window.active {
   z-index: 64;
   opacity: 1;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: pan-x;
+  padding: 0 26px;
 }
 
 .builtin {
