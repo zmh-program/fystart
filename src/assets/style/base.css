@@ -60,6 +60,7 @@
   margin: 0;
   position: relative;
   font-weight: normal;
+  touch-action: pan-y;
 }
 
 html, body, #app, main {

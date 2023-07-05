@@ -31,7 +31,7 @@ const images = [
     <div class="main">
       <div class="form">
         <label>Background</label>
-        <div class="column">
+        <div class="column"><br>
           <div class="builtin">
             <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
               <img
@@ -47,15 +47,18 @@ const images = [
         </div>
       </div>
       <div class="form">
-        <label>Search Engine Preference</label>
+        <label>Search Engine</label>
         <div class="column">
-          <div
-              class="engine"
-              v-for="(inner, name, index) in icons"
-              :class="{'selected': current === index}"
-              v-html="inner"
+          <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}"
               @click="set(index)"
-          />
+          >
+            <div class="icon" v-html="inner" />
+            <span>{{ name }}</span>
+            <template v-if="current === index">
+              <div style="flex-grow: 1" />
+              <check class="check" />
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -114,9 +117,22 @@ const images = [
   overflow: hidden;
 }
 
+@keyframes PopupAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 .window.active {
   z-index: 64;
   opacity: 1;
+  animation: PopupAnimation .5s ease-in-out;
 }
 
 .main {
@@ -125,14 +141,14 @@ const images = [
   overflow-x: hidden;
   overflow-y: auto;
   touch-action: pan-x;
-  padding: 0 26px;
+  padding: 0 26px 36px;
 }
 
 .builtin {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
   width: 100%;
   padding: 8px;
   justify-content: center;
@@ -187,6 +203,23 @@ const images = [
   scale: 1.1;
 }
 
+.engine {
+  padding: 4px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.engine span {
+  margin-left: 8px;
+  text-transform: capitalize;
+}
+.engine .check {
+  width: 26px;
+  height: 26px;
+  animation: FadeInAnimation .2s ease-in-out forwards;
+}
+
 .window .close {
   position: absolute;
   padding: 2px;
@@ -223,7 +256,7 @@ const images = [
 
 .window .form .column {
   background: rgb(40, 40, 40);
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
