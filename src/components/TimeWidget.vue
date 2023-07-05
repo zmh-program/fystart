@@ -13,15 +13,6 @@ setInterval(() =>
 </template>
 
 <style scoped>
-@keyframes FadeInAnimation {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .time {
   position: absolute;
   top: 80px;

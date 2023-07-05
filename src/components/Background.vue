@@ -12,7 +12,7 @@ const props = defineProps<{
 </template>
 
 <style scoped>
-@keyframes FadeInAnimation {
+@keyframes BackgroundAnimation {
   from {
     opacity: .2;
     backdrop-filter: blur(0);
@@ -31,7 +31,7 @@ const props = defineProps<{
   z-index: -1;
   transition: .25s;
   opacity: 0;
-  animation: FadeInAnimation .8s ease-in forwards;
+  animation: BackgroundAnimation .8s ease-in forwards;
   will-change: opacity;
   touch-action: pan-y;
   user-select: none;

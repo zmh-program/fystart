@@ -121,10 +121,11 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   width: 100%;
   top: 48px;
   display: none;
+  flex-direction: column;
 }
 
 .result.focus {
-  display: inherit;
+  display: flex;
 }
 
 .container .search-result {
@@ -184,6 +185,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   height: 18px;
   margin-right: 2px;
   animation: BlinkAnimation 1s infinite;
+  font-family: "Nunito", monospace, "PingFang SC", "Microsoft Yahei", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Nunito", "Comic Sans MS", Consolas, monospace, sans-serif;
 }
 
 .intelligence-result p.typing.finished::after {

@@ -40,6 +40,7 @@ fetch("https://v1.hitokoto.cn?c=i")
   text-align: center;
   opacity: 0;
   z-index: -1;
+  width: max-content;
   max-width: min(80%, 360px);
   color: #fff;
   transition: .45s;
