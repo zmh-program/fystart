@@ -113,6 +113,10 @@ body {
   width: 5px;
 }
 
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: rgba(120, 120, 120, .5);
   border-radius: 3px;

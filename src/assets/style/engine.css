@@ -45,6 +45,7 @@
 
 .engine .icon svg {
     margin: 0 4px;
+    padding: 4px;
     transform: translateY(2px);
     width: 26px;
     height: 26px;

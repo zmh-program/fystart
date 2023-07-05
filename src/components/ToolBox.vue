@@ -7,6 +7,7 @@ const props = defineProps<{
 
 const context = ref<boolean>(false);
 window.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
   context.value = !context.value;
 });
 
@@ -39,11 +40,11 @@ resize();
 </script>
 
 <template>
-  <div class="card-container" v-show="context">
+  <div class="card-container" :class="{'focus': props.focus}" v-if="context">
     <div class="card">
     </div>
   </div>
-  <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
+  <div class="tool-container" :class="{'focus': props.focus}" v-else>
     <a class="tool"
        v-for="(tool, idx) in renderer"
        @click="redirect(`https://${tool.link}`)"
@@ -54,6 +55,32 @@ resize();
 </template>
 
 <style>
+.card-container {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(90%, 600px);
+  height: max-content;
+  transition: .25s;
+  justify-content: center;
+  pointer-events: all;
+  animation: FadeInAnimation .25s ease-in-out;
+}
+
+.card-container.focus {
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.card-container.focus * {
+  user-select: none;
+}
+
 .tool-container {
   position: absolute;
   display: flex;
@@ -67,6 +94,7 @@ resize();
   transition: .25s;
   justify-content: center;
   pointer-events: all;
+  animation: FadeInAnimation .25s ease-in-out;
 }
 
 .tool-container.focus {

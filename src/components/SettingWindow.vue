@@ -9,7 +9,7 @@ import Check from "@/components/icons/check.vue";
 
 const status = ref(false);
 const images = [
-    "background.webp",
+    "/background.webp",
     "/background/hills.webp",
     "/background/lake.webp",
     "/background/mountain.webp",
@@ -183,6 +183,7 @@ const images = [
   border-radius: 6px;
   cursor: pointer;
   overflow: hidden;
+  user-select: none;
 }
 
 .builtin .wallpaper .selected {
