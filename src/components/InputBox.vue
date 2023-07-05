@@ -39,9 +39,12 @@ watch(input, function() {
 })
 
 const active = ref(false);
+const float = ref(false);
 function clicked(): void {
   active.value = true;
   requestAnimationFrame(toggle);
+  float.value = true;
+  setTimeout(() => float.value = false, 2000);
   setTimeout(() => active.value = false, 250);
 }
 
@@ -54,7 +57,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   <div class="container" id="input" tabindex="0" :class="{'focus': props.modelValue}">
     <input placeholder="search" ref="object" @keyup="listener" v-model="input" size="30" type="text">
     <div class="engine-icon" :class="{'focus': props.modelValue, 'clicked': active}" @click="clicked" v-html="getIcon" />
-    <span class="engine-text">{{ engines[current] }}</span>
+    <span class="engine-text" v-if="float">{{ engines[current] }}</span>
     <a class="search-icon" :class="{'focus': props.modelValue}" :href="uri(input)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="#70C001" stroke-miterlimit="10" stroke-width="42"/><path fill="none" stroke="#70C001" stroke-linecap="round" stroke-miterlimit="10" stroke-width="42" d="M338.29 338.29L448 448"/></svg></a>
     <div class="result" :class="{'focus': props.modelValue && (!display) && input}">
       <div class="intelligence-result" :class="{'focus': props.modelValue && (!display) && input}">
@@ -130,13 +133,11 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 }
 
 @keyframes FloatInOutAnimation {
-0% {
+  0%, 100% {
     opacity: 0;
-    transform: translateY(10px);
   }
-  100% {
+  25%, 75% {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -147,7 +148,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   color: #ccc;
   font-family: "Nunito", monospace;
   user-select: none;
-  animation: FloatInOutAnimation .45s;
+  animation: FloatInOutAnimation 2s forwards;
 }
 
 .container .search-result {
