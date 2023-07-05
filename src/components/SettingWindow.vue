@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { current, icons, set } from "@/assets/script/engine";
+import {current, icons, set, urls} from "@/assets/script/engine";
 import { background } from "@/assets/script/config";
 import { ref } from "vue";
 import Cover from "@/components/compositions/Cover.vue";
@@ -49,15 +49,14 @@ const images = [
       <div class="form">
         <label>Search Engine</label>
         <div class="column">
-          <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}"
-              @click="set(index)"
-          >
+          <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}" @click="set(index)">
             <div class="icon" v-html="inner" />
-            <span>{{ name }}</span>
+            <span class="name">{{ name }}</span>
             <template v-if="current === index">
               <div style="flex-grow: 1" />
               <check class="check" />
             </template>
+            <span class="uri" v-else>{{ urls[name] }}</span>
           </div>
         </div>
       </div>
@@ -208,16 +207,37 @@ const images = [
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-radius: 6px;
+  transition: .25s;
 }
 
-.engine span {
-  margin-left: 8px;
+.engine:hover {
+  background: rgba(50,50,50);
+}
+
+.engine .name {
+  margin: 0 8px;
   text-transform: capitalize;
 }
+
+.engine .uri {
+  color: #aaa;
+  margin-left: auto;
+  margin-right: 8px;
+  opacity: 1;
+  font-size: 12px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: FadeInAnimation .2s ease-in-out;
+}
+
 .engine .check {
   width: 26px;
   height: 26px;
   animation: FadeInAnimation .2s ease-in-out forwards;
+  margin-right: 8px;
 }
 
 .window .close {
