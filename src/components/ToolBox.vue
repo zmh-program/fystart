@@ -31,6 +31,10 @@ function resize() {
   const tool = Math.min(Math.ceil(size / 6800), 12);
   renderer.value = tools.slice(0, tool);
 }
+
+function redirect(uri: string) {
+  window.location.href = uri;
+}
 window.addEventListener('resize', resize);
 resize();
 </script>
@@ -43,7 +47,7 @@ resize();
   <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
     <a class="tool"
        v-for="(tool, idx) in renderer"
-       :href="`https://${tool.link}`"
+       @click="redirect(`https://${tool.link}`)"
        v-html="tool.icon"
        :key="idx"
     />
@@ -63,6 +67,7 @@ resize();
   height: max-content;
   transition: .25s;
   justify-content: center;
+  pointer-events: all;
 }
 
 .tool-container.focus {

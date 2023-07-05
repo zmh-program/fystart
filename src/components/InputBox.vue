@@ -40,11 +40,13 @@ watch(input, function() {
 
 const active = ref(false);
 const float = ref(false);
+let timeout: number | undefined;
 function clicked(): void {
   active.value = true;
   requestAnimationFrame(toggle);
   float.value = true;
-  setTimeout(() => float.value = false, 2000);
+  clearTimeout(timeout);
+  timeout = setTimeout(() => float.value = false, 2000);
   setTimeout(() => active.value = false, 250);
 }
 
@@ -132,15 +134,6 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   display: flex;
 }
 
-@keyframes FloatInOutAnimation {
-  0%, 100% {
-    opacity: 0;
-  }
-  25%, 75% {
-    opacity: 1;
-  }
-}
-
 .engine-text {
   position: absolute;
   left: 42px;
@@ -148,7 +141,11 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   color: #ccc;
   font-family: "Nunito", monospace;
   user-select: none;
-  animation: FloatInOutAnimation 2s forwards;
+  opacity: 0;
+}
+
+.engine-text.focus {
+  opacity: 1;
 }
 
 .container .search-result {
