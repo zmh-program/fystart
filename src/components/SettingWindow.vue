@@ -26,7 +26,8 @@ const images = [
   <settings class="button" @click="status = true" />
   <div class="window" :class="{'active': status}">
     <h1 class="title">Settings</h1>
-    <close class="close" @click="status = false" viewBox="0 0 512 512" /><br>
+    <close class="close" @click="status = false" viewBox="0 0 512 512" />
+    <div class="divider" />
     <div class="main">
       <div class="form">
         <label>Background</label>
@@ -63,8 +64,16 @@ const images = [
 
 <style scoped>
 .title {
+  transform: translateY(-6px);
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgb(40,40,40);
+  margin: 8px 0;
 }
 
 .button {
@@ -178,22 +187,22 @@ const images = [
   scale: 1.1;
 }
 
-.window svg.close {
+.window .close {
   position: absolute;
   padding: 2px;
   width: 26px;
   height: 26px;
-  right: 8px;
-  top: 12px;
+  right: 18px;
+  top: 18px;
   cursor: pointer;
   transition: .25s;
-  border-radius: 50%;
+  border-radius: 6px;
   stroke: rgba(255,255,255,0.8);
 }
 
-.window svg.close:hover {
-  background: rgba(0,0,0,.2);
-  backdrop-filter: blur(10px);
+
+.window .close:hover {
+  background: rgb(40,40,40);
   stroke: #fff;
 }
 
