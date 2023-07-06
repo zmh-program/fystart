@@ -1,12 +1,8 @@
 import { createI18n } from "vue-i18n";
 
 const messages = {
-  en: {
-    message: {}
-  },
-  zh: {
-    message: {}
-  }
+  en: {},
+  zh: {},
 }
 
 const i18n = createI18n({

@@ -19,7 +19,7 @@ import { input } from "@/assets/script/shared";
   transform: translateX(-50%);
   color: rgba(255,255,255,0.8);
   font-size: 14px;
-  font-family: "Nunito", monospace;
+  font-family: var(--fonts-en);
   text-decoration: none;
   opacity: 0;
   transition: .25s;

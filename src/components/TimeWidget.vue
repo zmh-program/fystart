@@ -41,7 +41,7 @@ function click() {
 
 .time span {
   color: #fff;
-  font-family: "Nunito", monospace;
+  font-family: var(--fonts-en);
   font-weight: 400;
   font-size: 42px;
   text-shadow: 0 0 20px rgba(0, 0, 0, .35);

@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-import {current, icons, set, urls} from "@/assets/script/engine";
-import { background } from "@/assets/script/config";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { current, icons, set, urls} from "@/assets/script/engine";
+import { background } from "@/assets/script/config";
+import EngineI18n from "@/i18n/engine";
 import Cover from "@/components/compositions/Cover.vue";
 import Close from "@/components/icons/close.vue";
 import Settings from "@/components/icons/settings.vue";
 import Check from "@/components/icons/check.vue";
 
 const status = ref(false);
+const { t } = useI18n({ messages: EngineI18n });
 const images = [
     "/background.webp",
     "/background/hills.webp",
@@ -25,12 +28,12 @@ const images = [
   <Cover :active="status" :floor="1" />
   <settings class="button" @click="status = true" />
   <div class="window" :class="{'active': status}">
-    <h1 class="title">Settings</h1>
+    <h1 class="title">{{ t('settings') }}</h1>
     <close class="close" @click="status = false" viewBox="0 0 512 512" />
     <div class="divider" />
     <div class="main">
       <div class="form">
-        <label>Background</label>
+        <label>{{ t('background') }}</label>
         <div class="column"><br>
           <div class="builtin">
             <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
@@ -43,15 +46,15 @@ const images = [
               <check class="check" v-if="background === image" />
             </div>
           </div>
-          <input type="url" v-model="background" placeholder="Input the background url.">
+          <input type="url" v-model="background" :placeholder="t('input-background')">
         </div>
       </div>
       <div class="form">
-        <label>Search Engine</label>
+        <label>{{ t('search-engine') }}</label>
         <div class="column">
           <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}" @click="set(index)">
             <div class="icon" v-html="inner" />
-            <span class="name">{{ name }}</span>
+            <span class="name">{{ t(name) }}</span>
             <template v-if="current === index">
               <div style="flex-grow: 1" />
               <check class="check" />
@@ -63,6 +66,23 @@ const images = [
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "settings": "Settings",
+    "background": "Background",
+    "search-engine": "Search Engine Preferences",
+    "input-background": "Input the background url."
+  },
+  "zh": {
+    "settings": "设置",
+    "background": "背景",
+    "search-engine": "搜索引擎偏好",
+    "input-background": "请输入背景图片的链接"
+  }
+}
+</i18n>
 
 <style scoped>
 .title {
@@ -263,7 +283,7 @@ const images = [
 .window * {
   color: #fff;
   user-select: none;
-  font-family:  "Nunito", monospace;
+  font-family: var(--fonts-cn);
 }
 
 .window .form {
@@ -286,10 +306,11 @@ const images = [
 }
 
 .window label {
-  font-size: 18px;
+  font-size: 15px;
+  font-weight: 700;
   width: max-content;
   text-wrap: none;
-  transform: translateY(14px);
+  transform: translateY(10px);
 }
 
 .window input {
