@@ -33,3 +33,7 @@
 ![search](/screenshot/search.png)
 
 ![customize](/screenshot/customize.png)
+
+![settings](/screenshot/settings.png)
+
+![engine](/screenshot/engine.png)

@@ -2,17 +2,26 @@
 import { ref } from "vue";
 import { context } from "@/assets/script/shared";
 
-const time = ref(new Date().toLocaleTimeString());
-setInterval(() =>
-    time.value = new Date().toLocaleTimeString(), 500);
+const time = ref<string>("");
+const clicked = ref<boolean>(false);
+
+(function refresh() {
+  const date = new Date();
+  let hour = String(date.getHours()), minute = String(date.getMinutes());
+  if (minute.length === 1) minute = "0" + minute;
+  time.value = `${hour}:${minute}`;
+  requestAnimationFrame(refresh);
+})();
 
 function click() {
-    context.value = !context.value;
+  clicked.value = true;
+  setTimeout(() => clicked.value = false, 200);
+  context.value = !context.value;
 }
 </script>
 
 <template>
-  <div class="time" @click="click">
+  <div class="time" :class="{'clicked': clicked}" @click="click">
     <span>{{ time }}</span>
   </div>
 </template>
@@ -47,5 +56,9 @@ function click() {
 .time:focus {
   cursor: pointer;
   transform: translateY(-4px) translateX(-50%);
+}
+
+.time.clicked span {
+  color: rgba(255, 255, 255, .6);
 }
 </style>
