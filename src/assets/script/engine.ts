@@ -53,7 +53,7 @@ export function uri(query: string): string {
     return urls[engines[current.value]] + decodeURI(query);
 }
 
-export const search = wrap((content: string, callback: (res: string[]) => any): void => {
+export const getSearchSuggestion = wrap((content: string, callback: (res: string[]) => any): void => {
     content = content.trim();
     if (!content.length) return;
     const script = document.createElement("script");

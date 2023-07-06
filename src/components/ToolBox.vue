@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { context } from "@/assets/script/shared";
+import {context} from "@/assets/script/shared";
 import DateCard from "@/components/cards/DateCard.vue";
 
 const props = defineProps<{
@@ -8,8 +8,10 @@ const props = defineProps<{
 }>();
 
 window.addEventListener('contextmenu', (e) => {
-  e.preventDefault();
-  context.value = !context.value;
+  if (!props.focus) {
+    e.preventDefault();
+    context.value = !context.value;
+  }
 });
 
 let tools = [
@@ -28,7 +30,9 @@ let tools = [
 ], renderer = ref(tools);
 
 function resize() {
-  const size = (document.body.offsetWidth - 120) * (document.body.offsetHeight - 480);
+  const browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  const browserHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  const size = (browserWidth - 120) * (browserHeight - 480);
   const tool = Math.min(Math.ceil(size / 6800), 12);
   renderer.value = tools.slice(0, tool);
 }
@@ -41,10 +45,10 @@ resize();
 </script>
 
 <template>
-  <div class="card-container" :class="{'focus': props.focus}" v-if="context">
+  <div class="card-container" :class="{'focus': props.focus}" v-show="context">
     <DateCard />
   </div>
-  <div class="tool-container" :class="{'focus': props.focus}" v-else>
+  <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
     <a class="tool"
        v-for="(tool, idx) in renderer"
        @click="redirect(`https://${tool.link}`)"

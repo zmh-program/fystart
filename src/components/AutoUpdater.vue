@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import Notification from "@/components/Notification.vue";
+import Notification from "@/components/compositions/Notification.vue";
 import { updater } from "@/assets/script/service";
 
 import { useI18n } from "vue-i18n";
-const { t: $t } = useI18n({ useScope: "global" });
+const { t } = useI18n();
 </script>
 
 <template>
   <Notification v-if="updater">
-    {{ $t('update') }}<a class="link" href="https://github.com/zmh-program/fystart">查看更新内容</a>
+    {{ t('update') }}<a class="link" href="https://github.com/zmh-program/fystart">{{ t('check') }}</a>
   </Notification>
 </template>
+
+<i18n>
+{
+  "zh": {
+    "update": "更新到最新版本！",
+    "check": "查看更新内容"
+  },
+  "en": {
+    "update": "Update to the latest version!",
+    "check": "Check out the update"
+  }
+}
+</i18n>
