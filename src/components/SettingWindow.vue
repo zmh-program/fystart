@@ -5,9 +5,9 @@ import { current, icons, set, urls} from "@/assets/script/engine";
 import { background } from "@/assets/script/config";
 import EngineI18n from "@/i18n/engine";
 import Cover from "@/components/compositions/Cover.vue";
-import Close from "@/components/icons/close.vue";
 import Settings from "@/components/icons/settings.vue";
 import Check from "@/components/icons/check.vue";
+import Window from "@/components/compositions/Window.vue";
 
 const status = ref(false);
 const { t } = useI18n({ messages: EngineI18n });
@@ -27,44 +27,39 @@ const images = [
 <template>
   <Cover :active="status" :floor="1" />
   <settings class="button" @click="status = true" />
-  <div class="window" :class="{'active': status}">
-    <h1 class="title">{{ t('settings') }}</h1>
-    <close class="close" @click="status = false" viewBox="0 0 512 512" />
-    <div class="divider" />
-    <div class="main">
-      <div class="form">
-        <label>{{ t('background') }}</label>
-        <div class="column"><br>
-          <div class="builtin">
-            <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
-              <img
-                  :src="image"
-                  :class="{'selected': background === image}"
-                  alt=""
-              />
-              <div class="cover" v-if="background === image" />
-              <check class="check" v-if="background === image" />
-            </div>
+  <Window :title="t('settings')" v-model="status">
+    <div class="form">
+      <label>{{ t('background') }}</label>
+      <div class="column"><br>
+        <div class="builtin">
+          <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
+            <img
+                :src="image"
+                :class="{'selected': background === image}"
+                alt=""
+            />
+            <div class="cover" v-if="background === image" />
+            <check class="check" v-if="background === image" />
           </div>
-          <input type="url" v-model="background" :placeholder="t('input-background')">
         </div>
+        <input type="url" v-model="background" :placeholder="t('input-background')">
       </div>
-      <div class="form">
-        <label>{{ t('search-engine') }}</label>
-        <div class="column">
-          <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}" @click="set(index)">
-            <div class="icon" v-html="inner" />
-            <span class="name">{{ t(name) }}</span>
-            <template v-if="current === index">
-              <div style="flex-grow: 1" />
-              <check class="check" />
-            </template>
-            <span class="uri" v-else>{{ urls[name] }}</span>
-          </div>
+    </div>
+    <div class="form">
+      <label>{{ t('search-engine') }}</label>
+      <div class="column">
+        <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}" @click="set(index)">
+          <div class="icon" v-html="inner" />
+          <span class="name">{{ t(name) }}</span>
+          <template v-if="current === index">
+            <div style="flex-grow: 1" />
+            <check class="check" />
+          </template>
+          <span class="uri" v-else>{{ urls[name] }}</span>
         </div>
       </div>
     </div>
-  </div>
+  </Window>
 </template>
 
 <i18n>
@@ -85,19 +80,6 @@ const images = [
 </i18n>
 
 <style scoped>
-.title {
-  transform: translateY(-6px);
-  text-align: center;
-  font-size: 20px;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background: rgb(40,40,40);
-  margin: 8px 0;
-}
-
 .button {
   position: absolute;
   cursor: pointer;
@@ -116,51 +98,6 @@ const images = [
 
 .button:hover {
   rotate: 90deg;
-}
-
-.window {
-  position: absolute;
-  padding: 26px 0;
-  border: 0;
-  top: 50%;
-  left: 50%;
-  transition: .5s;
-  transform: translate(-50%, -50%);
-  width: calc(100% - 52px);
-  height: min(80%, 540px);
-  background: rgb(30,30,30);
-  border-radius: 10px;
-  max-width: 640px;
-  z-index: -64;
-  opacity: 0;
-  overflow: hidden;
-}
-
-@keyframes PopupAnimation {
-  0% {
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-.window.active {
-  z-index: 64;
-  opacity: 1;
-  animation: PopupAnimation .5s ease-in-out;
-}
-
-.main {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  touch-action: pan-x;
-  padding: 0 26px 36px;
 }
 
 .builtin {
@@ -259,69 +196,5 @@ const images = [
   height: 26px;
   animation: FadeInAnimation .2s ease-in-out forwards;
   margin-right: 8px;
-}
-
-.window .close {
-  position: absolute;
-  padding: 2px;
-  width: 26px;
-  height: 26px;
-  right: 18px;
-  top: 18px;
-  cursor: pointer;
-  transition: .25s;
-  border-radius: 6px;
-  stroke: rgba(255,255,255,0.8);
-}
-
-
-.window .close:hover {
-  background: rgb(40,40,40);
-  stroke: #fff;
-}
-
-.window * {
-  color: #fff;
-  user-select: none;
-  font-family: var(--fonts-cn);
-}
-
-.window .form {
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  margin: 6px;
-  width: 100%;
-  height: max-content;
-}
-
-.window .form .column {
-  background: rgb(40, 40, 40);
-  padding: 8px 12px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 4px;
-}
-
-.window label {
-  font-size: 15px;
-  font-weight: 700;
-  width: max-content;
-  text-wrap: none;
-  transform: translateY(10px);
-}
-
-.window input {
-  background: #181818;
-  margin: 10px 4px;
-  border: none;
-  padding: 16px;
-  width: 100%;
-  height: 36px;
-  border-radius: 16px;
-  outline: none;
-  letter-spacing: 0.01cm;
 }
 </style>
