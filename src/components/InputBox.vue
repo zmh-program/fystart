@@ -34,7 +34,7 @@ const suggestions: Ref<string[]> = ref([]);
 const instance = new OpenAI(), answer = instance.getRef();
 const display = computed(() => (!input.value.trim().length) && (!suggestions.value.length));
 
-watch(input, function() {
+watch(input, function () {
   const message: string = input.value.trim();
   if (message) {
     getSearchSuggestion(message, (arr: string[]) => suggestions.value = arr);

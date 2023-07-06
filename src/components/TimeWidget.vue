@@ -7,9 +7,10 @@ const clicked = ref<boolean>(false);
 
 (function refresh() {
   const date = new Date();
-  let hour = String(date.getHours()), minute = String(date.getMinutes());
+  let hour = String(date.getHours()), minute = String(date.getMinutes()), second = String(date.getSeconds());
   if (minute.length === 1) minute = "0" + minute;
-  time.value = `${hour}:${minute}`;
+  if (second.length === 1) second = "0" + second;
+  time.value = `${hour}:${minute}:${second}`;
   requestAnimationFrame(refresh);
 })();
 
