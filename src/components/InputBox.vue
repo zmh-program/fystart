@@ -7,7 +7,9 @@ import {getIcon, uri, toggle, search, addition, current, engines} from "@/assets
 import { OpenAI, finished } from "@/assets/script/openai";
 import { input } from "@/assets/script/shared";
 import { contains } from "@/assets/script/dom";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const props = defineProps(['modelValue']);
 const emit = defineEmits(['update:modelValue']);
 
@@ -56,7 +58,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 
 <template>
   <div class="container" id="input" tabindex="0" :class="{'focus': props.modelValue}">
-    <input placeholder="search" ref="object" @keyup="listener" v-model="input" size="30" type="text">
+    <input :placeholder="t('search')" ref="object" @keyup="listener" v-model="input" size="30" type="text">
     <div class="engine-icon" :class="{'focus': props.modelValue, 'clicked': active}" @click="clicked" v-html="getIcon" />
     <span class="engine-text" :class="{'focus': props.modelValue && float}">{{ engines[current] }}</span>
     <a class="search-icon" :class="{'focus': props.modelValue}" :href="uri(input)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="#70C001" stroke-miterlimit="10" stroke-width="42"/><path fill="none" stroke="#70C001" stroke-linecap="round" stroke-miterlimit="10" stroke-width="42" d="M338.29 338.29L448 448"/></svg></a>
@@ -76,6 +78,17 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "search": "search"
+  },
+  "zh": {
+    "search": "搜索"
+  }
+}
+</i18n>
 
 <style scoped>
 .container {
