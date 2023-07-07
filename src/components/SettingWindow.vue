@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { current, icons, set, urls} from "@/assets/script/engine";
-import { background } from "@/assets/script/config";
+import { background } from "@/assets/script/storage";
 import EngineI18n from "@/i18n/engine";
 import Cover from "@/components/compositions/Cover.vue";
 import Settings from "@/components/icons/settings.vue";

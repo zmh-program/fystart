@@ -1,10 +1,11 @@
 import { wrap } from "@/assets/script/engine";
-import {ref, watch} from "vue";
+import { ref } from "vue";
 import type { Ref } from "vue";
-import {TypingEffect} from "@/assets/script/typing";
+import { TypingEffect } from "@/assets/script/typing";
+import { endpoint } from "@/assets/script/config";
 
 const ask = wrap(async (message: string, callback: (response: string) => any) => {
-    const resp = await fetch(`https://api.fystart.cn/gpt`, {
+    const resp = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message }),

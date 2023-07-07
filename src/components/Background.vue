@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { background } from "@/assets/script/config";
+import { background } from "@/assets/script/storage";
 import Cover from "@/components/compositions/Cover.vue";
 import {ref, watch} from "vue";
 
