@@ -92,5 +92,11 @@ cd backend && go build .
 ### License | 开源协议
 [MIT](/LICENSE)
 
+### Security Policy | 安全政策
+[Security Policy](/SECURITY.md)
+
+### Privacy Policy | 隐私政策
+[Privacy Policy](/PRIVACY.md)
+
 ### Sponsor | 赞助
 no one
