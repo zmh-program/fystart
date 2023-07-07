@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { context } from "@/assets/script/shared";
+import {storage} from "@/assets/script/storage";
 
 const time = ref<string>("");
 const clicked = ref<boolean>(false);
@@ -10,7 +11,7 @@ const clicked = ref<boolean>(false);
   let hour = String(date.getHours()), minute = String(date.getMinutes()), second = String(date.getSeconds());
   if (minute.length === 1) minute = "0" + minute;
   if (second.length === 1) second = "0" + second;
-  time.value = `${hour}:${minute}:${second}`;
+  time.value = storage.exactTime ? `${hour}:${minute}:${second}` : `${hour}:${minute}`;
   requestAnimationFrame(refresh);
 })();
 

@@ -171,14 +171,14 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   user-select: none;
   cursor: none;
   opacity: 0;
-  transform: translate(-36px, 10px);
+  transform: translate(-36px, 9px);
   z-index: -1;
   transition: .25s;
 }
 
 .engine-text.focus {
   opacity: 1;
-  transform: translate(4px, 10px);
+  transform: translate(4px, 9px);
 }
 
 .container .search-result {
@@ -256,5 +256,11 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 .intelligence-result.focus {
   opacity: 1;
   pointer-events: all;
+}
+
+@media (max-width: 340px) {
+  .engine-text {
+    display: none;
+  }
 }
 </style>

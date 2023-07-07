@@ -18,6 +18,9 @@ export const background = ref(localStorage.getItem("background") || "/background
 export const language = ref(localStorage.getItem("language") || "zh");
 export const storage = reactive(readDictConfig({
   chatgpt: true,
+  quote: true,
+  toolbox: true,
+  about: true,
   exactTime: false,
   focusInput: true,
 }));

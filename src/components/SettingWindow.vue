@@ -11,6 +11,7 @@ import Window from "@/components/compositions/Window.vue";
 import International from "@/components/icons/international.vue";
 import Openai from "@/components/icons/openai.vue";
 import Checkbox from "@/components/compositions/Checkbox.vue";
+import Clock from "@/components/icons/clock.vue";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -59,6 +60,15 @@ watch(locale, () => localStorage.setItem('language', locale.value))
           </div>
           <div class="row"><p>{{ t('openai') }}</p></div>
         </div>
+        <div class="row desc">
+          <div class="row">
+            <clock />
+            <span>{{ t('time') }}</span>
+            <div class="grow" />
+            <Checkbox v-model="storage.exactTime" />
+          </div>
+          <div class="row"><p>{{ t('time-desc') }}</p></div>
+        </div>
       </div>
     </div>
     <div class="form">
@@ -100,65 +110,86 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   "en": {
     "settings": "Settings",
     "general": "General",
+    "display": "Display",
     "background": "Background",
     "search-engine": "Search Engine Preferences",
     "language": "Language",
     "input-background": "Input the background url.",
-    "openai": "ChatGPT Search Suggestions"
+    "openai": "ChatGPT Search Suggestions",
+    "time": "Exact Time",
+    "time-desc": "Show the exact time on the search bar"
   },
   "zh": {
     "settings": "设置",
     "general": "常规设置",
+    "display": "显示",
     "background": "背景",
     "search-engine": "搜索引擎偏好",
     "language": "语言",
     "input-background": "请输入背景图片的链接",
-    "openai": "ChatGPT 搜索建议"
+    "openai": "ChatGPT 搜索建议",
+    "time": "精确时间",
+    "time-desc": "搜索栏上方显示的时间精确到秒"
   },
   "tw": {
     "settings": "設定",
     "general": "常規設定",
+    "display": "顯示",
     "background": "背景",
     "search-engine": "搜尋引擎偏好",
     "language": "語言",
     "input-background": "請輸入背景圖片的連結",
-    "openai": "ChatGPT 搜尋建議"
+    "openai": "ChatGPT 搜尋建議",
+    "time": "精確時間",
+    "time-desc": "搜尋欄上方顯示的時間精確到秒"
   },
   "ru": {
     "settings": "Настройки",
     "general": "Общие",
+    "display": "Отображение",
     "background": "Фон",
     "search-engine": "Настройки поисковой системы",
     "language": "Язык",
     "input-background": "Введите URL-адрес фона",
-    "openai": "Поисковые предложения ChatGPT"
+    "openai": "Поисковые предложения ChatGPT",
+    "time": "Точное время",
+    "time-desc": "Показывать точное время в строке поиска"
   },
   "de": {
     "settings": "Einstellungen",
     "general": "Allgemein",
+    "display": "Anzeige",
     "background": "Hintergrund",
     "search-engine": "Suchmaschinenpräferenzen",
     "language": "Sprache",
     "input-background": "Geben Sie die URL des Hintergrunds ein",
-    "openai": "ChatGPT-Suchvorschläge"
+    "openai": "ChatGPT-Suchvorschläge",
+    "time": "Exakte Zeit",
+    "time-desc": "Zeigen Sie die genaue Zeit in der Suchleiste an"
   },
   "fr": {
     "settings": "Paramètres",
     "general": "Général",
+    "display": "Affichage",
     "background": "Arrière-plan",
     "search-engine": "Préférences du moteur de recherche",
     "language": "Langue",
     "input-background": "Entrez l'URL de l'arrière-plan",
-    "openai": "Suggestions de recherche ChatGPT"
+    "openai": "Suggestions de recherche ChatGPT",
+    "time": "Heure exacte",
+    "time-desc": "Afficher l'heure exacte dans la barre de recherche"
   },
   "ja": {
     "settings": "設定",
     "general": "一般",
+    "display": "ショー",
     "background": "背景",
     "search-engine": "検索エンジンの設定",
     "language": "言語",
     "input-background": "背景のURLを入力してください",
-    "openai": "ChatGPT検索の提案"
+    "openai": "ChatGPT検索の提案",
+    "time": "正確な時間",
+    "time-desc": "検索バーに正確な時間を表示します"
   }
 }
 </i18n>
