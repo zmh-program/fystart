@@ -23,7 +23,7 @@ onMounted(() => {
     if (window.value === null) return;
     const height = e.touches[0].clientY - start.value;
     const time = new Date().getTime() - delta.value;
-    if (time >= 200) window.value.scrollTop = window.value.scrollTop - height / 4;
+    if (time >= 200) window.value.scrollTop = window.value.scrollTop - height / 10;
   })
 })
 </script>
