@@ -10,6 +10,7 @@ import Check from "@/components/icons/check.vue";
 import Window from "@/components/compositions/Window.vue";
 import International from "@/components/icons/international.vue";
 import Openai from "@/components/icons/openai.vue";
+import Checkbox from "@/components/compositions/Checkbox.vue";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -54,7 +55,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
             <openai />
             <span>ChatGPT</span>
             <div class="grow" />
-            <input type="checkbox" v-model="storage.chatgpt">
+            <Checkbox v-model="storage.chatgpt" />
           </div>
           <div class="row"><p>{{ t('openai') }}</p></div>
         </div>

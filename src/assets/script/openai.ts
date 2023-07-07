@@ -3,8 +3,10 @@ import { ref } from "vue";
 import type { Ref } from "vue";
 import { TypingEffect } from "@/assets/script/typing";
 import { endpoint } from "@/assets/script/config";
+import {storage} from "@/assets/script/storage";
 
 const ask = wrap(async (message: string, callback: (response: string) => any) => {
+    if (!storage.chatgpt) return;
     const resp = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

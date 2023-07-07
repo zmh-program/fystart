@@ -11,6 +11,7 @@ import { contains } from "@/assets/script/dom";
 import { useI18n } from "vue-i18n";
 import Search from "@/components/icons/search.vue";
 import Openai from "@/components/icons/openai.vue";
+import {storage} from "@/assets/script/storage";
 
 const { t } = useI18n({ messages: EngineI18n });
 const props = defineProps(['modelValue']);
@@ -66,7 +67,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
     <span class="engine-text" :class="{'focus': props.modelValue && float && !input}">{{ t(engines[current]) }}</span>
     <a class="search-icon" :class="{'focus': props.modelValue}" :href="uri(input)"><search /></a>
     <div class="result" :class="{'focus': props.modelValue && (!display) && input}">
-      <div class="intelligence-result" :class="{'focus': props.modelValue && (!display) && input}">
+      <div class="intelligence-result" :class="{'focus': props.modelValue && (!display) && input}" v-if="storage.chatgpt">
         <openai />
         <p class="typing" :class="{'finished': finished}">{{ answer }}</p>
       </div>
