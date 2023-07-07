@@ -14,10 +14,9 @@ function writeDictConfig(data: Record<string, any>): void {
   for (const key in data) data[key] = JSON.stringify(data[key]);
 }
 
-
 export const background = ref(localStorage.getItem("background") || "/background.webp");
+export const language = ref(localStorage.getItem("language") || "zh");
 export const storage = reactive(readDictConfig({
-  language: "zh",
   chatgpt: true,
   exactTime: false,
   focusInput: true,

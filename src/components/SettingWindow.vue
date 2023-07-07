@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import {ref, watch} from "vue";
 import { useI18n } from "vue-i18n";
 import { current, icons, set, urls} from "@/assets/script/engine";
 import { background } from "@/assets/script/storage";
@@ -10,7 +10,7 @@ import Check from "@/components/icons/check.vue";
 import Window from "@/components/compositions/Window.vue";
 
 const active = ref(false);
-const { t } = useI18n({ messages: EngineI18n });
+const { t, locale } = useI18n({ messages: EngineI18n });
 const images = [
     "/background.webp",
     "/background/hills.webp",
@@ -22,6 +22,8 @@ const images = [
     "/background/snow.webp",
     "/background/sunshine.webp",
 ]
+
+watch(locale, () => localStorage.setItem('language', locale.value))
 </script>
 
 <template>

@@ -1,4 +1,5 @@
 import { createI18n } from "vue-i18n";
+import {language} from "@/assets/script/storage";
 
 const messages = {
   en: {},
@@ -7,7 +8,7 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'zh',
+  locale: language.value,
   fallbackLocale: 'en',
   messages,
 })
