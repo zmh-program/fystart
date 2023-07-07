@@ -11,7 +11,7 @@ if (localStorage.getItem("version") && localStorage.getItem("version") !== versi
 }
 localStorage.setItem("version", version);
 
-watch(updater, (v) => {
+watch(updater, () => {
   if (updater.value) setTimeout(() => updater.value = false, 5000);
 })
 

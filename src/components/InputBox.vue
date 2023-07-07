@@ -109,13 +109,16 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 
 .container:hover,
 .container:focus,
-.container:active,
-.container.focus {
+.container:active {
   background: rgba(15,15,15,.8);
   width: 530px;
 }
+
 .container.focus {
+  background: rgba(15,15,15,.8);
+  width: 530px;
   transform: translate(-50%, -15px);
+  will-change: transform;
 }
 
 .container input {
