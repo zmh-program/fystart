@@ -57,7 +57,7 @@
 ![engine](/screenshot/engine.png)
 
 
-## Get Started | 开始
+### Get Started | 开始
 npm (yarn, pnpm)
 ```shell
 npm install
@@ -67,7 +67,7 @@ cd backend
 go run .
 ```
 
-# Configuration | 配置
+### Configuration | 配置
 /src/assets/script/config.ts
 ```ts
 export const endpoint = "https://api.fystart.cn/gpt";
@@ -83,11 +83,14 @@ redis:
   db: 0
 ```
 
-## Deploy | 部署
+### Build | 构建
 ```shell
 npm run build
 cd backend && go build .
 ```
 
-## License | 许可
+### License | 开源协议
 [MIT](/LICENSE)
+
+### Sponsor | 赞助
+no one
