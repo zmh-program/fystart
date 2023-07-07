@@ -25,7 +25,7 @@ if (storage.focusInput) window.addEventListener('load', () => {
     <InputBox v-model="focus" />
     <ToolBox :focus="focus" v-if="storage.toolbox" />
     <Quote :focus="focus" v-if="storage.quote" />
-    <About v-if="storage.about" />
+    <About />
   </main>
 </template>
 

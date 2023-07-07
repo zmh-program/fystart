@@ -1,54 +1,181 @@
 <script setup lang="ts">
 import { input } from "@/assets/script/shared";
+import { useI18n } from "vue-i18n";
+import { storage } from "@/assets/script/storage";
+import { ref } from "vue";
+import Window from "@/components/compositions/Window.vue";
+import {version} from "../assets/script/service";
+import Github from "@/components/icons/github.vue";
+
+const { t } = useI18n();
+const active = ref(false);
 </script>
 <template>
-  <a class="about" href="https://github.com/zmh-program/fystart" :class="{'focus': !input}">
-    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-    </svg>
-    Fystart
-  </a>
+  <div class="about" :class="{'focus': !input && storage.about}">
+    <span>© 2023</span>
+    <div class="split" />
+    <span class="button" @click="active = true">{{ t("about") }}</span>
+  </div>
+  <Window :title="t('about')" v-model="active">
+    <div class="title">
+      <img src="/favicon.ico" alt="" />
+      <h1>Fystart</h1>
+      <p class="version">{{ version }}</p>
+    </div>
+    <pre class="description">
+      🍏 一言：在这里，你可以发现随机的名人名言，这些名言会给你带来灵感和启发，让你的每一天都充满动力。
+
+      🍋 自定义设置：Fystart允许你根据自己的喜好进行自定义设置。你可以选择你喜欢的主题颜色、背景图片等，让浏览器起始页与你的个性完美融合。
+
+      🍎 ChatGPT 搜索建议：通过ChatGPT的智能搜索建议功能，Fystart能够为你提供更快速、更准确的搜索结果，让你轻松找到你需要的信息，提高效率。
+
+      🍉 翻译 / Github 搜索：无论是需要翻译文字还是在GitHub上搜索代码，Fystart都能够为你提供便捷的功能，让你在浏览器起始页上完成这些操作，提高工作效率。
+
+      🍇 工具箱：Fystart内置了一系列实用工具，让你无需离开浏览器起始页，就能完成各种常用任务，方便实用。Fystart还内置了很多常用软件，方便您快速打开。
+
+      🍐 搜索引擎建议：当你输入关键词时，Fystart会为你提供相关的搜索引擎建议，帮助你快速定位到你想要的内容，省去了繁琐的搜索过程。
+
+      🎃 PWA 应用：通过Fystart，你可以将一些网站添加为PWA应用，这意味着你可以在离线状态下访问它们，无需依赖网络连接。
+
+      ✨ 国际化支持：Fystart支持多种语言，包括简体中文、繁体中文、英语、俄语、法语和日语，让用户在不同地区和语言环境下都能享受到优质的浏览器起始页。
+
+      我希望通过Fystart，能够为您提供一个美观、实用、与个性相匹配的浏览器起始页，让你的工作、学习和生活更加高效和轻松。感谢您一直以来对Fystart的支持和陪伴👋！
+    </pre>
+    <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
+    <a class="author" href="https://zmh-program.site">@ProgramZmh</a>
+  </Window>
 </template>
 
+<i18n>
+{
+  "en": {
+    "about": "About"
+  },
+  "zh": {
+    "about": "关于"
+  },
+  "tw": {
+    "about": "關於"
+  },
+  "ru": {
+    "about": "О сайте"
+  },
+  "fr": {
+    "about": "Sur"
+  },
+  "de": {
+    "about": "Über"
+  },
+  "ja": {
+    "about": "について"
+  }
+}
+</i18n>
 <style scoped>
 .about {
-  cursor: pointer;
+  display: flex;
+  flex-direction: row;
   position: absolute;
   bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
   color: rgba(255,255,255,0.8);
   font-size: 14px;
-  font-family: var(--fonts-en);
+  font-family: var(--fonts-cn);
   text-decoration: none;
   opacity: 0;
   transition: .25s;
+  user-select: none;
+}
+
+.split::after {
+  content: " | ";
+  color: rgba(255,255,255,.3);
+  padding: 0 4px;
 }
 
 .about.focus {
   opacity: 1;
 }
 
-.about svg {
-  width: 14px;
-  height: 14px;
-  fill: rgba(255,255,255,0.8);
-  transform: translate(-2px, 2px);
-  transition-delay: .05s;
-  transition: .3s;
+.about .button {
+  cursor: pointer;
+  transition: .25s;
 }
 
-.about:hover {
+.about .button:hover {
   color: #fff;
-}
-
-.about:hover svg {
-  fill: #fff;
 }
 
 @media (max-height: 700px) and (max-width: 300px){
   .about {
     opacity: 0;
   }
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  width: max-content;
+  text-align: center;
+  padding: 20px;
+}
+
+.title img {
+  transform: translate(-12px, -4px);
+  width: 56px;
+  height: 56px;
+}
+
+.version {
+  top: 8px;
+  margin-left: 12px;
+  background: rgb(40,40,40);
+  width: max-content;
+  height: max-content;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #80baff;
+}
+
+.author {
+  color: #ccc;
+  display: block;
+  width: max-content;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+.repo {
+  display: block;
+  width: max-content;
+  margin: 0 auto;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.repo svg {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  transform: translateY(1px);
+  fill: #fff;
+}
+
+.description {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow-wrap: anywhere;
+  white-space: break-spaces;
+  word-break: break-all;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-family: var(--fonts-cn);
+  text-align: left;
+  line-height: 1.5;
+  user-select: none;
 }
 </style>
