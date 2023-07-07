@@ -1,11 +1,31 @@
 <script setup lang="ts">
 import Close from "@/components/icons/close.vue";
+import {onMounted, ref} from "vue";
 
 const props = defineProps<{
   title: string,
   modelValue: boolean,
 }>();
 const emit = defineEmits(['update:modelValue']);
+const window = ref<HTMLElement | null>(null);
+
+const start = ref<number>(NaN);
+const delta = ref<number>(NaN);
+
+onMounted(() => {
+  if (window.value === null) return;
+  window.value.addEventListener('touchstart', (e) => {
+    start.value = e.touches[0].clientY;
+    delta.value = new Date().getTime();
+  })
+  window.value.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (window.value === null) return;
+    const height = e.touches[0].clientY - start.value;
+    const time = new Date().getTime() - delta.value;
+    if (time >= 200) window.value.scrollTop = window.value.scrollTop - height / 4;
+  })
+})
 </script>
 
 <template>
@@ -13,7 +33,7 @@ const emit = defineEmits(['update:modelValue']);
     <h1 class="title">{{ title }}</h1>
     <close class="close" @click="emit('update:modelValue', false)" viewBox="0 0 512 512" />
     <div class="divider" />
-    <div class="main">
+    <div class="main" ref="window">
       <slot />
     </div>
   </div>
