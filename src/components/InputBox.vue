@@ -86,6 +86,9 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   "zh": {
     "search": "搜索"
   },
+  "tw": {
+    "search": "搜索"
+  },
   "ru": {
     "search": "поиск"
   },

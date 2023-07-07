@@ -13,6 +13,13 @@ const messages = {
       "duckduckgo": "DuckDuckGo",
       "sogou": "搜狗",
   },
+  tw: {
+      "baidu": "百度",
+      "google": "谷歌",
+      "bing": "必應",
+      "duckduckgo": "DuckDuckGo",
+      "sogou": "搜狗",
+  },
   ru: {
     "baidu": "Baidu",
     "google": "Google",

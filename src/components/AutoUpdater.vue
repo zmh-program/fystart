@@ -18,6 +18,10 @@ const { t } = useI18n();
     "update": "更新到最新版本！",
     "check": "查看更新内容"
   },
+  "tw": {
+    "update": "更新到最新版本！",
+    "check": "查看更新內容"
+  },
   "en": {
     "update": "Update to the latest version!",
     "check": "Check out the update"

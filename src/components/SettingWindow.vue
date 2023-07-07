@@ -36,6 +36,7 @@ const images = [
           <div class="grow" />
           <select v-model="$i18n.locale">
             <option value="zh">简体中文</option>
+            <option value="tw">繁體中文</option>
             <option value="en">English</option>
             <option value="ru">Русский</option>
             <option value="de">Deutsch</option>
@@ -96,6 +97,14 @@ const images = [
     "search-engine": "搜索引擎偏好",
     "language": "语言",
     "input-background": "请输入背景图片的链接"
+  },
+  "tw": {
+    "settings": "設定",
+    "general": "常規設定",
+    "background": "背景",
+    "search-engine": "搜尋引擎偏好",
+    "language": "語言",
+    "input-background": "請輸入背景圖片的連結"
   },
   "ru": {
     "settings": "Настройки",
