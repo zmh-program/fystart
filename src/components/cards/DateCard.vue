@@ -12,7 +12,7 @@ const year = date.getUTCFullYear();
   <div class="prefix" />
   <span class="date">{{ year }} / {{ month }}</span>
   <div class="column day"><span>{{ day }}</span><p>日</p></div>
-  <div style="flex-grow: 1" />
+  <div class="grow" />
   <div class="column week"><p>本月的第</p><span>{{ week }}</span><p>星期</p></div>
 </div>
 </template>

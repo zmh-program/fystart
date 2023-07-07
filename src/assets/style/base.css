@@ -89,6 +89,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.grow {
+  flex-grow: 1;
+}
 
 .link {
   text-decoration: none;

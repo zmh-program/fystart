@@ -44,6 +44,12 @@ const emit = defineEmits(['update:modelValue']);
   gap: 4px;
 }
 
+.window .form .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
 .window label {
   font-size: 15px;
   font-weight: 700;
@@ -62,6 +68,21 @@ const emit = defineEmits(['update:modelValue']);
   border-radius: 16px;
   outline: none;
   letter-spacing: 0.01cm;
+}
+
+.window select {
+  background: rgb(30,30,30);
+  border: none;
+  font-family: var(--fonts-cn);
+  border-radius: 4px;
+  padding: 4px 8px 4px 8px;
+}
+
+.window select option {
+  background: rgb(40,40,40);
+  border: none;
+  font-family: var(--fonts-cn);
+  border-radius: 4px;
 }
 </style>
 <style scoped>

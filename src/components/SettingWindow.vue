@@ -9,7 +9,7 @@ import Settings from "@/components/icons/settings.vue";
 import Check from "@/components/icons/check.vue";
 import Window from "@/components/compositions/Window.vue";
 
-const status = ref(false);
+const active = ref(false);
 const { t } = useI18n({ messages: EngineI18n });
 const images = [
     "/background.webp",
@@ -25,9 +25,22 @@ const images = [
 </script>
 
 <template>
-  <Cover :active="status" :floor="1" />
-  <settings class="button" @click="status = true" />
-  <Window :title="t('settings')" v-model="status">
+  <Cover :active="active" :floor="1" />
+  <settings class="button" @click="active = true" />
+  <Window :title="t('settings')" v-model="active">
+    <div class="form">
+      <label>{{ t('general') }}</label>
+      <div class="column">
+        <div class="row">
+          <span>{{ t('language') }}</span>
+          <div class="grow" />
+          <select v-model="$i18n.locale">
+            <option value="zh">简体中文</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <div class="form">
       <label>{{ t('background') }}</label>
       <div class="column"><br>
@@ -52,7 +65,7 @@ const images = [
           <div class="icon" v-html="inner" />
           <span class="name">{{ t(name) }}</span>
           <template v-if="current === index">
-            <div style="flex-grow: 1" />
+            <div class="grow" />
             <check class="check" />
           </template>
           <span class="uri" v-else>{{ urls[name] }}</span>
@@ -66,14 +79,18 @@ const images = [
 {
   "en": {
     "settings": "Settings",
+    "general": "General",
     "background": "Background",
     "search-engine": "Search Engine Preferences",
+    "language": "Language",
     "input-background": "Input the background url."
   },
   "zh": {
     "settings": "设置",
+    "general": "常规设置",
     "background": "背景",
     "search-engine": "搜索引擎偏好",
+    "language": "语言",
     "input-background": "请输入背景图片的链接"
   }
 }
