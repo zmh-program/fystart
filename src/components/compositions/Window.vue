@@ -76,6 +76,7 @@ const emit = defineEmits(['update:modelValue']);
   font-family: var(--fonts-cn);
   border-radius: 4px;
   padding: 4px 8px 4px 8px;
+  outline: none;
 }
 
 .window select option {

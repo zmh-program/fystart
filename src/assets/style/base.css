@@ -63,6 +63,7 @@
 *::before,
 *::after {
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   margin: 0;
   position: relative;
