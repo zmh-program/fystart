@@ -2,12 +2,14 @@
 import {ref, watch} from "vue";
 import { useI18n } from "vue-i18n";
 import { current, icons, set, urls} from "@/assets/script/engine";
-import { background } from "@/assets/script/storage";
+import {background, storage} from "@/assets/script/storage";
 import EngineI18n from "@/i18n/engine";
 import Cover from "@/components/compositions/Cover.vue";
 import Settings from "@/components/icons/settings.vue";
 import Check from "@/components/icons/check.vue";
 import Window from "@/components/compositions/Window.vue";
+import International from "@/components/icons/international.vue";
+import Openai from "@/components/icons/openai.vue";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -32,8 +34,9 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   <Window :title="t('settings')" v-model="active">
     <div class="form">
       <label>{{ t('general') }}</label>
-      <div class="column">
+      <div class="column general">
         <div class="row">
+          <international />
           <span>{{ t('language') }}</span>
           <div class="grow" />
           <select v-model="$i18n.locale">
@@ -45,6 +48,15 @@ watch(locale, () => localStorage.setItem('language', locale.value))
             <option value="fr">Français</option>
             <option value="ja">日本語</option>
           </select>
+        </div>
+        <div class="row desc">
+          <div class="row">
+            <openai />
+            <span>ChatGPT</span>
+            <div class="grow" />
+            <input type="checkbox" v-model="storage.chatgpt">
+          </div>
+          <div class="row"><p>{{ t('openai') }}</p></div>
         </div>
       </div>
     </div>
@@ -90,7 +102,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "Background",
     "search-engine": "Search Engine Preferences",
     "language": "Language",
-    "input-background": "Input the background url."
+    "input-background": "Input the background url.",
+    "openai": "ChatGPT Search Suggestions"
   },
   "zh": {
     "settings": "设置",
@@ -98,7 +111,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "背景",
     "search-engine": "搜索引擎偏好",
     "language": "语言",
-    "input-background": "请输入背景图片的链接"
+    "input-background": "请输入背景图片的链接",
+    "openai": "ChatGPT 搜索建议"
   },
   "tw": {
     "settings": "設定",
@@ -106,7 +120,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "背景",
     "search-engine": "搜尋引擎偏好",
     "language": "語言",
-    "input-background": "請輸入背景圖片的連結"
+    "input-background": "請輸入背景圖片的連結",
+    "openai": "ChatGPT 搜尋建議"
   },
   "ru": {
     "settings": "Настройки",
@@ -114,7 +129,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "Фон",
     "search-engine": "Настройки поисковой системы",
     "language": "Язык",
-    "input-background": "Введите URL-адрес фона"
+    "input-background": "Введите URL-адрес фона",
+    "openai": "Поисковые предложения ChatGPT"
   },
   "de": {
     "settings": "Einstellungen",
@@ -122,7 +138,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "Hintergrund",
     "search-engine": "Suchmaschinenpräferenzen",
     "language": "Sprache",
-    "input-background": "Geben Sie die URL des Hintergrunds ein"
+    "input-background": "Geben Sie die URL des Hintergrunds ein",
+    "openai": "ChatGPT-Suchvorschläge"
   },
   "fr": {
     "settings": "Paramètres",
@@ -130,7 +147,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "Arrière-plan",
     "search-engine": "Préférences du moteur de recherche",
     "language": "Langue",
-    "input-background": "Entrez l'URL de l'arrière-plan"
+    "input-background": "Entrez l'URL de l'arrière-plan",
+    "openai": "Suggestions de recherche ChatGPT"
   },
   "ja": {
     "settings": "設定",
@@ -138,7 +156,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "background": "背景",
     "search-engine": "検索エンジンの設定",
     "language": "言語",
-    "input-background": "背景のURLを入力してください"
+    "input-background": "背景のURLを入力してください",
+    "openai": "ChatGPT検索の提案"
   }
 }
 </i18n>
@@ -162,6 +181,17 @@ watch(locale, () => localStorage.setItem('language', locale.value))
 
 .button:hover {
   rotate: 90deg;
+}
+
+.general span {
+  white-space: nowrap;
+}
+
+.general svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  margin-right: 8px;
 }
 
 .builtin {
@@ -239,6 +269,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
 
 .engine .name {
   margin: 0 8px;
+  white-space: nowrap;
   text-transform: capitalize;
 }
 

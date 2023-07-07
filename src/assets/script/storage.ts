@@ -11,7 +11,7 @@ function readDictConfig(data: Record<string, any>): Record<string, any> {
 }
 
 function writeDictConfig(data: Record<string, any>): void {
-  for (const key in data) data[key] = JSON.stringify(data[key]);
+  for (const key in data) localStorage.setItem(key, JSON.stringify(data[key]));
 }
 
 export const background = ref(localStorage.getItem("background") || "/background.webp");

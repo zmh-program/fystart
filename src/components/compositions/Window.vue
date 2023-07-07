@@ -68,6 +68,18 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  margin: 2px 0;
+}
+
+.window .form .row.desc {
+  flex-direction: column;
+}
+
+.window .form .row.desc p {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 4px 0 4px 28px;
+  color: #ccc;
 }
 
 .window label {
@@ -88,6 +100,19 @@ onMounted(() => {
   border-radius: 16px;
   outline: none;
   letter-spacing: 0.01cm;
+}
+
+.window input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+.window input[type="checkbox"]:checked {
+  background: #fff;
 }
 
 .window select {
