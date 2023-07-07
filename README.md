@@ -29,7 +29,7 @@
 - ❤ 国际化支持
   - ❤ i18n (Internationalization) Support
     - ✔ 🇨🇳 简体中文 (Simplified Chinese)
-    - ✔ 🇨🇳 | 🇹🇼 繁體中文 (Traditional Chinese)
+    - ✔ 🇨🇳 🇹🇼 繁體中文 (Traditional Chinese)
     - ✔ 🇺🇸 English (United States)
     - ✔ 🇷🇺 Русский (Russian)
     - ✔ 🇫🇷 Français (French)
