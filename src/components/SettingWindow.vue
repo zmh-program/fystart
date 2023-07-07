@@ -12,6 +12,9 @@ import International from "@/components/icons/international.vue";
 import Openai from "@/components/icons/openai.vue";
 import Checkbox from "@/components/compositions/Checkbox.vue";
 import Clock from "@/components/icons/clock.vue";
+import Box from "@/components/icons/box.vue";
+import Note from "@/components/icons/note.vue";
+import Info from "@/components/icons/info.vue";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -72,6 +75,29 @@ watch(locale, () => localStorage.setItem('language', locale.value))
       </div>
     </div>
     <div class="form">
+      <label>{{ t('display') }}</label>
+      <div class="column general">
+        <div class="row">
+          <box />
+          <span>{{ t('toolbox') }}</span>
+          <div class="grow" />
+          <Checkbox v-model="storage.toolbox" />
+        </div>
+        <div class="row">
+          <note />
+          <span>{{ t('quote') }}</span>
+          <div class="grow" />
+          <Checkbox v-model="storage.quote" />
+        </div>
+        <div class="row">
+          <info />
+          <span>{{ t('about') }}</span>
+          <div class="grow" />
+          <Checkbox v-model="storage.about" />
+        </div>
+      </div>
+    </div>
+    <div class="form">
       <label>{{ t('background') }}</label>
       <div class="column"><br>
         <div class="builtin">
@@ -117,7 +143,10 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "Input the background url.",
     "openai": "ChatGPT Search Suggestions",
     "time": "Exact Time",
-    "time-desc": "Show the exact time on the search bar"
+    "time-desc": "Show the exact time on the search bar",
+    "toolbox": "Tool Box",
+    "quote": "Quote",
+    "about": "About"
   },
   "zh": {
     "settings": "设置",
@@ -129,7 +158,10 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "请输入背景图片的链接",
     "openai": "ChatGPT 搜索建议",
     "time": "精确时间",
-    "time-desc": "搜索栏上方显示的时间精确到秒"
+    "time-desc": "搜索栏上方显示的时间精确到秒",
+    "toolbox": "工具箱",
+    "quote": "一言",
+    "about": "关于"
   },
   "tw": {
     "settings": "設定",
@@ -141,7 +173,10 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "請輸入背景圖片的連結",
     "openai": "ChatGPT 搜尋建議",
     "time": "精確時間",
-    "time-desc": "搜尋欄上方顯示的時間精確到秒"
+    "time-desc": "搜尋欄上方顯示的時間精確到秒",
+    "toolbox": "工具箱",
+    "quote": "一言",
+    "about": "關於"
   },
   "ru": {
     "settings": "Настройки",
@@ -153,7 +188,10 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "Введите URL-адрес фона",
     "openai": "Поисковые предложения ChatGPT",
     "time": "Точное время",
-    "time-desc": "Показывать точное время в строке поиска"
+    "time-desc": "Показывать точное время в строке поиска",
+    "toolbox": "Инструменты",
+    "quote": "Цитата",
+    "about": "О программе"
   },
   "de": {
     "settings": "Einstellungen",
@@ -165,7 +203,10 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "Geben Sie die URL des Hintergrunds ein",
     "openai": "ChatGPT-Suchvorschläge",
     "time": "Exakte Zeit",
-    "time-desc": "Zeigen Sie die genaue Zeit in der Suchleiste an"
+    "time-desc": "Zeigen Sie die genaue Zeit in der Suchleiste an",
+    "toolbox": "Werkzeugkasten",
+    "quote": "Zitat",
+    "about": "Über"
   },
   "fr": {
     "settings": "Paramètres",
@@ -177,7 +218,10 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "Entrez l'URL de l'arrière-plan",
     "openai": "Suggestions de recherche ChatGPT",
     "time": "Heure exacte",
-    "time-desc": "Afficher l'heure exacte dans la barre de recherche"
+    "time-desc": "Afficher l'heure exacte dans la barre de recherche",
+    "toolbox": "Boîte à outils",
+    "quote": "Citation",
+    "about": "À propos"
   },
   "ja": {
     "settings": "設定",
@@ -189,7 +233,9 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "input-background": "背景のURLを入力してください",
     "openai": "ChatGPT検索の提案",
     "time": "正確な時間",
-    "time-desc": "検索バーに正確な時間を表示します"
+    "time-desc": "検索バーに正確な時間を表示します",
+    "toolbox": "ツールボックス",
+    "quote": "引用"
   }
 }
 </i18n>
