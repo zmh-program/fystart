@@ -41,8 +41,18 @@ const active = ref(false);
 
       我希望通过Fystart，能够为您提供一个美观、实用、与个性相匹配的浏览器起始页，让你的工作、学习和生活更加高效和轻松。感谢您一直以来对Fystart的支持和陪伴👋！
     </pre>
+    <div class="form">
+      <h3>致谢</h3>
+      <div class="links">
+        <a href="https://go.itab.link" target="_blank">iTab 起始页</a><div class="split" />
+        <a href="https://hitokoto.cn" target="_blank">Hitokoto 一言</a><div class="split" />
+        <a href="https://limestart.cn" target="_blank">青柠起始页</a><div class="split" />
+        <a href="https://inftab.com" target="_blank">Infinity 起始页</a><div class="split" />
+        <a href="https://openai.com" target="_blank">OpenAI</a>
+      </div>
+    </div><br><br>
     <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
-    <a class="author" href="https://zmh-program.site">@ProgramZmh</a>
+    <a class="author" href="https://zmh-program.site">© zmh-program</a>
   </Window>
 </template>
 
@@ -140,9 +150,10 @@ const active = ref(false);
 }
 
 .author {
-  color: #ccc;
+  color: #ddd;
   display: block;
   width: max-content;
+  padding: 6px 0;
   margin: 0 auto;
   text-decoration: none;
 }
@@ -177,5 +188,35 @@ const active = ref(false);
   text-align: left;
   line-height: 1.5;
   user-select: none;
+}
+
+.form h3 {
+  width: max-content;
+  margin: 6px auto;
+}
+
+.form h3::after {
+  background: #70c000;
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: -6px;
+  left: 0;
+}
+
+.links {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.links a {
+  text-decoration: none;
+  color: #eee;
 }
 </style>
