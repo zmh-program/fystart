@@ -117,8 +117,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 .container.focus {
   background: rgba(15,15,15,.8);
   width: 530px;
-  transform: translate(-50%, -15px);
-  will-change: transform;
+  will-change: width;
 }
 
 .container input {
