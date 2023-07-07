@@ -37,6 +37,7 @@ const images = [
           <select v-model="$i18n.locale">
             <option value="zh">简体中文</option>
             <option value="en">English</option>
+            <option value="ru">Русский</option>
           </select>
         </div>
       </div>
@@ -92,6 +93,14 @@ const images = [
     "search-engine": "搜索引擎偏好",
     "language": "语言",
     "input-background": "请输入背景图片的链接"
+  },
+  "ru": {
+    "settings": "Настройки",
+    "general": "Общие",
+    "background": "Фон",
+    "search-engine": "Настройки поисковой системы",
+    "language": "Язык",
+    "input-background": "Введите URL-адрес фона"
   }
 }
 </i18n>

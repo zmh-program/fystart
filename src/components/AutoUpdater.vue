@@ -21,6 +21,10 @@ const { t } = useI18n();
   "en": {
     "update": "Update to the latest version!",
     "check": "Check out the update"
+  },
+  "ru": {
+    "update": "Обновить до последней версии!",
+    "check": "Проверить обновление"
   }
 }
 </i18n>
