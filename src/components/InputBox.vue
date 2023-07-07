@@ -89,6 +89,15 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   "ru": {
     "search": "поиск"
   },
+  "de": {
+    "search": "Suche"
+  },
+  "fr": {
+    "search": "recherche"
+  },
+  "ja": {
+    "search": "検索"
+  }
 }
 </i18n>
 

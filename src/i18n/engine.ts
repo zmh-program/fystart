@@ -19,7 +19,27 @@ const messages = {
     "bing": "Bing",
     "duckduckgo": "DuckDuckGo",
     "sogou": "Sogou",
+  },
+  de: {
+    "baidu": "Baidu",
+    "google": "Google",
+    "bing": "Bing",
+    "duckduckgo": "DuckDuckGo",
+    "sogou": "Sogou",
+  },
+  fr: {
+    "baidu": "Baidu",
+    "google": "Google",
+    "bing": "Bing",
+    "duckduckgo": "DuckDuckGo",
+    "sogou": "Sogou",
+  },
+  ja: {
+    "baidu": "Baidu",
+    "google": "Google",
+    "bing": "Bing",
+    "duckduckgo": "DuckDuckGo",
+    "sogou": "Sogou",
   }
 }
-
 export default messages;

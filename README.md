@@ -26,6 +26,16 @@
   - ✨ Offline Requests (Service Worker)
 - ⚡ 搜索引擎优化
   - ⚡ SEO (Search Engine Optimization) 
+- ❤ 国际化支持
+  - ❤ i18n (Internationalization) Support
+    - ✔ 🇨🇳 简体中文 (Simplified Chinese)
+    - ✔ 🇺🇸 English (United States)
+    - ✔ 🇷🇺 Русский (Russian)
+    - ✔ 🇫🇷 Français (French)
+    - ✔ 🇯🇵 日本語 (Japanese)
+
+
+
 
 ## ScreenShot | 快照
 ![main](/screenshot/main.png)

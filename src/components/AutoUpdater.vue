@@ -25,6 +25,18 @@ const { t } = useI18n();
   "ru": {
     "update": "Обновить до последней версии!",
     "check": "Проверить обновление"
+  },
+  "de": {
+    "update": "Aktualisieren Sie auf die neueste Version!",
+    "check": "Überprüfen Sie das Update"
+  },
+  "fr": {
+    "update": "Mettre à jour vers la dernière version!",
+    "check": "Vérifier la mise à jour"
+  },
+  "ja": {
+    "update": "最新バージョンに更新する！",
+    "check": "更新を確認する"
   }
 }
 </i18n>

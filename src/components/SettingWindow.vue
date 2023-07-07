@@ -38,6 +38,9 @@ const images = [
             <option value="zh">简体中文</option>
             <option value="en">English</option>
             <option value="ru">Русский</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="ja">日本語</option>
           </select>
         </div>
       </div>
@@ -101,6 +104,30 @@ const images = [
     "search-engine": "Настройки поисковой системы",
     "language": "Язык",
     "input-background": "Введите URL-адрес фона"
+  },
+  "de": {
+    "settings": "Einstellungen",
+    "general": "Allgemein",
+    "background": "Hintergrund",
+    "search-engine": "Suchmaschinenpräferenzen",
+    "language": "Sprache",
+    "input-background": "Geben Sie die URL des Hintergrunds ein"
+  },
+  "fr": {
+    "settings": "Paramètres",
+    "general": "Général",
+    "background": "Arrière-plan",
+    "search-engine": "Préférences du moteur de recherche",
+    "language": "Langue",
+    "input-background": "Entrez l'URL de l'arrière-plan"
+  },
+  "ja": {
+    "settings": "設定",
+    "general": "一般",
+    "background": "背景",
+    "search-engine": "検索エンジンの設定",
+    "language": "言語",
+    "input-background": "背景のURLを入力してください"
   }
 }
 </i18n>
