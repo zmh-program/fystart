@@ -12,7 +12,7 @@ import {storage} from "@/assets/script/storage";
 
 
 const focus = ref(false);
-window.addEventListener('load', () => {
+if (storage.focusInput) window.addEventListener('load', () => {
   focus.value = true;
 });
 </script>

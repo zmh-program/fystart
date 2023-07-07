@@ -28,8 +28,8 @@ window.addEventListener('click', function (e) {
   emit('update:modelValue', status);
 })
 
-const object = ref<HTMLElement | null>(null);  // the dom of the input element
-onMounted(() => object.value?.focus());  // focus the input element
+const object = ref<HTMLElement | null>(null);
+if (storage.focusInput) onMounted(() => object.value?.focus());
 
 const suggestions: Ref<string[]> = ref([]);
 const instance = new OpenAI(), answer = instance.getRef();

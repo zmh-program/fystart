@@ -56,6 +56,8 @@
 
 ![engine](/screenshot/engine.png)
 
+![i18n](/screenshot/i18n.png)
+
 
 ### Get Started | 开始
 npm (yarn, pnpm)

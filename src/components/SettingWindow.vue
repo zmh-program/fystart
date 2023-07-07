@@ -15,6 +15,7 @@ import Clock from "@/components/icons/clock.vue";
 import Box from "@/components/icons/box.vue";
 import Note from "@/components/icons/note.vue";
 import Info from "@/components/icons/info.vue";
+import Cursor from "@/components/icons/cursor.vue";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -71,6 +72,15 @@ watch(locale, () => localStorage.setItem('language', locale.value))
             <Checkbox v-model="storage.exactTime" />
           </div>
           <div class="row"><p>{{ t('time-desc') }}</p></div>
+        </div>
+        <div class="row desc">
+          <div class="row">
+            <cursor />
+            <span>{{ t('focus') }}</span>
+            <div class="grow" />
+            <Checkbox v-model="storage.focusInput" />
+          </div>
+          <div class="row"><p>{{ t('focus-desc') }}</p></div>
         </div>
       </div>
     </div>
@@ -144,6 +154,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "ChatGPT Search Suggestions",
     "time": "Exact Time",
     "time-desc": "Show the exact time on the search bar",
+    "focus": "Auto Focus",
+    "focus-desc": "Auto focus on the search bar when entering",
     "toolbox": "Tool Box",
     "quote": "Quote",
     "about": "About"
@@ -159,6 +171,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "ChatGPT 搜索建议",
     "time": "精确时间",
     "time-desc": "搜索栏上方显示的时间精确到秒",
+    "focus": "自动聚焦",
+    "focus-desc": "进入时自动聚焦搜索栏",
     "toolbox": "工具箱",
     "quote": "一言",
     "about": "关于"
@@ -174,6 +188,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "ChatGPT 搜尋建議",
     "time": "精確時間",
     "time-desc": "搜尋欄上方顯示的時間精確到秒",
+    "focus": "自動聚焦",
+    "focus-desc": "進入時自動聚焦搜尋欄",
     "toolbox": "工具箱",
     "quote": "一言",
     "about": "關於"
@@ -189,6 +205,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "Поисковые предложения ChatGPT",
     "time": "Точное время",
     "time-desc": "Показывать точное время в строке поиска",
+    "focus": "Автофокус",
+    "focus-desc": "Автоматически фокусироваться на строке поиска при входе",
     "toolbox": "Инструменты",
     "quote": "Цитата",
     "about": "О программе"
@@ -204,6 +222,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "ChatGPT-Suchvorschläge",
     "time": "Exakte Zeit",
     "time-desc": "Zeigen Sie die genaue Zeit in der Suchleiste an",
+    "focus": "Autofokus",
+    "focus-desc": "Autofokus auf die Suchleiste beim Eingeben",
     "toolbox": "Werkzeugkasten",
     "quote": "Zitat",
     "about": "Über"
@@ -219,6 +239,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "Suggestions de recherche ChatGPT",
     "time": "Heure exacte",
     "time-desc": "Afficher l'heure exacte dans la barre de recherche",
+    "focus": "Mise au point automatique",
+    "focus-desc": "Mise au point automatique sur la barre de recherche lors de la saisie",
     "toolbox": "Boîte à outils",
     "quote": "Citation",
     "about": "À propos"
@@ -234,6 +256,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "openai": "ChatGPT検索の提案",
     "time": "正確な時間",
     "time-desc": "検索バーに正確な時間を表示します",
+    "focus": "オートフォーカス",
+    "focus-desc": "入力時に検索バーに自動的にフォーカスします",
     "toolbox": "ツールボックス",
     "quote": "引用"
   }
