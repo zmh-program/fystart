@@ -12,12 +12,14 @@
 ## Features | 功能
 - 🍏 一言 
   - 🍏 Quotes
-- 🍋 设置 (自定义背景，自定义搜索引擎) 
-  - 🍋 Settings (Custom Background, Custom Search Engine)
-- 🍎 ChatGPT 支持
-  - 🍎 ChatGPT Support 
+- 🍋 自定义设置
+  - 🍋 Customizable Settings
+- 🍎 ChatGPT 搜索建议
+  - 🍎 ChatGPT Search Suggestions
 - 🍉 翻译 / Github 搜索
   - 🍉 Translation / GitHub Search
+- 🍇 工具箱
+  - 🍇 Tool Box
 - 🍐 搜索引擎建议
   - 🍐 Search Engine Suggestions
 - 🎃 PWA 应用
@@ -48,3 +50,21 @@
 ![settings](/screenshot/settings.png)
 
 ![engine](/screenshot/engine.png)
+
+
+## Get Started | 开始
+npm (yarn, pnpm)
+```shell
+npm install
+npm run dev
+
+cd backend
+go run .
+```
+
+
+## Deploy | 部署
+```shell
+npm run build
+cd backend && go build .
+```
