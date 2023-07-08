@@ -25,7 +25,7 @@ onMounted(() => {
     const height = current - start.value;
     start.value = current;
     const time = new Date().getTime() - delta.value;
-    if (time >= 200) window.value.scrollTop = window.value.scrollTop - height / 10;
+    if (time >= 200) window.value.scrollTop = window.value.scrollTop - height;
   })
 })
 </script>
