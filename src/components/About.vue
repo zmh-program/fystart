@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n";
 import { storage } from "@/assets/script/storage";
 import { ref } from "vue";
 import Window from "@/components/compositions/Window.vue";
-import {version} from "../assets/script/service";
+import { version } from "@/assets/script/service";
 import Github from "@/components/icons/github.vue";
 
 const { t } = useI18n();
@@ -64,6 +64,11 @@ const active = ref(false);
     </div><br><br>
     <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
     <a class="author" href="https://zmh-program.site">© zmh-program</a>
+    <div class="license" style="text-align: center; color: #aaa">
+      请遵守
+      <a class="link" style="color: #ccc; background: none" href="https://github.com/zmh-program/fystart/blob/main/LICENSE">MIT</a>
+      开源协议分发
+    </div>
   </Window>
 </template>
 
