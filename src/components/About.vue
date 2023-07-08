@@ -31,15 +31,15 @@ const active = ref(false);
 
       🍉 翻译 / Github 搜索：无论是需要翻译文字还是在 GitHub 上搜索代码，Fystart 都能够为你提供便捷的功能，让你在浏览器起始页上完成这些操作，提高工作效率。
 
-      🍇 工具箱：Fystart内置了一系列实用工具，让你无需离开浏览器起始页，就能完成各种常用任务，方便实用。Fystart 还内置了很多常用软件，方便您快速打开。
+      🍇 工具箱：Fystart 内置了一系列实用工具，让你无需离开浏览器起始页，就能完成各种常用任务，方便实用。Fystart 还内置了很多常用软件，方便您快速打开。
 
       🍐 搜索引擎建议：当你输入关键词时，Fystart 会为你提供相关的搜索引擎建议，帮助你快速定位到你想要的内容，省去了繁琐的搜索过程。
 
       🎃 PWA 应用：Fystart 为 PWA 应用，这意味着可以在离线状态下访问，并且保存到桌面，无需依赖网络连接。
 
-      ✨ 国际化支持：Fystart支持多种语言，包括简体中文、繁体中文、英语、俄语、法语和日语，让用户在不同地区和语言环境下都能享受到优质的浏览器起始页。
+      ✨ 国际化支持：Fystart 支持多种语言，包括简体中文、繁体中文、英语、俄语、法语和日语，让用户在不同地区和语言环境下都能享受到优质的浏览器起始页。
 
-      我希望通过Fystart，能够为您提供一个美观、实用、与个性相匹配的浏览器起始页，让你的工作、学习和生活更加高效和轻松。感谢您一直以来对Fystart的支持和陪伴👋！
+      我希望通过 Fystart，能够为您提供一个美观、实用、与个性相匹配的浏览器起始页，让你的工作、学习和生活更加高效和轻松。感谢您一直以来对Fystart的支持和陪伴👋！
     </pre>
     <div class="form">
       <h3>致谢</h3>
@@ -49,6 +49,17 @@ const active = ref(false);
         <a href="https://limestart.cn" target="_blank">青柠起始页</a><div class="split" />
         <a href="https://inftab.com" target="_blank">Infinity 起始页</a><div class="split" />
         <a href="https://openai.com" target="_blank">OpenAI</a>
+      </div>
+    </div><br>
+    <div class="form">
+      <h3 class="donate">捐助</h3>
+      <span style="text-align: center">他们比我更需要一杯咖啡！</span>
+      <div class="links">
+        <a href="https://github.com/vuejs/core" target="_blank">@Vue</a><div class="split" />
+        <a href="https://github.com/vitejs/vite" target="_blank">@Vite</a><div class="split" />
+        <a href="https://github.com/intlify/vue-i18n-next" target="_blank">@Vue-I18n</a><div class="split" />
+        <a href="https://github.com/gin-gonic/gin" target="_blank">@Gin</a><div class="split" />
+        <a href="https://github.com/hitokoto-osc/hitokoto-api" target="_blank">@Hitokoto</a>
       </div>
     </div><br><br>
     <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
@@ -204,6 +215,10 @@ const active = ref(false);
   height: 2px;
   bottom: -6px;
   left: 0;
+}
+
+.form h3.donate::after {
+  background: #106eea;
 }
 
 .links {
