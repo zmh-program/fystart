@@ -10,13 +10,11 @@ const emit = defineEmits(['update:modelValue']);
 const window = ref<HTMLElement | null>(null);
 
 const start = ref<number>(NaN);
-const delta = ref<number>(NaN);
 
 onMounted(() => {
   if (window.value === null) return;
   window.value.addEventListener('touchstart', (e) => {
     start.value = e.touches[0].clientY;
-    delta.value = new Date().getTime();
   })
   window.value.addEventListener('touchmove', (e) => {
     e.preventDefault();
@@ -24,8 +22,7 @@ onMounted(() => {
     const current = e.touches[0].clientY;
     const height = current - start.value;
     start.value = current;
-    const time = new Date().getTime() - delta.value;
-    if (time >= 200) window.value.scrollTop = window.value.scrollTop - height;
+    window.value.scrollTop = window.value.scrollTop - height;
   })
 })
 </script>
