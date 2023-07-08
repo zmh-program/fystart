@@ -21,7 +21,9 @@ onMounted(() => {
   window.value.addEventListener('touchmove', (e) => {
     e.preventDefault();
     if (window.value === null) return;
-    const height = e.touches[0].clientY - start.value;
+    const current = e.touches[0].clientY;
+    const height = current - start.value;
+    start.value = current;
     const time = new Date().getTime() - delta.value;
     if (time >= 200) window.value.scrollTop = window.value.scrollTop - height / 10;
   })
