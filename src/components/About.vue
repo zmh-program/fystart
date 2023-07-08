@@ -6,6 +6,7 @@ import { ref } from "vue";
 import Window from "@/components/compositions/Window.vue";
 import { version } from "@/assets/script/service";
 import Github from "@/components/icons/github.vue";
+import Qq from "@/components/icons/qq.vue";
 
 const { t } = useI18n();
 const active = ref(false);
@@ -60,6 +61,14 @@ const active = ref(false);
         <a href="https://github.com/intlify/vue-i18n-next" target="_blank">@Vue-I18n</a><div class="split" />
         <a href="https://github.com/gin-gonic/gin" target="_blank">@Gin</a><div class="split" />
         <a href="https://github.com/hitokoto-osc/hitokoto-api" target="_blank">@Hitokoto</a>
+      </div>
+    </div><br>
+    <div class="form">
+      <h3 class="community">交流</h3>
+      <div class="links">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ASpQxeVFhUb4KTI69XiLwplSS_VTEGWs" target="_blank">
+          <qq class="qq" /> Deeptrain 交流群
+        </a>
       </div>
     </div><br><br>
     <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
@@ -226,6 +235,10 @@ const active = ref(false);
   background: #106eea;
 }
 
+.form h3.community::after {
+  background: #ff6d00;
+}
+
 .links {
   padding: 0 20px;
   display: flex;
@@ -238,5 +251,13 @@ const active = ref(false);
 .links a {
   text-decoration: none;
   color: #eee;
+}
+
+.qq {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  transform: translateY(2px);
+  fill: #eee;
 }
 </style>
