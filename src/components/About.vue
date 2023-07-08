@@ -64,7 +64,7 @@ const active = ref(false);
       </div>
     </div><br>
     <div class="form">
-      <h3 class="community">交流</h3>
+      <h3 class="community">社区</h3>
       <div class="links">
         <a href="https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ASpQxeVFhUb4KTI69XiLwplSS_VTEGWs" target="_blank">
           <qq class="qq" /> Deeptrain 交流群
@@ -256,7 +256,7 @@ const active = ref(false);
 .qq {
   width: 16px;
   height: 16px;
-  margin-right: 4px;
+  margin-right: 2px;
   transform: translateY(2px);
   fill: #eee;
 }
