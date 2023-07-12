@@ -35,7 +35,7 @@ watch(background, () => {
 
 .background {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   object-fit: cover;
   position: fixed;
   z-index: -1;
