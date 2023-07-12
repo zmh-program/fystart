@@ -73,7 +73,7 @@ const year = date.getUTCFullYear();
   position: absolute;
   font-weight: bolder;
   font-size: 20px;
-  transform: translate(26px, -6px);
+  transform: translate(38px, -6px);
 }
 
 .week p {
