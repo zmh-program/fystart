@@ -72,7 +72,7 @@ const active = ref(false);
       </div>
     </div><br><br>
     <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
-    <a class="author" href="https://zmh-program.site">© zmh-program</a>
+    <a class="author" href="https://deeptrain.net" target="_blank">© Deeptrain Team</a>
     <div class="license" style="text-align: center; color: #aaa">
       请遵守
       <a class="link" style="color: #ccc; background: none" href="https://github.com/zmh-program/fystart/blob/main/LICENSE">MIT</a>

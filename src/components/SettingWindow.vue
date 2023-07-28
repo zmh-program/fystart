@@ -31,6 +31,10 @@ const images = [
     "/background/sunshine.webp",
 ]
 
+function redirect() {
+  location.href = 'https://deeptrain.net/login?app=fystart';
+}
+
 watch(locale, () => localStorage.setItem('language', locale.value))
 </script>
 
@@ -38,6 +42,12 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   <Cover :active="active" :floor="1" />
   <settings class="button" @click="active = true" />
   <Window :title="t('settings')" v-model="active">
+    <div class="form">
+      <label>{{ t('account') }}</label>
+      <div class="column">
+        <button class="login" @click="redirect">{{ t('login') }}</button>
+      </div>
+    </div>
     <div class="form">
       <label>{{ t('general') }}</label>
       <div class="column general">
@@ -145,6 +155,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
 {
   "en": {
     "settings": "Settings",
+    "account": "Account",
+    "login": "Login",
     "general": "General",
     "display": "Display",
     "background": "Background",
@@ -162,6 +174,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   },
   "zh": {
     "settings": "设置",
+    "account": "账号",
+    "login": "登录",
     "general": "常规设置",
     "display": "显示",
     "background": "背景",
@@ -179,6 +193,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   },
   "tw": {
     "settings": "設定",
+    "account": "帳號",
+    "login": "登入",
     "general": "常規設定",
     "display": "顯示",
     "background": "背景",
@@ -196,6 +212,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   },
   "ru": {
     "settings": "Настройки",
+    "account": "Аккаунт",
+    "login": "Войти",
     "general": "Общие",
     "display": "Отображение",
     "background": "Фон",
@@ -213,6 +231,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   },
   "de": {
     "settings": "Einstellungen",
+    "account": "Konto",
+    "login": "Anmelden",
     "general": "Allgemein",
     "display": "Anzeige",
     "background": "Hintergrund",
@@ -230,6 +250,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   },
   "fr": {
     "settings": "Paramètres",
+    "account": "Compte",
+    "login": "S'identifier",
     "general": "Général",
     "display": "Affichage",
     "background": "Arrière-plan",
@@ -247,6 +269,8 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   },
   "ja": {
     "settings": "設定",
+    "account": "アカウント",
+    "login": "ログイン",
     "general": "一般",
     "display": "ショー",
     "background": "背景",
@@ -279,6 +303,20 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   right: 26px;
   transition: .45s;
   z-index: 2;
+}
+
+.login {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: rgb(30, 30, 30);
+  backdrop-filter: blur(10px);
+  width: max-content;
+  height: max-content;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: .25s;
+  margin: 6px auto;
 }
 
 .button:hover {

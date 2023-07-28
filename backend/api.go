@@ -74,3 +74,21 @@ func ChatGPTAPI(c *gin.Context, message string) {
 		"reason":  "",
 	})
 }
+
+func RegisterChatGPTAPI(app *gin.Engine) {
+	app.Handle("GET", "/gpt", func(c *gin.Context) {
+		ChatGPTAPI(c, c.Query("message"))
+	})
+	app.Handle("POST", "/gpt", func(c *gin.Context) {
+		var body RequestBody
+		if err := c.ShouldBindJSON(&body); err != nil {
+			c.JSON(http.StatusOK, gin.H{
+				"status":  false,
+				"message": "",
+				"reason":  "message is empty",
+			})
+			return
+		}
+		ChatGPTAPI(c, body.Message)
+	})
+}

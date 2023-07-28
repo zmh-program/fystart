@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"net/http"
 )
 
 type RequestBody struct {
@@ -17,6 +16,7 @@ func main() {
 	}
 
 	ConnectRedis()
+	ConnectMySQL()
 
 	if viper.GetBool("debug") {
 		gin.SetMode(gin.DebugMode)
@@ -27,21 +27,8 @@ func main() {
 	app := gin.Default()
 
 	app.Use(CORSMiddleware())
-	app.Handle("GET", "/gpt", func(c *gin.Context) {
-		ChatGPTAPI(c, c.Query("message"))
-	})
-	app.Handle("POST", "/gpt", func(c *gin.Context) {
-		var body RequestBody
-		if err := c.ShouldBindJSON(&body); err != nil {
-			c.JSON(http.StatusOK, gin.H{
-				"status":  false,
-				"message": "",
-				"reason":  "message is empty",
-			})
-			return
-		}
-		ChatGPTAPI(c, body.Message)
-	})
+	RegisterChatGPTAPI(app)
+
 	err := app.Run(":8001")
 	if err != nil {
 		panic(err)

@@ -2,11 +2,33 @@ package main
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"io"
+	"math/rand"
 	"net/http"
 	"net/url"
 )
+
+func Sha2Encrypt(raw string) string {
+	hash := sha256.Sum256([]byte(raw))
+	return hex.EncodeToString(hash[:])
+}
+
+func Unmarshal[T interface{}](data []byte) (form T, err error) {
+	err = json.Unmarshal(data, &form)
+	return form, err
+}
+
+func GenerateChar(length int) string {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	result := make([]byte, length)
+	for i := 0; i < length; i++ {
+		result[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(result)
+}
 
 func Http(uri string, method string, ptr interface{}, headers map[string]string, body io.Reader) (err error) {
 	req, err := http.NewRequest(method, uri, body)
