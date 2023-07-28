@@ -1,8 +1,11 @@
 package main
 
 import (
+	"database/sql"
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 	"net/http"
+	"strings"
 )
 
 var allowedOrigins = []string{
@@ -28,6 +31,34 @@ func CORSMiddleware() gin.HandlerFunc {
 			}
 		}
 
+		c.Next()
+	}
+}
+
+func AuthMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		token := strings.TrimSpace(c.GetHeader("Authorization"))
+		if token != "" {
+			if user := ParseToken(c, token); user != nil {
+				c.Set("token", token)
+				c.Set("auth", true)
+				c.Set("user", user.Username)
+				c.Next()
+				return
+			}
+		}
+
+		c.Set("token", token)
+		c.Set("auth", false)
+		c.Set("user", "")
+		c.Next()
+	}
+}
+
+func BuiltinMiddleWare(db *sql.DB, cache *redis.Client) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set("db", db)
+		c.Set("cache", cache)
 		c.Next()
 	}
 }

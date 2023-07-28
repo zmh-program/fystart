@@ -15,9 +15,6 @@ func main() {
 		panic(err)
 	}
 
-	ConnectRedis()
-	ConnectMySQL()
-
 	if viper.GetBool("debug") {
 		gin.SetMode(gin.DebugMode)
 	} else {
@@ -26,8 +23,16 @@ func main() {
 
 	app := gin.Default()
 
-	app.Use(CORSMiddleware())
-	RegisterChatGPTAPI(app)
+	{
+		app.Use(CORSMiddleware())
+		app.Use(BuiltinMiddleWare(ConnectMySQL(), ConnectRedis()))
+		app.Use(AuthMiddleware())
+	}
+	{
+		app.POST("/login", LoginAPI)
+		app.POST("/state", StateAPI)
+		RegisterChatGPTAPI(app)
+	}
 
 	err := app.Run(":8001")
 	if err != nil {

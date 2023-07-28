@@ -2,18 +2,13 @@ import { wrap } from "@/assets/script/engine";
 import { ref } from "vue";
 import type { Ref } from "vue";
 import { TypingEffect } from "@/assets/script/typing";
-import { endpoint } from "@/assets/script/config";
 import {storage} from "@/assets/script/storage";
+import axios from "axios";
 
 const ask = wrap(async (message: string, callback: (response: string) => any) => {
     if (!storage.chatgpt) return;
-    const resp = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message }),
-    })
-    const data = await resp.json();
-    callback(data.message);
+    const resp = await axios.post("/gpt", { message })
+    callback(resp.data.message);
 }, 800);
 
 export const finished = ref<boolean>(false);

@@ -1,1 +1,1 @@
-export const endpoint = "https://api.fystart.cn/gpt";
+export const endpoint = "https://api.fystart.cn";

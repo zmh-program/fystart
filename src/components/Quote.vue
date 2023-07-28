@@ -2,6 +2,7 @@
 import { TypingEffect } from "@/assets/script/typing";
 import { ref } from "vue";
 import { input } from "@/assets/script/shared";
+import axios from "axios";
 
 const props = defineProps<{
   focus: boolean,
@@ -12,9 +13,9 @@ function run(content: string, hook?: () => any) {
   return new TypingEffect(`「 ${content} 」`, 800, true, effect, hook).run();
 }
 
-fetch("https://v1.hitokoto.cn?c=i")
+axios.get("https://v1.hitokoto.cn?c=i")
     .then(async (res) => {
-      const { hitokoto, from } = await res.json();
+      const { hitokoto, from } = res.data;
       run(hitokoto, () => {
         verse.value = `—— ${from}`;
       });

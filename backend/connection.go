@@ -13,7 +13,7 @@ import (
 var _ *sql.DB
 var Cache *redis.Client
 
-func ConnectRedis() {
+func ConnectRedis() *redis.Client {
 	// connect to redis
 	Cache = redis.NewClient(&redis.Options{
 		Addr:     fmt.Sprintf("%s:%d", viper.GetString("redis.host"), viper.GetInt("redis.port")),
@@ -32,6 +32,8 @@ func ConnectRedis() {
 		Cache.FlushAll(context.Background())
 		log.Println("Flushed all cache")
 	}
+
+	return Cache
 }
 
 func ConnectMySQL() *sql.DB {
