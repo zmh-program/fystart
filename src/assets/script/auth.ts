@@ -1,4 +1,4 @@
-import { ref, watch } from "vue";
+import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 
 export const auth = ref<boolean | undefined>(undefined);
@@ -13,8 +13,26 @@ async function update() {
     const resp = await axios.post("/state");
     username.value = resp.data.user;
     auth.value = resp.data.status;
+    if (auth.value) {
+      username.value = resp.data.user;
+    }
+  } else {
+    auth.value = false;
+    username.value = "";
   }
 }
 
 watch(token, update);
-setTimeout(update, 0);
+
+window.addEventListener("load", () => {
+  const url = new URLSearchParams(window.location.search);
+  if (url.has("token")) {
+    window.history.replaceState({}, "", "/");
+    const client = url.get("token") || "";
+    if (client) axios.post("/login", { token: client })
+      .then((resp) => {
+        token.value = resp.data.token;
+      })
+  }
+  update().then(r => 0);
+});

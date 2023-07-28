@@ -16,6 +16,7 @@ import Box from "@/components/icons/box.vue";
 import Note from "@/components/icons/note.vue";
 import Info from "@/components/icons/info.vue";
 import Cursor from "@/components/icons/cursor.vue";
+import {auth, token, username} from "@/assets/script/auth";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -36,6 +37,11 @@ function redirect() {
 }
 
 watch(locale, () => localStorage.setItem('language', locale.value))
+
+function logout() {
+  token.value = "";
+  location.reload();
+}
 </script>
 
 <template>
@@ -45,7 +51,13 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     <div class="form">
       <label>{{ t('account') }}</label>
       <div class="column">
-        <button class="login" @click="redirect">{{ t('login') }}</button>
+        <button class="login" @click="redirect" v-if="!auth">{{ t('login') }}</button>
+        <div class="user" v-else>
+          <img class="avatar" alt="" :src="'https://api.deeptrain.net/avatar/' + username" />
+          <span class="username">{{ username }}</span>
+          <div class="grow" />
+          <button class="logout" @click="logout">{{ t('logout') }}</button>
+        </div>
       </div>
     </div>
     <div class="form">
@@ -157,6 +169,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "Settings",
     "account": "Account",
     "login": "Login",
+    "logout": "Logout",
     "general": "General",
     "display": "Display",
     "background": "Background",
@@ -176,6 +189,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "设置",
     "account": "账号",
     "login": "登录",
+    "logout": "登出",
     "general": "常规设置",
     "display": "显示",
     "background": "背景",
@@ -195,6 +209,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "設定",
     "account": "帳號",
     "login": "登入",
+    "logout": "登出",
     "general": "常規設定",
     "display": "顯示",
     "background": "背景",
@@ -214,6 +229,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "Настройки",
     "account": "Аккаунт",
     "login": "Войти",
+    "logout": "Выйти",
     "general": "Общие",
     "display": "Отображение",
     "background": "Фон",
@@ -233,6 +249,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "Einstellungen",
     "account": "Konto",
     "login": "Anmelden",
+    "logout": "Abmelden",
     "general": "Allgemein",
     "display": "Anzeige",
     "background": "Hintergrund",
@@ -252,6 +269,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "Paramètres",
     "account": "Compte",
     "login": "S'identifier",
+    "logout": "Se déconnecter",
     "general": "Général",
     "display": "Affichage",
     "background": "Arrière-plan",
@@ -271,6 +289,7 @@ watch(locale, () => localStorage.setItem('language', locale.value))
     "settings": "設定",
     "account": "アカウント",
     "login": "ログイン",
+    "logout": "ログアウト",
     "general": "一般",
     "display": "ショー",
     "background": "背景",
@@ -303,6 +322,41 @@ watch(locale, () => localStorage.setItem('language', locale.value))
   right: 26px;
   transition: .45s;
   z-index: 2;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.user .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.user .username {
+  color: #fff;
+  font-size: 16px;
+  font-family: var(--fonts-cn);
+}
+
+.user .logout {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: rgb(30, 30, 30);
+  backdrop-filter: blur(10px);
+  width: max-content;
+  height: max-content;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: .25s;
+  margin: 2px auto;
 }
 
 .login {
