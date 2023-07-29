@@ -53,6 +53,7 @@ func ConnectMySQL() *sql.DB {
 	}
 
 	CreateUserTable(Database)
+	CreateStorageTable(Database)
 	return Database
 }
 
@@ -64,6 +65,19 @@ func CreateUserTable(db *sql.DB) {
 		  username VARCHAR(24) UNIQUE,
 		  token VARCHAR(255) NOT NULL,
 		  password VARCHAR(64) NOT NULL
+		);
+	`)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func CreateStorageTable(db *sql.DB) {
+	_, err := db.Exec(`
+		CREATE TABLE IF NOT EXISTS storage (
+		  id INT PRIMARY KEY AUTO_INCREMENT,
+		  bind_id INT UNIQUE,
+		  data TEXT(65535) NOT NULL
 		);
 	`)
 	if err != nil {

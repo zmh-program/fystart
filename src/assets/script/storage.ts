@@ -1,4 +1,4 @@
-import {reactive, ref, watch} from 'vue';
+import { reactive, watch } from 'vue';
 
 function readDictConfig(data: Record<string, any>): Record<string, any> {
   for (const key in data) {
