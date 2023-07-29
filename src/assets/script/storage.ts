@@ -1,4 +1,9 @@
 import { reactive, watch } from 'vue';
+import axios from "axios";
+import {auth} from "@/assets/script/auth";
+
+let migrate = false;
+let timeout: number;
 
 function readDictConfig(data: Record<string, any>): Record<string, any> {
   for (const key in data) {
@@ -11,6 +16,7 @@ function readDictConfig(data: Record<string, any>): Record<string, any> {
       }
     }
   }
+
   return data;
 }
 
@@ -27,6 +33,30 @@ export const storage = reactive(readDictConfig({
   focusInput: true,
   language: "zh",
   background: "/background.webp",
+  stamp: 0,
 }));
 
-watch(storage, () => writeDictConfig(storage));
+
+function sync() {
+  migrate = true;
+  axios.post("/sync", storage).then((response) => {
+    if (response.data.success) {
+      for (const key in response.data.data) {
+        storage[key] = response.data.data[key];
+      }
+    }
+    migrate = false;
+  })
+}
+watch(auth, () => {
+  if (!auth.value) return;
+  sync();
+})
+
+watch(storage, () => {
+  if (migrate) return;
+  storage.stamp = Date.now();
+  writeDictConfig(storage);
+  clearTimeout(timeout);
+  timeout = setTimeout(sync, 1000);
+});

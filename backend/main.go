@@ -26,11 +26,13 @@ func main() {
 	{
 		app.Use(CORSMiddleware())
 		app.Use(BuiltinMiddleWare(ConnectMySQL(), ConnectRedis()))
+		app.Use(ThrottleMiddleware())
 		app.Use(AuthMiddleware())
 	}
 	{
 		app.POST("/login", LoginAPI)
 		app.POST("/state", StateAPI)
+		app.POST("/sync", SyncStorageAPI)
 		RegisterChatGPTAPI(app)
 	}
 

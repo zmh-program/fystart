@@ -36,10 +36,9 @@ func (l *Limiter) RateLimit(ctx *gin.Context, rds *redis.Client, ip string, path
 }
 
 var limits = map[string]Limiter{
-	"/login":       {Duration: 10, Count: 5},
-	"/state":       {Duration: 1, Count: 2},
-	"/storage/get": {Duration: 60, Count: 30},
-	"/storage/set": {Duration: 90, Count: 30},
+	"/login":        {Duration: 10, Count: 5},
+	"/state":        {Duration: 1, Count: 2},
+	"/storage/sync": {Duration: 120, Count: 60},
 }
 
 func GetPrefixMap[T comparable](s string, p map[string]T) *T {
