@@ -1,6 +1,6 @@
 import { reactive, watch } from 'vue';
 import axios from "axios";
-import {auth} from "@/assets/script/auth";
+import { auth } from "@/assets/script/auth";
 
 let migrate = false;
 let timeout: number;

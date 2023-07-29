@@ -17,8 +17,8 @@
 ## Features | 功能
 - 🍏 一言 
   - 🍏 Quotes
-- 🍋 自定义设置
-  - 🍋 Customizable Settings
+- 🍋 自定义设置 (账号自动同步)
+  - 🍋 Customizable Settings (Account Auto Sync)
 - 🍎 ChatGPT 搜索建议
   - 🍎 ChatGPT Search Suggestions
 - 🍉 翻译 / Github 搜索
@@ -27,6 +27,8 @@
   - 🍇 Tool Box
 - 🍐 搜索引擎建议
   - 🍐 Search Engine Suggestions
+- 🍑 账号管理
+  - 🍑 Account Management
 - 🎃 PWA 应用
   - 🎃 PWA Application
 - ✨ 离线访问 (Service Worker)
