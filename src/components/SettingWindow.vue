@@ -2,7 +2,7 @@
 import {ref, watch} from "vue";
 import { useI18n } from "vue-i18n";
 import { current, icons, set, urls} from "@/assets/script/engine";
-import {background, storage} from "@/assets/script/storage";
+import { storage } from "@/assets/script/storage";
 import EngineI18n from "@/i18n/engine";
 import Cover from "@/components/compositions/Cover.vue";
 import Settings from "@/components/icons/settings.vue";
@@ -133,17 +133,17 @@ function logout() {
       <label>{{ t('background') }}</label>
       <div class="column"><br>
         <div class="builtin">
-          <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="background = image">
+          <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="storage.background = image">
             <img
                 :src="image"
-                :class="{'selected': background === image}"
+                :class="{'selected': storage.background === image}"
                 alt=""
             />
-            <div class="cover" v-if="background === image" />
-            <check class="check" v-if="background === image" />
+            <div class="cover" v-if="storage.background === image" />
+            <check class="check" v-if="storage.background === image" />
           </div>
         </div>
-        <input type="url" v-model="background" :placeholder="t('input-background')">
+        <input type="url" v-model="storage.background" :placeholder="t('input-background')">
       </div>
     </div>
     <div class="form">

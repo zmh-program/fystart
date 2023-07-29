@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { background } from "@/assets/script/storage";
+import {storage} from "@/assets/script/storage";
 import Cover from "@/components/compositions/Cover.vue";
 import {ref, watch} from "vue";
 
@@ -8,7 +8,11 @@ const props = defineProps<{
 }>();
 
 const object = ref<HTMLElement | null>(null);
-watch(background, () => {
+let before: string = storage.background;
+
+watch(storage, () => {
+  if (before === storage.background) return;
+  before = storage.background;
   object.value?.classList.add("fade");
   setTimeout(() => {
     object.value?.classList.remove("fade");
@@ -17,7 +21,7 @@ watch(background, () => {
 </script>
 
 <template>
-  <img class="background" ref="object" :src="background" :class="{'focus': props.focus}" alt>
+  <img class="background" ref="object" :src="storage.background" :class="{'focus': props.focus}" alt>
   <Cover :active="true" />
 </template>
 
