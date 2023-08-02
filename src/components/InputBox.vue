@@ -294,5 +294,9 @@ window.addEventListener('keydown', function (e) {
   .container.focus {
     top: 160px;
   }
+
+  .engine-container.focus {
+    transform: translate(-50%, calc(-100% - 12px));
+  }
 }
 </style>
