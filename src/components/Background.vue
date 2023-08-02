@@ -49,6 +49,7 @@ watch(storage, () => {
   will-change: opacity;
   touch-action: pan-y;
   user-select: none;
+  backface-visibility: hidden;
 }
 
 .background.focus {

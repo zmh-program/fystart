@@ -59,6 +59,11 @@
   }
 }
 
+* {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 *,
 *::before,
 *::after {

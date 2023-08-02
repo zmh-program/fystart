@@ -22,7 +22,6 @@ window.addEventListener('click', function (e) {
   const target = e.target as HTMLElement;
   const status = contains([
     document.getElementById('input') as HTMLElement,
-    document.getElementById('quote') as HTMLElement,
   ], target);
   if (!status) input.value = '';
   emit('update:modelValue', status);
