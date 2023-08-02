@@ -32,7 +32,7 @@ const year = date.getUTCFullYear();
   border-radius: 12px;
   overflow: hidden;
   text-align: center;
-  font-family: var(--fonts-en);
+  font-family: var(--fonts-cn);
   user-select: none;
   padding-bottom: 8px;
 }

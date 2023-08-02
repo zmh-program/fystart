@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import {context} from "@/assets/script/shared";
 import DateCard from "@/components/cards/DateCard.vue";
+import WeatherCard from "@/components/cards/WeatherCard.vue";
 
 const props = defineProps<{
   focus: boolean,
@@ -47,6 +48,7 @@ resize();
 <template>
   <div class="card-container" :class="{'focus': props.focus}" v-show="context">
     <DateCard />
+    <WeatherCard />
   </div>
   <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
     <a class="tool"
