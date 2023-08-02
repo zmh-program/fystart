@@ -38,6 +38,7 @@ watch(storage, () => {
 }
 
 .background {
+  display: block;
   width: 100%;
   height: 100vh;
   object-fit: cover;
@@ -69,5 +70,11 @@ watch(storage, () => {
 
 .background.fade {
   animation: BackgroundAnimation .8s ease-in forwards, BackgroundFadeInAnimation .5s ease-in;
+}
+
+@media screen and (max-width: 620px) {
+  .background {
+    background-size: auto;
+  }
 }
 </style>
