@@ -311,17 +311,20 @@ function logout() {
 .button {
   position: absolute;
   cursor: pointer;
-  padding: 4px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
   fill: #fff;
-  background: rgba(255,255,255,.2);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.2);
   top: 26px;
   right: 26px;
-  transition: .45s;
+  transition: .25s;
   z-index: 2;
+}
+
+.button:hover {
+  background: rgba(0,0,0,.4);
 }
 
 .user {
@@ -371,10 +374,6 @@ function logout() {
   cursor: pointer;
   transition: .25s;
   margin: 6px auto;
-}
-
-.button:hover {
-  rotate: 90deg;
 }
 
 .general span {
