@@ -54,8 +54,7 @@ watch(storage, () => {
 }
 
 .background.focus {
-  scale: 1.1;
-  filter: blur(10px);
+  filter: brightness(0.9);
 }
 
 @keyframes BackgroundFadeInAnimation {

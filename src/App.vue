@@ -21,7 +21,7 @@ if (storage.focusInput) window.addEventListener('load', () => {
     <Background :focus="focus" />
     <AutoUpdater />
     <SettingWindow />
-    <TimeWidget />
+    <TimeWidget :focus="focus" />
     <InputBox v-model="focus" />
     <ToolBox :focus="focus" v-if="storage.toolbox" />
     <Quote :focus="focus" v-if="storage.quote" />

@@ -119,7 +119,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   color: #fff;
   box-shadow: rgba(0, 0, 0, .2) 0 0 10px;
   backdrop-filter: blur(10px) saturate(1.5);
-  transition: .25s;
+  transition: .25s ease-in-out;
 }
 
 .container:hover,
@@ -133,6 +133,7 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   background: rgba(15,15,15,.8);
   width: 530px;
   will-change: width;
+  top: 160px;
 }
 
 .container input {

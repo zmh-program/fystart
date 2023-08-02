@@ -3,6 +3,10 @@ import { ref } from "vue";
 import { context } from "@/assets/script/shared";
 import {storage} from "@/assets/script/storage";
 
+const props = defineProps<{
+  focus: boolean,
+}>();
+
 const time = ref<string>("");
 const clicked = ref<boolean>(false);
 
@@ -23,7 +27,7 @@ function click() {
 </script>
 
 <template>
-  <div class="time" :class="{'clicked': clicked}" @click="click">
+  <div class="time" :class="{'clicked': clicked, 'focus': props.focus}" @click="click">
     <span>{{ time }}</span>
   </div>
 </template>
@@ -34,11 +38,13 @@ function click() {
   top: 80px;
   transition: .25s;
   left: 50%;
-  opacity: 0;
+  opacity: 1;
   transform: translateX(-50%);
   animation: FadeInAnimation .8s ease-in forwards;
   will-change: opacity;
   animation-delay: .6s;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .time span {
@@ -62,5 +68,9 @@ function click() {
 
 .time.clicked span {
   color: rgba(255, 255, 255, .6);
+}
+
+.time.focus {
+  opacity: 0 !important;
 }
 </style>
