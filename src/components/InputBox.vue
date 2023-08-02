@@ -3,7 +3,17 @@ import '@/assets/style/engine.css';
 import Suggestion from "@/components/compositions/Suggestion.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import type { Ref } from "vue";
-import {getIcon, uri, toggle, getSearchSuggestion, addition, current, engines} from "@/assets/script/engine";
+import {
+  getIcon,
+  uri,
+  toggle,
+  getSearchSuggestion,
+  addition,
+  current,
+  engines,
+  icons,
+  set
+} from "@/assets/script/engine";
 import EngineI18n from "@/i18n/engine";
 import { OpenAI, finished } from "@/assets/script/openai";
 import { input } from "@/assets/script/shared";
@@ -12,6 +22,7 @@ import { useI18n } from "vue-i18n";
 import Search from "@/components/icons/search.vue";
 import Openai from "@/components/icons/openai.vue";
 import {storage} from "@/assets/script/storage";
+import Chat from "@/components/icons/chat.vue";
 
 const { t } = useI18n({ messages: EngineI18n });
 const props = defineProps(['modelValue']);
@@ -42,28 +53,30 @@ watch(input, function () {
   }
 })
 
-const active = ref(false);
-const float = ref(false);
-let timeout: number | undefined;
-function clicked(): void {
-  active.value = true;
-  requestAnimationFrame(toggle);
-  float.value = true;
-  clearTimeout(timeout);
-  timeout = setTimeout(() => float.value = false, 2000);
-  setTimeout(() => active.value = false, 250);
-}
-
 const listener = (ev: KeyboardEvent): void => {  // listening for the enter event
   if (ev.key === "Enter") window.location.href = uri(input.value);
 };
+
+window.addEventListener('keydown', function (e) {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    toggle();
+  }
+});
 </script>
 
 <template>
   <div class="container" id="input" tabindex="0" :class="{'focus': props.modelValue}">
+    <div class="engine-container" :class="{'focus': props.modelValue}">
+      <div class="engine" v-for="(engine, index) in engines"
+           :key="index"
+           v-html="icons[engine]"
+           :class="{'toggle': current === index}"
+           @click="set(index)"
+      />
+    </div>
     <input :placeholder="t('search')" ref="object" @keyup="listener" v-model="input" size="30" type="text">
-    <div class="engine-icon" :class="{'focus': props.modelValue, 'clicked': active}" @click="clicked" v-html="getIcon" />
-    <span class="engine-text" :class="{'focus': props.modelValue && float && !input}">{{ t(engines[current]) }}</span>
+    <a class="chat-icon" :class="{'focus': props.modelValue}" :href="'https://nio.fystart.cn/?q=' + encodeURI(input)"><chat /></a>
     <a class="search-icon" :class="{'focus': props.modelValue}" :href="uri(input)"><search /></a>
     <div class="result" :class="{'focus': props.modelValue && (!display) && input}">
       <div class="intelligence-result" :class="{'focus': props.modelValue && (!display) && input}" v-if="storage.chatgpt">
@@ -133,7 +146,44 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   background: rgba(15,15,15,.8);
   width: 530px;
   will-change: width;
-  top: 160px;
+}
+
+.engine-container {
+  left: 50%;
+  transform: translate(-50%, calc(-100% - 24px));
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  height: max-content;
+  transition: .25s ease-in-out;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.engine-container.focus {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.engine {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: max-content;
+  transition: .25s;
+  padding: 0 12px;
+  background: rgba(0,0,0,.2);
+  backdrop-filter: blur(4px);
+  border-radius: 6px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.engine.toggle {
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(8px);
 }
 
 .container input {
@@ -161,24 +211,6 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
 
 .result.focus {
   display: flex;
-}
-
-.engine-text {
-  position: absolute;
-  left: 42px;
-  color: rgba(255,255,255,.8);
-  font-family: var(--fonts-cn);
-  user-select: none;
-  cursor: none;
-  opacity: 0;
-  transform: translate(-36px, 9px);
-  z-index: -1;
-  transition: .25s;
-}
-
-.engine-text.focus {
-  opacity: 1;
-  transform: translate(4px, 9px);
 }
 
 .container .search-result {
@@ -258,9 +290,9 @@ const listener = (ev: KeyboardEvent): void => {  // listening for the enter even
   pointer-events: all;
 }
 
-@media (max-width: 340px) {
-  .engine-text {
-    display: none;
+@media screen and (max-width: 620px) {
+  .container.focus {
+    top: 160px;
   }
 }
 </style>

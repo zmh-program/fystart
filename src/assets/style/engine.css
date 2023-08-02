@@ -3,8 +3,9 @@
     50% {scale: 0.8}
     100% {scale: 1}
 }
+
 .search-icon,
-.engine-icon {
+.chat-icon {
     position: absolute;
     opacity: 0;
     height: 42px;
@@ -13,11 +14,20 @@
     transition-delay: .05s;
     cursor: pointer;
 }
-.engine-icon {left: 2px}
-.search-icon {right: 2px}
-.engine-icon svg {fill: #fff}
 
-.engine-icon svg,
+.chat-icon {
+    left: 2px;
+}
+
+.search-icon {
+    right: 2px;
+}
+
+.chat-icon svg {
+    fill: #70C001;
+}
+
+.chat-icon svg,
 .search-icon svg {
     width: 30px;
     height: 30px;
@@ -28,22 +38,22 @@
     transition: .25s ease;
 }
 
-.engine-icon:active svg,
+.chat-icon:active svg,
 .search-icon:active svg {
     background: rgba(0,0,0,.4);
     scale: 0.8;
 }
 
-.engine-icon.clicked {
+.chat-icon.clicked {
     animation: size-animation .25s ease;
 }
 
-.engine-icon.focus,
+.chat-icon.focus,
 .search-icon.focus {
     opacity: 1;
 }
 
-.engine .icon svg {
+.window .engine .icon svg {
     margin: 0 4px;
     padding: 4px;
     transform: translateY(2px);
@@ -54,6 +64,14 @@
     transition: .25s;
 }
 
-.engine .check path {
+.window .engine .check path {
     stroke: #58a6ff !important;
+}
+
+
+.engine-container .engine svg {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    fill: #fff;
 }
