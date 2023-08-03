@@ -182,7 +182,7 @@ window.addEventListener('keydown', function (e) {
 }
 
 .engine.toggle {
-  background: rgba(0,0,0,.4);
+  background: rgba(0,0,0,.6);
   backdrop-filter: blur(8px);
 }
 
