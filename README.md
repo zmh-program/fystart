@@ -17,6 +17,10 @@
 ## Features | 功能
 - 🍏 一言 
   - 🍏 Quotes
+- 🎈 天气
+  - 🎈 Weather
+- 🍊 日历
+  - 🍊 Calendar
 - 🍋 自定义设置 (账号自动同步)
   - 🍋 Customizable Settings (Account Auto Sync)
 - 🍎 ChatGPT 搜索建议
