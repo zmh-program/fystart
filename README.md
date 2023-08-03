@@ -78,8 +78,13 @@ go run .
 ### Configuration | 配置
 /src/assets/script/config.ts
 ```ts
-export const endpoint = "https://api.fystart.cn/gpt";
+export const deploy = true;
+export let endpoint = "https://api.fystart.cn";
+export const qweather = "d25856c083574121a538e53952a2bfff";
+
+if (!deploy) endpoint = "http://localhost:8001";
 ```
+
 /backend/config.yaml
 ```yaml
 debug: true

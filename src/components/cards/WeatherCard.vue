@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "@/assets/style/weather.css";
 import { exportScript, insertScript } from "@/assets/script/utils";
+import { qweather } from "@/assets/script/config";
 
 exportScript("WIDGET", {
   "CONFIG": {
@@ -11,7 +12,7 @@ exportScript("WIDGET", {
     "dataColor": "FFFFFF",
     "borderRadius": "5",
     "modules": "10",
-    "key": "d25856c083574121a538e53952a2bfff"
+    "key": qweather,
   }
 });
 insertScript("https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0");
