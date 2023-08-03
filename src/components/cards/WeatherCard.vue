@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {exportScript, insertScript} from "@/assets/script/utils";
+import "@/assets/style/weather.css";
+import { exportScript, insertScript } from "@/assets/script/utils";
 
 exportScript("WIDGET", {
   "CONFIG": {

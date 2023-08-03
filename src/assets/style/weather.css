@@ -1,0 +1,95 @@
+#he-plugin-standard {
+    padding: 4px !important;
+}
+
+.wv-v-h-row {
+    animation: FadeInAnimation 0.5s ease-in-out;
+}
+
+.wv-lt-location a {
+    margin-left: 4px !important;
+    color: #58a6ff !important;
+    background: rgba(88, 166, 255, 0.2) !important;
+    border-radius: 4px !important;
+    padding: 2px 4px !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: 0.25s !important;
+}
+
+.wv-lt-location a:hover {
+    background: rgba(88, 166, 255, 0.3) !important;
+}
+
+.wv-lt-refresh a {
+    color: rgb(139, 191, 248) !important;
+    cursor: pointer !important;
+    transition: 0.25s !important;
+}
+
+.wv-lt-refresh a:hover {
+    color: rgb(88, 166, 255) !important;
+}
+
+.wv-top-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: FadeInAnimation 0.5s ease-in-out;
+}
+
+.wv-top-col-12 select.wv-top-select {
+    width: 74px;
+    height: 32px;
+    border: 0;
+    border-radius: 4px !important;
+    padding: 2px 10px !important;
+    margin: 2px 0 !important;
+    background: var(--color-background);
+    color: #ccc;
+    font-size: 14px;
+    font-family: var(--fonts);
+    transition: 0.25s;
+}
+
+.wv-top-col-12 select.wv-top-select:hover {
+    color: #fff;
+}
+
+.wv-top-col-12 select.wv-top-select option {
+    background: var(--color-background);
+    color: #ddd;
+    font-size: 14px;
+    font-family: var(--fonts);
+    transition: 0.25s;
+}
+
+.wv-top-col-12 button.wv-top-button {
+    width: 56px;
+    height: 32px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0 8px;
+    margin-top: 8px;
+    background: var(--color-background);
+    color: #ccc;
+    font-size: 14px;
+    font-family: var(--fonts);
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.wv-top-col-12 button.wv-top-button:hover {
+    color: #fff;
+    border-color: var(--color-border-hover);
+}
