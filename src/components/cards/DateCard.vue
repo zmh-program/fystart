@@ -11,12 +11,13 @@ console.log(data.value);
 <div class="card">
   <div class="date-top">
     <span class="date-name">日历</span>
+    <span class="date-solar">{{ data.solar }}</span>
     <span class="date-zodiac">{{ data.zodiac }}</span>
   </div>
   <div class="date-content">
     <span class="date-day">{{ data.day }}</span>
+    <span class="date-week">{{ data.weekday }}</span>
     <span class="date-ganzhi">{{ data.ganzhi }}</span>
-    <span class="date-solar">{{ data.solar }} {{ data.weekday }}</span>
   </div>
   <div class="date-bottom">
     <span class="date-lunar">{{ data.lunar }}</span>
@@ -52,9 +53,15 @@ console.log(data.value);
   width: 100%;
 }
 
+.date-solar {
+  flex-grow: 1;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: center;
+}
+
 .date-zodiac {
   font-size: 12px;
-  margin-left: auto;
   display: inline-block;
   vertical-align: center;
   background: rgb(237, 98, 94);
@@ -80,24 +87,22 @@ console.log(data.value);
 
 .date-day {
   font-size: 42px;
-  transform: translateY(-12px);
   font-weight: 600;
-  margin: 0 auto;
+  margin: -12px auto 0;
   display: inline-block;
   vertical-align: center;
   border-radius: 4px;
   font-family: var(--fonts);
 }
 
-.date-solar {
-  font-size: 12px;
-  margin: 0 auto;
+.date-week {
+  font-size: 14px;
+  margin: -2px auto 0;
   display: inline-block;
   vertical-align: center;
   padding: 2px 6px;
   border-radius: 4px;
   font-family: var(--fonts);
-  transform: translateY(-10px);
 }
 
 .date-ganzhi {
@@ -109,7 +114,6 @@ console.log(data.value);
   border-radius: 4px;
   color: #ddd;
   font-family: var(--fonts);
-  transform: translateY(-10px);
 }
 
 .date-lunar {
@@ -120,6 +124,5 @@ console.log(data.value);
   background: gray;
   padding: 2px 6px;
   border-radius: 4px;
-  transform: translate(2px, -10px);
 }
 </style>
