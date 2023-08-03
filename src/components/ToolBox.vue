@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import {context} from "@/assets/script/shared";
 import DateCard from "@/components/cards/DateCard.vue";
 import WeatherCard from "@/components/cards/WeatherCard.vue";
@@ -7,6 +7,24 @@ import WeatherCard from "@/components/cards/WeatherCard.vue";
 const props = defineProps<{
   focus: boolean,
 }>();
+
+const element = ref<HTMLElement | null>(null);
+const start = ref<number>(NaN);
+
+onMounted(() => {
+  if (element.value === null) return;
+  element.value.addEventListener('touchstart', (e) => {
+    start.value = e.touches[0].clientY;
+  })
+  element.value.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (element.value === null) return;
+    const current = e.touches[0].clientY;
+    const height = current - start.value;
+    start.value = current;
+    element.value.scrollTop = element.value.scrollTop - height;
+  })
+})
 
 window.addEventListener('contextmenu', (e) => {
   if (!props.focus) {
@@ -46,28 +64,39 @@ resize();
 </script>
 
 <template>
-  <div class="card-container" :class="{'focus': props.focus}" v-show="context">
-    <DateCard />
-    <WeatherCard />
-  </div>
-  <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
-    <a class="tool"
-       v-for="(tool, idx) in renderer"
-       @click="redirect(`https://${tool.link}`)"
-       v-html="tool.icon"
-       :key="idx"
-    />
+  <div class="scroll" ref="element">
+    <div class="card-container" :class="{'focus': props.focus}" v-show="context">
+      <DateCard />
+      <WeatherCard />
+    </div>
+    <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
+      <a class="tool"
+         v-for="(tool, idx) in renderer"
+         @click="redirect(`https://${tool.link}`)"
+         v-html="tool.icon"
+         :key="idx"
+      />
+    </div>
   </div>
 </template>
 
 <style>
-.card-container {
+.scroll {
   position: absolute;
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  max-height: calc(80vh - 280px);
   top: 280px;
   left: 50%;
   transform: translateX(-50%);
+  touch-action: pan-y;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
   width: max-content;
   max-width: min(90%, 600px);
   height: max-content;
@@ -75,6 +104,7 @@ resize();
   justify-content: center;
   pointer-events: all;
   animation: FadeInAnimation .25s ease-in-out;
+  margin: 0 auto;
 }
 
 .card-container.focus {
@@ -88,12 +118,8 @@ resize();
 }
 
 .tool-container {
-  position: absolute;
   display: flex;
   flex-wrap: wrap;
-  top: 280px;
-  left: 50%;
-  transform: translateX(-50%);
   width: max-content;
   max-width: min(90%, 600px);
   height: max-content;
@@ -101,6 +127,7 @@ resize();
   justify-content: center;
   pointer-events: all;
   animation: FadeInAnimation .25s ease-in-out;
+  margin: 0 auto;
 }
 
 .tool-container.focus {
