@@ -17,6 +17,7 @@ import Note from "@/components/icons/note.vue";
 import Info from "@/components/icons/info.vue";
 import Cursor from "@/components/icons/cursor.vue";
 import {auth, token, username} from "@/assets/script/auth";
+import { withCdn } from "@/assets/script/utils";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -135,7 +136,7 @@ function logout() {
         <div class="builtin">
           <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="storage.background = image">
             <img
-                :src="image"
+                :src="withCdn(image)"
                 :class="{'selected': storage.background === image}"
                 alt=""
             />

@@ -33,6 +33,17 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,webp,png}'],
         globDirectory: 'dist',
+        runtimeCaching: [{
+          urlPattern: new RegExp('^https://cdn.zmh-program.site/fystart/'),
+          handler: "CacheFirst",
+          options: {
+            cacheName: "fystart-cdn",
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365,
+            }
+          }
+        }],
       },
       devOptions: {
         enabled: true,
