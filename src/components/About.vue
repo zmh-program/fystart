@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n";
 import { storage } from "@/assets/script/storage";
 import { ref } from "vue";
 import Window from "@/components/compositions/Window.vue";
-import { version } from "@/assets/script/service";
+import { version } from "@/assets/script/utils/service";
 import Github from "@/components/icons/github.vue";
 import Qq from "@/components/icons/qq.vue";
 

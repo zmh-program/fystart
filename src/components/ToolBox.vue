@@ -1,15 +1,20 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {context} from "@/assets/script/shared";
 import DateCard from "@/components/cards/DateCard.vue";
 import WeatherCard from "@/components/cards/WeatherCard.vue";
 import {storage} from "@/assets/script/storage";
 import GithubCard from "@/components/cards/GithubCard.vue";
+import {contextTool} from "@/assets/script/tool";
+import Delete from "@/components/icons/delete.vue";
 
 const props = defineProps<{
   focus: boolean,
 }>();
 
+const popup = ref<boolean>(false);
+const popupEl = ref<HTMLElement | null>(null);
+const popupIdx = ref<number>(0);
 const element = ref<HTMLElement | null>(null);
 const start = ref<number>(NaN);
 
@@ -28,19 +33,73 @@ onMounted(() => {
   })
 })
 
-window.addEventListener('contextmenu', (e) => {
+window.addEventListener('contextmenu', (e: MouseEvent) => {
   if (!props.focus) {
     e.preventDefault();
+    const idx = contextTool(e.target as HTMLElement);
+    if (!context.value && idx !== -1) {
+      const x = e.clientX, y = e.clientY;
+
+      let target = popupEl.value;
+      if (target === null) return;
+      target.style.left = x + 'px';
+      target.style.top = y + 'px';
+      popupIdx.value = idx;
+
+      popup.value = true;
+      return;
+    }
+
     context.value = !context.value;
+    if (context.value) popup.value = false;
   }
 });
+
+window.addEventListener('click', () => {
+  if (popup.value) {
+    popup.value = false;
+  }
+})
+
+watch(props, () => {
+  if (props.focus) {
+    popup.value = false;
+  }
+});
+
+watch(popup, () => {
+  if (!popup.value) {
+    requestAnimationFrame(() => {
+      popupIdx.value = -1;
+      setTimeout(() => {
+        let target = popupEl.value;
+        if (target === null) return;
+        target.style.removeProperty('left');
+        target.style.removeProperty('top');
+      }, 250);
+    })
+  }
+})
 
 function redirect(uri: string) {
   window.location.href = uri;
 }
+
+function remove() {
+  const idx = popupIdx.value;
+  if (idx === -1) return;
+  storage.tools.splice(idx, 1);
+  popup.value = false;
+}
 </script>
 
 <template>
+  <div class="popup" :class="{'active': popup}" ref="popupEl">
+    <div class="row" @click="remove">
+      <delete />
+      <span>删除</span>
+    </div>
+  </div>
   <div class="scroll" ref="element">
     <div class="card-container" :class="{'focus': props.focus}" v-show="context">
       <DateCard />
@@ -48,7 +107,8 @@ function redirect(uri: string) {
       <GithubCard />
     </div>
     <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
-      <a class="tool" v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)" :key="idx">
+      <a class="tool" v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)" :key="idx"
+         :fy-index="idx">
         <img :src="tool.icon"  :alt="tool.name" />
         <div>{{ tool.name }}</div>
       </a>
@@ -68,6 +128,56 @@ function redirect(uri: string) {
   touch-action: pan-y;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.popup {
+  position: absolute;
+  background: rgb(30,30,30);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  transition: .25s;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: -64;
+  padding: 4px;
+}
+
+.popup .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: 100%;
+  height: max-content;
+  transition: .25s;
+  border-radius: 6px;
+  min-width: 100px;
+}
+
+.popup .row:hover {
+  background: rgba(255,255,255,.1);
+}
+
+.popup .row svg {
+  fill: #fff;
+  width: 16px;
+  height: 16px;
+}
+
+.popup .row span {
+  color: #fff;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.popup.active {
+  pointer-events: all;
+  z-index: 64;
+  opacity: 1;
+  width: max-content;
+  height: max-content;
 }
 
 .card-container {

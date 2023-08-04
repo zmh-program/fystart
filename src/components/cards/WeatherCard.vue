@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import "@/assets/style/weather.css";
-import { exportScript, insertScript } from "@/assets/script/utils";
-import { qweather } from "@/assets/script/config";
+import "@/assets/style/card/weather.css";
+import {onMounted} from "vue";
+import { setupWeatherCard } from "@/assets/script/card/weather";
 
-exportScript("WIDGET", {
-  "CONFIG": {
-    "layout": "1",
-    "width": "220",
-    "height": "181",
-    "background": "3",
-    "dataColor": "FFFFFF",
-    "borderRadius": "5",
-    "modules": "10",
-    "key": qweather,
-  }
-});
-insertScript("https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0");
+onMounted(() => {
+  setupWeatherCard();
+})
 </script>
 
 <template>
@@ -27,13 +17,13 @@ insertScript("https://widget.qweather.net/standard/static/js/he-standard-common.
 <style scoped>
 .card {
   color: #5070da;
+  background: rgb(49, 58, 68);
   position: relative;
   display: flex;
   flex-direction: column;
-  background: none;
   box-shadow: 0 0 10px rgba(0,0,0,.2);
-  width: max-content;
-  height: max-content;
+  width: 220px;
+  height: 180px;
   margin: 15px 15px 30px 15px;
   transition: .3s;
   border-radius: 12px;

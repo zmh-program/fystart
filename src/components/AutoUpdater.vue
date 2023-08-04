@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Notification from "@/components/compositions/Notification.vue";
-import { updater } from "@/assets/script/service";
+import { updater } from "@/assets/script/utils/service";
 
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();

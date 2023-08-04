@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { getCalendar } from "@/assets/script/calendar";
-import type { Calendar } from "@/assets/script/calendar";
+import { getCalendar } from "@/assets/script/card/calendar";
+import type { Calendar } from "@/assets/script/card/calendar";
 
 const data = ref<Calendar>(getCalendar());
-console.log(data.value);
 </script>
 
 <template>

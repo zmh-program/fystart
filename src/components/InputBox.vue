@@ -17,7 +17,7 @@ import {
 import EngineI18n from "@/i18n/engine";
 import { OpenAI, finished } from "@/assets/script/openai";
 import { input } from "@/assets/script/shared";
-import { contains } from "@/assets/script/dom";
+import { contains } from "@/assets/script/utils/base";
 import { useI18n } from "vue-i18n";
 import Search from "@/components/icons/search.vue";
 import Openai from "@/components/icons/openai.vue";

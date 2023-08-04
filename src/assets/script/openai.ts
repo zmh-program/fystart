@@ -1,7 +1,7 @@
 import { wrap } from "@/assets/script/engine";
 import { ref } from "vue";
 import type { Ref } from "vue";
-import { TypingEffect } from "@/assets/script/typing";
+import { TypingEffect } from "@/assets/script/utils/typing";
 import {storage} from "@/assets/script/storage";
 import axios from "axios";
 

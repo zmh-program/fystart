@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { TypingEffect } from "@/assets/script/typing";
+import { TypingEffect } from "@/assets/script/utils/typing";
 import {ref, watch} from "vue";
 import { input } from "@/assets/script/shared";
 import axios from "axios";
