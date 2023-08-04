@@ -13,6 +13,7 @@
     transition: .2s;
     transition-delay: .05s;
     cursor: pointer;
+    pointer-events: none;
 }
 
 .chat-icon {
@@ -50,6 +51,7 @@
 
 .chat-icon.focus,
 .search-icon.focus {
+    pointer-events: all;
     opacity: 1;
 }
 

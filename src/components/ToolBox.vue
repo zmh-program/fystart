@@ -3,8 +3,8 @@ import {onMounted, ref} from "vue";
 import {context} from "@/assets/script/shared";
 import DateCard from "@/components/cards/DateCard.vue";
 import WeatherCard from "@/components/cards/WeatherCard.vue";
-import type {ToolList} from "@/assets/script/tool";
-import {ToolTypes} from "@/assets/script/tool";
+import {storage} from "@/assets/script/storage";
+import GithubCard from "@/components/cards/GithubCard.vue";
 
 const props = defineProps<{
   focus: boolean,
@@ -35,20 +35,6 @@ window.addEventListener('contextmenu', (e) => {
   }
 });
 
-let tools: ToolList = [
-  { "type": ToolTypes.BUILTIN, "name": "GitHub", "link": "https://github.com", "icon": "/tool/github.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "OpenAI", "link": "https://chat.openai.com", "icon": "/tool/openai.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Stack Overflow", "link": "https://stackoverflow.com", "icon": "/tool/stackoverflow.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "ConvertIO", link: "https://convertio.co", "icon": "/tool/convert.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Light Notes", "link": "https://notes.lightxi.com", "icon": "/tool/lightnotes.ico" },
-  { "type": ToolTypes.BUILTIN, "name": "Twitter", "link": "https://twitter.com", "icon": "/tool/twitter.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Cloudflare", "link": "https://dash.cloudflare.com", "icon": "/tool/cloudflare.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Vercel", "link": "https://vercel.com", "icon": "/tool/vercel.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Codepen", "link": "https://codepen.io", "icon": "/tool/codepen.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Kaggle", "link": "https://kaggle.com", "icon": "/tool/kaggle.svg" },
-  { "type": ToolTypes.BUILTIN, "name": "Replit", "link": "https://replit.com", "icon": "/tool/replit.svg" },
-];
-
 function redirect(uri: string) {
   window.location.href = uri;
 }
@@ -59,9 +45,10 @@ function redirect(uri: string) {
     <div class="card-container" :class="{'focus': props.focus}" v-show="context">
       <DateCard />
       <WeatherCard />
+      <GithubCard />
     </div>
     <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
-      <a class="tool" v-for="(tool, idx) in tools" @click="redirect(tool.link)" :key="idx">
+      <a class="tool" v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)" :key="idx">
         <img :src="tool.icon"  :alt="tool.name" />
         <div>{{ tool.name }}</div>
       </a>
@@ -87,7 +74,7 @@ function redirect(uri: string) {
   display: flex;
   flex-wrap: wrap;
   width: max-content;
-  max-width: min(90%, 600px);
+  max-width: min(90%, 780px);
   height: max-content;
   transition: .25s;
   justify-content: center;
@@ -110,7 +97,7 @@ function redirect(uri: string) {
   display: flex;
   flex-wrap: wrap;
   width: max-content;
-  max-width: min(90%, 820px);
+  max-width: min(90%, 650px);
   height: max-content;
   transition: .25s;
   justify-content: center;
@@ -138,11 +125,12 @@ function redirect(uri: string) {
   margin: 15px 15px 30px 15px;
   transition: .25s;
   cursor: pointer;
+  user-select: none;
 }
 
 .tool img {
   border-radius: 6px;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
   width: 80px;
   height: 80px;
