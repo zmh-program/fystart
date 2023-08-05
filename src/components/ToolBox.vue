@@ -10,6 +10,8 @@ import {getFavicon, swap} from "@/assets/script/utils/base";
 import Window from "@/components/compositions/Window.vue";
 import CardContainer from "@/components/CardContainer.vue";
 import Tool from "@/components/compositions/Tool.vue";
+import Cover from "@/components/compositions/Cover.vue";
+import {set} from "@/assets/script/engine";
 
 const { t } = useI18n();
 const props = defineProps<{
@@ -62,7 +64,7 @@ window.addEventListener('contextmenu', (e: MouseEvent) => {
       return;
     }
 
-    context.value = !context.value;
+    if (!setting.value) context.value = !context.value;
     if (context.value) popup.value = false;
   }
 });
@@ -183,6 +185,7 @@ function saveEdit() {
       <delete /><span>删除</span>
     </div>
   </div>
+  <Cover :active="setting" floor="32" />
   <Window :title="newTab ? t('add') : t('edit')" v-model="setting" class="dialog">
     <div class="form">
       <div class="column">
@@ -319,9 +322,9 @@ function saveEdit() {
 
 button.button {
   cursor: pointer;
-  padding: 6px;
+  padding: 6px 12px;
   margin: 2px 6px;
-  width: 62px;
+  width: max-content;
   height: 32px;
   outline: 0;
   border-radius: 4px;
