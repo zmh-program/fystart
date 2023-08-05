@@ -97,3 +97,11 @@ func Contains[T comparable](value T, slice []T) bool {
 	}
 	return false
 }
+
+func MapToStruct(m interface{}, s interface{}) error {
+	b, err := json.Marshal(m)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(b, s)
+}

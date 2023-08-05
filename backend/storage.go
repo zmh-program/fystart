@@ -8,15 +8,16 @@ import (
 )
 
 type StorageRequestBody struct {
-	ChatGPT    bool   `json:"chatgpt" required:"true"`
-	Quote      bool   `json:"quote" required:"true"`
-	ToolBox    bool   `json:"toolbox" required:"true"`
-	About      bool   `json:"about" required:"true"`
-	ExactTime  bool   `json:"exactTime" required:"true"`
-	FocusInput bool   `json:"focusInput" required:"true"`
-	Language   string `json:"language" required:"true"`
-	Background string `json:"background" required:"true"`
-	Stamp      int64  `json:"stamp" required:"true"`
+	ChatGPT    bool          `json:"chatgpt" required:"true"`
+	Quote      bool          `json:"quote" required:"true"`
+	ToolBox    bool          `json:"toolbox" required:"true"`
+	About      bool          `json:"about" required:"true"`
+	ExactTime  bool          `json:"exactTime" required:"true"`
+	FocusInput bool          `json:"focusInput" required:"true"`
+	Language   string        `json:"language" required:"true"`
+	Background string        `json:"background" required:"true"`
+	Stamp      int64         `json:"stamp" required:"true"`
+	Tools      []interface{} `json:"tools" required:"true"`
 }
 
 func GetStorage(db *sql.DB, id int) *StorageRequestBody {
