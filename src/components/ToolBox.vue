@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import {context} from "@/assets/script/shared";
-import DateCard from "@/components/cards/DateCard.vue";
-import WeatherCard from "@/components/cards/WeatherCard.vue";
 import {storage} from "@/assets/script/storage";
-import GithubCard from "@/components/cards/GithubCard.vue";
 import {contextTool} from "@/assets/script/tool";
 import Delete from "@/components/icons/delete.vue";
 import {useI18n} from "vue-i18n";
 import Edit from "@/components/icons/edit.vue";
-import {swap} from "@/assets/script/utils/base";
+import { swap } from "@/assets/script/utils/base";
+import Window from "@/components/compositions/Window.vue";
+import CardContainer from "@/components/CardContainer.vue";
+import Tool from "@/components/compositions/Tool.vue";
 
 const { t } = useI18n();
 const props = defineProps<{
@@ -17,6 +17,7 @@ const props = defineProps<{
 }>();
 
 const popup = ref<boolean>(false);
+const setting = ref<boolean>(false);
 const popupEl = ref<HTMLElement | null>(null);
 const popupIdx = ref<number>(0);
 const element = ref<HTMLElement | null>(null);
@@ -38,7 +39,7 @@ onMounted(() => {
 })
 
 window.addEventListener('contextmenu', (e: MouseEvent) => {
-  if (!props.focus) {
+  if (!props.focus && (!setting.value)) {
     e.preventDefault();
     const idx = contextTool(e.target as HTMLElement);
     if (!context.value && idx >= 0) {
@@ -79,7 +80,7 @@ watch(props, () => {
 watch(popup, () => {
   if (!popup.value) {
     requestAnimationFrame(() => {
-      popupIdx.value = -1;
+      if (!setting.value) popupIdx.value = -1;
       popupEl.value && (popupEl.value.style.transform = 'scale(.5)');
       setTimeout(() => {
         let target = popupEl.value;
@@ -126,33 +127,78 @@ onMounted(function () {
     });
   }
 })
+
+const form = reactive({
+  name: '',
+  link: '',
+  icon: '',
+})
+
+function activeEdit() {
+  setting.value = true;
+  const idx = popupIdx.value;
+  if (idx < 0) return;
+  const tool = storage.tools[idx];
+  form.name = tool.name;
+  form.link = tool.link;
+  form.icon = tool.icon;
+}
+
+function saveEdit() {
+  const idx = popupIdx.value;
+  if (idx < 0) return;
+  const tool = storage.tools[idx];
+  tool.name = form.name;
+  tool.link = form.link;
+  tool.icon = form.icon;
+  setting.value = false;
+}
 </script>
 
 <template>
   <div class="popup" :class="{'active': popup}" ref="popupEl">
-    <div class="row" @click="">
+    <div class="row" @click="activeEdit">
       <edit /><span>编辑</span>
     </div>
     <div class="row" @click="remove">
       <delete /><span>删除</span>
     </div>
   </div>
-  <div class="scroll" ref="element">
-    <div class="card-container" :class="{'focus': props.focus}" v-show="context">
-      <DateCard />
-      <WeatherCard />
-      <GithubCard />
+  <Window :title="t('edit')" v-model="setting" class="dialog">
+    <div class="form">
+      <div class="column">
+        <div class="row">
+          <span>{{ t('name') }}</span>
+          <div class="grow" />
+          <input :placeholder="t('name-desc')" v-model="form.name" />
+        </div>
+        <div class="row">
+          <span>{{ t('link') }}</span>
+          <div class="grow" />
+          <input placeholder="https://" v-model="form.link" />
+        </div>
+        <div class="row">
+          <span>{{ t('icon') }}</span>
+          <div class="grow" />
+          <input :placeholder="t('icon-desc')" v-model="form.icon" />
+        </div>
+        <div class="row">
+          <div class="grow" />
+          <button class="button plain" @click="setting = false">{{ t('cancel') }}</button>
+          <button class="button" @click="saveEdit">{{ t('save') }}</button>
+        </div>
+      </div>
     </div>
+  </Window>
+  <div class="scroll" ref="element">
+    <CardContainer :focus="props.focus" />
     <div class="tool-container" ref="toolContainer" :class="{'focus': props.focus}" v-show="!context">
-      <a class="tool draggable" v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)" :key="idx"
-         :fy-index="idx" draggable="true">
-        <img :src="tool.icon" :alt="tool.name" />
-        <div>{{ tool.name }}</div>
-      </a>
-      <a class="tool add" :fy-index="-2">
-        <img src="/tool/add.svg" alt="add" />
-        <div>{{ t('add') }}</div>
-      </a>
+      <Tool class="draggable" :key="idx"
+          :title="tool.name" :src="tool.icon" :index="idx" draggable="true"
+          v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)"
+      />
+
+      <Tool :title="t('add')" src="/tool/add.svg" :index="-2" />
     </div>
   </div>
 </template>
@@ -160,27 +206,84 @@ onMounted(function () {
 {
   "zh": {
     "add": "添加工具",
+    "edit": "编辑工具",
+    "name": "名称",
+    "name-desc": "编辑工具名称",
+    "link": "链接",
+    "icon": "图标",
+    "icon-desc": "图标链接, https:// 或 data:image/png;base64",
+    "cancel": "取消",
+    "save": "保存"
   },
   "en": {
     "add": "Add Tool",
+    "edit": "Edit Tool",
+    "name": "Name",
+    "name-desc": "Edit tool name",
+    "link": "Link",
+    "icon": "Icon",
+    "icon-desc": "Icon link, https:// or data:image/png;base64",
+    "cancel": "Cancel",
+    "save": "Save"
   },
   "tw": {
-    "add": "添加工具",
+    "add": "新增工具",
+    "edit": "編輯工具",
+    "name": "名稱",
+    "name-desc": "編輯工具名稱",
+    "link": "連結",
+    "icon": "圖示",
+    "icon-desc": "圖示連結, https:// 或 data:image/png;base64",
+    "cancel": "取消",
+    "save": "保存"
   },
   "ru": {
     "add": "Добавить инструмент",
+    "edit": "Редактировать инструмент",
+    "name": "Название",
+    "name-desc": "Редактировать название инструмента",
+    "link": "Ссылка",
+    "icon": "Иконка",
+    "icon-desc": "Ссылка на иконку, https:// или data:image/png;base64",
+    "cancel": "Отмена",
+    "save": "Сохранить"
   },
   "de": {
     "add": "Werkzeug hinzufügen",
+    "edit": "Werkzeug bearbeiten",
+    "name": "Name",
+    "name-desc": "Werkzeugnamen bearbeiten",
+    "link": "Link",
+    "icon": "Symbol",
+    "icon-desc": "Symbol-Link, https:// oder data:image/png;base64",
+    "cancel": "Abbrechen",
+    "save": "Speichern"
   },
   "fr": {
     "add": "Ajouter un outil",
+    "edit": "Modifier l'outil",
+    "name": "Nom",
+    "name-desc": "Modifier le nom de l'outil",
+    "link": "Lien",
+    "icon": "Icône",
+    "icon-desc": "Lien de l'icône, https:// ou data:image/png;base64",
+    "cancel": "Annuler",
+    "save": "Enregistrer"
   },
   "ja": {
     "add": "ツールを追加",
+    "edit": "ツールを編集",
+    "name": "名前",
+    "name-desc": "ツール名を編集する",
+    "link": "リンク",
+    "icon": "アイコン",
+    "icon-desc": "アイコンのリンク、https://またはdata:image/png;base64",
+    "cancel": "キャンセル",
+    "save": "保存"
   }
 }
 </i18n>
+
 <style>
 .scroll {
   position: absolute;
@@ -193,6 +296,52 @@ onMounted(function () {
   touch-action: pan-y;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+button.button {
+  cursor: pointer;
+  padding: 6px;
+  margin: 2px 6px;
+  width: 62px;
+  height: 32px;
+  outline: 0;
+  border-radius: 4px;
+  fill: #fff;
+  background: rgb(50,50,50);
+  border: 1px solid rgb(80,80,80);
+  transition: .25s;
+}
+
+button.button.plain {
+  background: transparent;
+  fill: rgb(200,200,200);
+}
+
+button.button:hover {
+  background: rgb(60,60,60);
+}
+
+.dialog {
+  max-width: 420px !important;
+  height: max-content !important;
+  padding-bottom: 12px !important;
+}
+
+.dialog .main {
+  padding-bottom: 0 !important;
+}
+
+.dialog h1 {
+  font-size: 16px !important;
+}
+
+.dialog .row {
+  align-items: center;
+}
+
+.dialog .row span {
+  white-space: nowrap;
+  margin-right: 4px;
 }
 
 .popup {
@@ -248,29 +397,6 @@ onMounted(function () {
   height: max-content;
 }
 
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: max-content;
-  max-width: min(90%, 780px);
-  height: max-content;
-  transition: .25s;
-  justify-content: center;
-  pointer-events: all;
-  animation: FadeInAnimation .25s ease-in-out;
-  margin: 0 auto;
-}
-
-.card-container.focus {
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
-}
-
-.card-container.focus * {
-  user-select: none;
-}
-
 .tool-container {
   display: flex;
   flex-wrap: wrap;
@@ -290,73 +416,14 @@ onMounted(function () {
   user-select: none;
 }
 
-.tool-container.focus * {
-  user-select: none;
-}
-
-.tool {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  height: max-content;
-  margin: 15px 15px 30px 15px;
-  transition: .25s;
-  cursor: pointer;
-  user-select: none;
-}
-
-.tool img {
-  border-radius: 6px;
-  background: rgba(0,0,0,0.85);
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
-  width: 80px;
-  height: 80px;
-  padding: 20px;
-  fill: rgba(255,255,255,0.85);
-  transition: .2s;
-  backdrop-filter: blur(4px);
-}
-
-.tool.add img {
+.add img {
   background: rgba(0,0,0,0.5);
   fill: rgba(255,255,255,0.85);
-}
-
-.tool div {
-  width: max-content;
-  white-space: nowrap;
-  position: absolute;
-  bottom: -24px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255,255,255,0.95);
-  font-family: var(--fonts-cn);
-  font-size: 14px;
-  transition: .2s;
-}
-
-.tool:hover img {
-  background: rgba(0,0,0,0.95);
-  transform: scale(1.1);
-}
-
-.tool:hover div {
-  bottom: -30px;
-}
-
-.tool:hover svg {
-  padding: 2px;
-  fill: #fff;
 }
 
 @media (max-height: 520px) {
   .tool-container {
     top: 240px;
-  }
-
-  .tool {
-    margin: 15px;
   }
 }
 </style>
