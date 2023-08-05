@@ -17,6 +17,7 @@ const props = defineProps<{
 }>();
 
 const popup = ref<boolean>(false);
+const newTab = ref<boolean>(false);
 const setting = ref<boolean>(false);
 const popupEl = ref<HTMLElement | null>(null);
 const popupIdx = ref<number>(0);
@@ -57,6 +58,7 @@ window.addEventListener('contextmenu', (e: MouseEvent) => {
       popup.value = true;
       return;
     } else if (idx === -2) {
+      popupIdx.value = -2;
       return;
     }
 
@@ -134,10 +136,18 @@ const form = reactive({
   icon: '',
 })
 
-function activeEdit() {
+function activeEdit(type: boolean) {
   setting.value = true;
+  newTab.value = type;
+  if (type) popupIdx.value = -2;
   const idx = popupIdx.value;
-  if (idx < 0) return;
+  if (idx < 0) {
+    if (idx !== -2) return;
+    form.name = '';
+    form.link = '';
+    form.icon = '';
+    return;
+  }
   const tool = storage.tools[idx];
   form.name = tool.name;
   form.link = tool.link;
@@ -146,7 +156,16 @@ function activeEdit() {
 
 function saveEdit() {
   const idx = popupIdx.value;
-  if (idx < 0) return;
+  if (idx < 0) {
+    if (idx !== -2) return;
+    storage.tools.push({
+      name: form.name,
+      link: form.link,
+      icon: form.icon.trim().length > 0 ? form.icon : getFavicon(form.link),
+    })
+    setting.value = false;
+    return;
+  }
   const tool = storage.tools[idx];
   tool.name = form.name;
   tool.link = form.link;
@@ -157,14 +176,14 @@ function saveEdit() {
 
 <template>
   <div class="popup" :class="{'active': popup}" ref="popupEl">
-    <div class="row" @click="activeEdit">
+    <div class="row" @click="activeEdit(false)">
       <edit /><span>编辑</span>
     </div>
     <div class="row" @click="remove">
       <delete /><span>删除</span>
     </div>
   </div>
-  <Window :title="t('edit')" v-model="setting" class="dialog">
+  <Window :title="newTab ? t('add') : t('edit')" v-model="setting" class="dialog">
     <div class="form">
       <div class="column">
         <div class="row">
@@ -198,7 +217,7 @@ function saveEdit() {
           v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)"
       />
 
-      <Tool :title="t('add')" src="/tool/add.svg" :index="-2" />
+      <Tool :title="t('add')" src="/tool/add.svg" :index="-2" @click="activeEdit(true)" />
     </div>
   </div>
 </template>
@@ -211,7 +230,7 @@ function saveEdit() {
     "name-desc": "编辑工具名称",
     "link": "链接",
     "icon": "图标",
-    "icon-desc": "图标链接, https:// 或 data:image/png;base64",
+    "icon-desc": "图标链接 (留空自动获取), https:// 或 data:image/png;base64",
     "cancel": "取消",
     "save": "保存"
   },

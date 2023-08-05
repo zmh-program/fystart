@@ -45,6 +45,10 @@ export function getSelectionText(): string | undefined {
 }
 
 export function getFavicon(url: string): string {
-  const instance = new URL(url);
-  return `${instance.origin}/favicon.ico`;
+  try {
+    const instance = new URL(url);
+    return `${instance.origin}/favicon.ico`;
+  } catch {
+    return "/tool/unknown.svg";
+  }
 }
