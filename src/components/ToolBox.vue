@@ -7,7 +7,11 @@ import {storage} from "@/assets/script/storage";
 import GithubCard from "@/components/cards/GithubCard.vue";
 import {contextTool} from "@/assets/script/tool";
 import Delete from "@/components/icons/delete.vue";
+import {useI18n} from "vue-i18n";
+import Edit from "@/components/icons/edit.vue";
+import {swap} from "@/assets/script/utils/base";
 
+const { t } = useI18n();
 const props = defineProps<{
   focus: boolean,
 }>();
@@ -37,16 +41,21 @@ window.addEventListener('contextmenu', (e: MouseEvent) => {
   if (!props.focus) {
     e.preventDefault();
     const idx = contextTool(e.target as HTMLElement);
-    if (!context.value && idx !== -1) {
+    if (!context.value && idx >= 0) {
       const x = e.clientX, y = e.clientY;
 
       let target = popupEl.value;
       if (target === null) return;
       target.style.left = x + 'px';
       target.style.top = y + 'px';
+
+      target.style.transform = 'scale(1.03)';
+      setTimeout(() => target && (target.style.transform = 'scale(1)'), 250);
       popupIdx.value = idx;
 
       popup.value = true;
+      return;
+    } else if (idx === -2) {
       return;
     }
 
@@ -71,6 +80,7 @@ watch(popup, () => {
   if (!popup.value) {
     requestAnimationFrame(() => {
       popupIdx.value = -1;
+      popupEl.value && (popupEl.value.style.transform = 'scale(.5)');
       setTimeout(() => {
         let target = popupEl.value;
         if (target === null) return;
@@ -87,17 +97,44 @@ function redirect(uri: string) {
 
 function remove() {
   const idx = popupIdx.value;
-  if (idx === -1) return;
+  if (idx < 0) return;
   storage.tools.splice(idx, 1);
   popup.value = false;
 }
+
+const toolContainer = ref<HTMLElement | null>(null);
+
+onMounted(function () {
+  for (const draggable of document.querySelectorAll('.draggable') as NodeListOf<HTMLElement>) {
+    draggable.addEventListener('dragstart', function (e: DragEvent) {
+      if (!e.dataTransfer) return;
+      e.dataTransfer.setData('text/plain', draggable.getAttribute("fy-index") as string);
+      e.dataTransfer.dropEffect = 'move';
+    });
+
+    draggable.addEventListener('dragover', function (e: DragEvent) {
+      e.preventDefault();
+    });
+
+    draggable.addEventListener('drop', function (e: DragEvent) {
+      if (!e.dataTransfer) return;
+      e.preventDefault();
+      const before: number = parseInt(e.dataTransfer.getData('text/plain'));
+      const after: number = parseInt(draggable.getAttribute("fy-index") as string);
+      (!(before === after || [before, after].includes(-2))) &&
+        swap(storage.tools, before, after);
+    });
+  }
+})
 </script>
 
 <template>
   <div class="popup" :class="{'active': popup}" ref="popupEl">
+    <div class="row" @click="">
+      <edit /><span>编辑</span>
+    </div>
     <div class="row" @click="remove">
-      <delete />
-      <span>删除</span>
+      <delete /><span>删除</span>
     </div>
   </div>
   <div class="scroll" ref="element">
@@ -106,16 +143,44 @@ function remove() {
       <WeatherCard />
       <GithubCard />
     </div>
-    <div class="tool-container" :class="{'focus': props.focus}" v-show="!context">
-      <a class="tool" v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)" :key="idx"
-         :fy-index="idx">
-        <img :src="tool.icon"  :alt="tool.name" />
+    <div class="tool-container" ref="toolContainer" :class="{'focus': props.focus}" v-show="!context">
+      <a class="tool draggable" v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)" :key="idx"
+         :fy-index="idx" draggable="true">
+        <img :src="tool.icon" :alt="tool.name" />
         <div>{{ tool.name }}</div>
+      </a>
+      <a class="tool add" :fy-index="-2">
+        <img src="/tool/add.svg" alt="add" />
+        <div>{{ t('add') }}</div>
       </a>
     </div>
   </div>
 </template>
-
+<i18n>
+{
+  "zh": {
+    "add": "添加工具",
+  },
+  "en": {
+    "add": "Add Tool",
+  },
+  "tw": {
+    "add": "添加工具",
+  },
+  "ru": {
+    "add": "Добавить инструмент",
+  },
+  "de": {
+    "add": "Werkzeug hinzufügen",
+  },
+  "fr": {
+    "add": "Ajouter un outil",
+  },
+  "ja": {
+    "add": "ツールを追加",
+  }
+}
+</i18n>
 <style>
 .scroll {
   position: absolute;
@@ -135,12 +200,14 @@ function remove() {
   background: rgb(30,30,30);
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0,0,0,.2);
-  transition: .25s;
+  transition: .25s cubic-bezier(.60,.05,.1,1);
+  transform-origin: top left;
   opacity: 0;
   pointer-events: none;
   user-select: none;
   z-index: -64;
   padding: 4px;
+  transform: scale(.5);
 }
 
 .popup .row {
@@ -161,7 +228,8 @@ function remove() {
 }
 
 .popup .row svg {
-  fill: #fff;
+  stroke: #fff;
+  stroke-width: 32;
   width: 16px;
   height: 16px;
 }
@@ -247,6 +315,12 @@ function remove() {
   padding: 20px;
   fill: rgba(255,255,255,0.85);
   transition: .2s;
+  backdrop-filter: blur(4px);
+}
+
+.tool.add img {
+  background: rgba(0,0,0,0.5);
+  fill: rgba(255,255,255,0.85);
 }
 
 .tool div {

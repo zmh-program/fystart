@@ -27,6 +27,10 @@ export function contains(els: Element[], target: HTMLElement): boolean {
   return els.some((el: Element) => contain(el, target));
 }
 
+export function swap<T>(arr: T[], i: number, j: number) {
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+}
+
 export function clipboard(text: string) {
   const el = document.createElement("textarea");
   el.value = text;

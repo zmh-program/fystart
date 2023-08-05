@@ -40,7 +40,6 @@ export const storage = reactive(readDictConfig({
     { "type": ToolTypes.BUILTIN, "name": "OpenAI", "link": "https://chat.openai.com", "icon": "/tool/openai.svg" },
     { "type": ToolTypes.BUILTIN, "name": "Stack Overflow", "link": "https://stackoverflow.com", "icon": "/tool/stackoverflow.svg" },
     { "type": ToolTypes.BUILTIN, "name": "Light Notes", "link": "https://notes.lightxi.com", "icon": "/tool/lightnotes.ico" },
-    { "type": ToolTypes.BUILTIN, "name": "Twitter", "link": "https://twitter.com", "icon": "/tool/twitter.svg" },
     { "type": ToolTypes.BUILTIN, "name": "Cloudflare", "link": "https://dash.cloudflare.com", "icon": "/tool/cloudflare.svg" },
     { "type": ToolTypes.BUILTIN, "name": "Vercel", "link": "https://vercel.com", "icon": "/tool/vercel.svg" },
     { "type": ToolTypes.BUILTIN, "name": "Codepen", "link": "https://codepen.io", "icon": "/tool/codepen.svg" },
