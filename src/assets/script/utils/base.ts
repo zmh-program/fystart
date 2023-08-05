@@ -40,7 +40,11 @@ export function clipboard(text: string) {
   document.body.removeChild(el);
 }
 
-export function getSelectionText() {
-  if (window.getSelection) return window.getSelection()?.toString();
-  return "";
+export function getSelectionText(): string | undefined {
+  return window.getSelection ? window.getSelection()?.toString() : "";
+}
+
+export function getFavicon(url: string): string {
+  const instance = new URL(url);
+  return `${instance.origin}/favicon.ico`;
 }

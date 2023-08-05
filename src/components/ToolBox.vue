@@ -6,7 +6,7 @@ import {contextTool} from "@/assets/script/tool";
 import Delete from "@/components/icons/delete.vue";
 import {useI18n} from "vue-i18n";
 import Edit from "@/components/icons/edit.vue";
-import { swap } from "@/assets/script/utils/base";
+import {getFavicon, swap} from "@/assets/script/utils/base";
 import Window from "@/components/compositions/Window.vue";
 import CardContainer from "@/components/CardContainer.vue";
 import Tool from "@/components/compositions/Tool.vue";
@@ -150,7 +150,7 @@ function saveEdit() {
   const tool = storage.tools[idx];
   tool.name = form.name;
   tool.link = form.link;
-  tool.icon = form.icon;
+  tool.icon = form.icon.trim().length > 0 ? form.icon : getFavicon(form.link);
   setting.value = false;
 }
 </script>
