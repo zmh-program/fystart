@@ -309,12 +309,12 @@ function saveEdit() {
 <style>
 .scroll {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  max-height: calc(80vh - 280px);
-  top: 280px;
+  top: var(--height-tool-box);
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  max-height: calc(80vh - var(--height-tool-box));
   touch-action: pan-y;
   overflow-y: auto;
   overflow-x: hidden;

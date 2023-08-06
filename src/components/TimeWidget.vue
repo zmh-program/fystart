@@ -35,7 +35,7 @@ function click() {
 <style scoped>
 .time {
   position: absolute;
-  top: 80px;
+  top: var(--height-time-widget);
   transition: .25s;
   left: 50%;
   opacity: 1;

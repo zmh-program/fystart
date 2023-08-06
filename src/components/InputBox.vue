@@ -130,7 +130,7 @@ window.addEventListener('contextmenu', function (e) {
 .container {
   position: absolute;
   display: flex;
-  top: 180px;
+  top: var(--height-input-box);
   left: 50%;
   transform: translateX(-50%);
   width: 230px;
@@ -301,7 +301,7 @@ window.addEventListener('contextmenu', function (e) {
 
 @media screen and (max-width: 620px) {
   .container.focus {
-    top: 160px;
+    top: calc(var(--height-input-box) - 20px);
   }
 
   .engine-container.focus {

@@ -43,6 +43,10 @@
   --color-text: var(--vt-c-text-dark-2);
 
   --section-gap: 160px;
+  --height-time-widget: min(80px, max(10vh, 30px));
+  --height-input-box: min(180px, max(25vh, 100px));
+  --height-tool-box: calc(var(--height-time-widget) + var(--height-input-box));
+
 }
 
 * {
