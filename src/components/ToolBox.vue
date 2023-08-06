@@ -185,7 +185,7 @@ function saveEdit() {
       <delete /><span>删除</span>
     </div>
   </div>
-  <Cover :active="setting" floor="32" />
+  <Cover :active="setting" :floor="32" />
   <Window :title="newTab ? t('add') : t('edit')" v-model="setting" class="dialog">
     <div class="form">
       <div class="column">

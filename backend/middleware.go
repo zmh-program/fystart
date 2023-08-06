@@ -16,6 +16,7 @@ var allowedOrigins = []string{
 	"https://deeptrain.net",
 	"https://www.deeptrain.net",
 	"http://localhost",
+	"http://localhost:5173",
 }
 
 type Limiter struct {
@@ -38,7 +39,7 @@ func (l *Limiter) RateLimit(ctx *gin.Context, rds *redis.Client, ip string, path
 var limits = map[string]Limiter{
 	"/login":        {Duration: 10, Count: 5},
 	"/state":        {Duration: 1, Count: 2},
-	"/github":       {Duration: 10, Count: 5},
+	"/github":       {Duration: 60, Count: 45},
 	"/storage/sync": {Duration: 120, Count: 60},
 }
 

@@ -37,7 +37,7 @@ function redirect() {
   location.href = 'https://deeptrain.net/login?app=fystart';
 }
 
-watch(locale, () => localStorage.setItem('language', locale.value))
+watch(locale, () => storage.language = locale.value);
 
 function logout() {
   token.value = "";
