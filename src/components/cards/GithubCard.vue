@@ -10,7 +10,7 @@ update();
     <div class="github-top">
       <span class="github-name">GitHub</span>
       <span style="flex-grow: 1" />
-      <span class="github-explore">Explore</span>
+      <span class="github-explore" @click="update">Explore</span>
     </div>
     <div class="github-content">
       <template v-for="(repo, idx) in data" :key="idx">
@@ -145,6 +145,13 @@ update();
   background: rgba(56, 140, 255, 0.8);
   padding: 2px 6px;
   border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: .3s;
+}
+
+.github-explore:hover {
+  background: rgba(56, 140, 255, 1);
 }
 
 .github-content {
