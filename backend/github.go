@@ -1,8 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
+	"github.com/spf13/viper"
+	"math/rand"
 	"strconv"
+	"time"
 )
 
 // generate at https://github.com/ozh/github-colors/blob/master/colors.json
@@ -50,7 +56,8 @@ func GetPopularRepo(page int) ([]PopularRepo, error) {
 		page = 1
 	}
 	data, err := Get("https://api.github.com/search/repositories?q=stars:%3E1000&per_page=100&page="+strconv.Itoa(page), map[string]string{
-		"Accept": "application/vnd.github.v3+json",
+		"Accept":        "application/vnd.github.v3+json",
+		"Authorization": "Bearer " + viper.GetString("token"),
 	})
 
 	if err != nil {
@@ -82,6 +89,33 @@ func HandlePopularRepo(data []GithubRepo) []PopularRepo {
 			Color:       GetColor(v.Language),
 		})
 	}
-	fmt.Println(res)
+
 	return res
+}
+
+func GetRandomPagination(data []PopularRepo) []PopularRepo {
+	page := rand.Intn(25)
+	return data[page*4 : page*4+4]
+}
+
+func GetRandomPopularRepoWithCache(ctx *gin.Context, cache *redis.Client) ([]PopularRepo, error) {
+	page := rand.Intn(10)
+
+	if result, err := cache.Get(ctx, fmt.Sprintf("popularepo:%d", page)).Result(); err == nil && result != "" {
+		var res []PopularRepo
+		if err = json.Unmarshal([]byte(result), &res); err == nil {
+			return GetRandomPagination(res), nil
+		}
+	}
+
+	res, err := GetPopularRepo(page)
+	if err != nil {
+		return nil, err
+	}
+
+	if buffer, err := json.Marshal(res); err == nil {
+		cache.Set(ctx, fmt.Sprintf("popularepo:%d", page), buffer, time.Minute*2)
+	}
+
+	return GetRandomPagination(res), nil
 }

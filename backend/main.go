@@ -14,7 +14,6 @@ func main() {
 	if err := viper.ReadInConfig(); err != nil {
 		panic(err)
 	}
-
 	if viper.GetBool("debug") {
 		gin.SetMode(gin.DebugMode)
 	} else {
@@ -33,6 +32,7 @@ func main() {
 		app.POST("/login", LoginAPI)
 		app.POST("/state", StateAPI)
 		app.POST("/sync", SyncStorageAPI)
+		app.GET("/github", GithubExploreAPI)
 		RegisterChatGPTAPI(app)
 	}
 

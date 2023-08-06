@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
 	"net/http"
 	"strings"
@@ -90,5 +91,24 @@ func RegisterChatGPTAPI(app *gin.Engine) {
 			return
 		}
 		ChatGPTAPI(c, body.Message)
+	})
+}
+
+func GithubExploreAPI(c *gin.Context) {
+	resp, err := GetRandomPopularRepoWithCache(c, c.MustGet("cache").(*redis.Client))
+
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status": false,
+			"data":   nil,
+			"reason": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": true,
+		"data":   resp,
+		"reason": "",
 	})
 }
