@@ -11,7 +11,6 @@ import Window from "@/components/compositions/Window.vue";
 import CardContainer from "@/components/CardContainer.vue";
 import Tool from "@/components/compositions/Tool.vue";
 import Cover from "@/components/compositions/Cover.vue";
-import {set} from "@/assets/script/engine";
 import {registerScrollableComponent} from "@/assets/script/utils/scroll";
 
 const { t } = useI18n();

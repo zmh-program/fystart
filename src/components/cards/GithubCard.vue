@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import {data, update} from "@/assets/script/card/github";
+import { data, update, loading } from "@/assets/script/card/github";
 import Star from "@/components/icons/star.vue";
 import {registerScrollableComponent} from "@/assets/script/utils/scroll";
 import {ref} from "vue";
+import Loader from "@/components/icons/loader.vue";
 
 const element = ref<HTMLElement | null>(null);
 registerScrollableComponent(element, true);
-
-update();
 </script>
 
 <template>
@@ -15,7 +14,10 @@ update();
     <div class="github-top">
       <span class="github-name">GitHub</span>
       <span style="flex-grow: 1" />
-      <span class="github-explore" @click="update">Explore</span>
+      <span class="github-explore" @click="update">
+        <loader v-if="loading" />
+        <template v-else>Explore</template>
+      </span>
     </div>
     <div class="github-content" ref="element">
       <template v-for="(repo, idx) in data" :key="idx">
@@ -153,6 +155,23 @@ update();
   cursor: pointer;
   user-select: none;
   transition: .3s;
+}
+
+@keyframes ScrollAnimation {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+.github-explore svg {
+  width: 18px;
+  height: 18px;
+  margin: 1px 4px -5px;
+  fill: #fff;
+  animation: ScrollAnimation 1s linear infinite;
 }
 
 .github-explore:hover {

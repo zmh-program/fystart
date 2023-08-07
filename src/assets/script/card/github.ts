@@ -15,10 +15,10 @@ type GithubRepo = {
 
 export const data = ref<GithubRepo[]>([]);
 
-let loading = false;
+export const loading = ref<boolean>(false);
 export function update() {
-  if (loading) return;
-  loading = true;
+  if (loading.value) return;
+  loading.value = true;
   axios.get("/github")
     .then((res) => {
       data.value = res.data.data;
@@ -26,10 +26,12 @@ export function update() {
         repo.stars = DecimalConvert(Number(repo.stars));
       });
 
-      loading = false;
+      loading.value = false;
     })
     .catch((e) => {
       console.debug(e);
-      loading = false;
+      loading.value = false;
     })
 }
+
+update();
