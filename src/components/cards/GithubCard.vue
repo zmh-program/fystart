@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import {data, update} from "@/assets/script/card/github";
 import Star from "@/components/icons/star.vue";
+import {registerScrollableComponent} from "@/assets/script/utils/scroll";
+import {ref} from "vue";
 
+const element = ref<HTMLElement | null>(null);
+registerScrollableComponent(element);
 update();
 </script>
 
@@ -12,7 +16,7 @@ update();
       <span style="flex-grow: 1" />
       <span class="github-explore" @click="update">Explore</span>
     </div>
-    <div class="github-content">
+    <div class="github-content" ref="element">
       <template v-for="(repo, idx) in data" :key="idx">
         <div class="github-repo">
           <a class="github-header" :href="repo.url" target="_blank">

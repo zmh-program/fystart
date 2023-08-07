@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Close from "@/components/icons/close.vue";
 import {onMounted, ref} from "vue";
+import {registerScrollableComponent} from "@/assets/script/utils/scroll";
 
 const props = defineProps<{
   title: string,
@@ -8,23 +9,7 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(['update:modelValue']);
 const window = ref<HTMLElement | null>(null);
-
-const start = ref<number>(NaN);
-
-onMounted(() => {
-  if (window.value === null) return;
-  window.value.addEventListener('touchstart', (e) => {
-    start.value = e.touches[0].clientY;
-  })
-  window.value.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    if (window.value === null) return;
-    const current = e.touches[0].clientY;
-    const height = current - start.value;
-    start.value = current;
-    window.value.scrollTop = window.value.scrollTop - height;
-  })
-})
+registerScrollableComponent(window);
 </script>
 
 <template>
