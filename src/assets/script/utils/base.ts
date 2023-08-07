@@ -1,4 +1,7 @@
-type Element = HTMLElement | null;
+import type { Ref } from "vue";
+
+export type Element = HTMLElement | null;
+
 
 export function exportScript(name: string, conf: any) {
   const script = document.createElement("script");
@@ -19,12 +22,12 @@ export const withCdn = (src: string) => (
   src.startsWith("/") ? `https://cdn.zmh-program.site/fystart${src}` : src
 );
 
-export function contain(el: Element, target: HTMLElement): boolean {
-  return el ? (el == target || el.contains(target)) : false;
+export function contain(el: Element, target: HTMLElement, exclude?: boolean): boolean {
+  return el ? ((exclude ? el == target : false) || el.contains(target)) : false;
 }
 
-export function contains(els: Element[], target: HTMLElement): boolean {
-  return els.some((el: Element) => contain(el, target));
+export function contains(els: Element[], target: HTMLElement, exclude?: boolean): boolean {
+  return els.some((el: Element) => contain(el, target, exclude));
 }
 
 export function swap<T>(arr: T[], i: number, j: number) {
@@ -51,4 +54,30 @@ export function getFavicon(url: string): string {
   } catch {
     return "/tool/unknown.svg";
   }
+}
+
+export function getListExcludeSelf<T>(list: T[], self: T): T[] {
+  return list.filter((item) => item !== self);
+}
+
+export function getValueOfRef<T>(ref: Ref<T>[]): T[] {
+  return ref.map((item) => item.value);
+}
+
+export function getQueryVariable(variable: string): string | null {
+  const query = window.location.search.substring(1);
+  const vars = query.split("&");
+  for (const v of vars) {
+    const pair = v.split("=");
+    if (pair[0] === variable) return pair[1];
+  }
+  return null;
+}
+
+export function DecimalConvert(n: number): string {
+  if (n < 1000) return n.toString();
+  if (n < 1000000) return `${(n / 1000).toFixed(1)}k`;
+  if (n < 1000000000) return `${(n / 1000000).toFixed(1)}m`;
+  if (n < 10000000000) return `${(n / 1000000000).toFixed(1)}b`;
+  return n.toString();
 }

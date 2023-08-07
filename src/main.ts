@@ -3,7 +3,6 @@ import App from './App.vue';
 import i18n from "@/i18n";
 import { endpoint } from "@/assets/script/config";
 import '@/assets/script/auth';
-
 import './assets/style/base.css';
 import axios from "axios";
 

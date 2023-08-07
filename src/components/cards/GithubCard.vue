@@ -5,7 +5,8 @@ import {registerScrollableComponent} from "@/assets/script/utils/scroll";
 import {ref} from "vue";
 
 const element = ref<HTMLElement | null>(null);
-registerScrollableComponent(element);
+registerScrollableComponent(element, true);
+
 update();
 </script>
 
