@@ -70,5 +70,5 @@ watch(storage, () => {
   storage.stamp = Date.now();
   writeDictConfig(storage);
   clearTimeout(timeout);
-  timeout = setTimeout(sync, 1000);
+  if (auth.value) timeout = setTimeout(sync, 1000);
 });
