@@ -7,6 +7,7 @@ import Loader from "@/components/icons/loader.vue";
 
 const element = ref<HTMLElement | null>(null);
 registerScrollableComponent(element, true);
+update();
 </script>
 
 <template>

@@ -33,5 +33,3 @@ export function update() {
       loading.value = false;
     })
 }
-
-update();
