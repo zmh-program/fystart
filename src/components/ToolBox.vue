@@ -198,7 +198,7 @@ function saveEdit() {
       </div>
     </div>
   </Window>
-  <div class="scroll" ref="element">
+  <div class="scroll" :class="{'focus': props.focus}" ref="element">
     <CardContainer :focus="props.focus" />
     <div class="tool-container" ref="toolContainer" :class="{'focus': props.focus}" v-show="!context">
       <Tool class="draggable" :key="idx"
@@ -304,6 +304,10 @@ function saveEdit() {
   touch-action: pan-y;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.scroll.focus {
+  pointer-events: none;
 }
 
 button.button {

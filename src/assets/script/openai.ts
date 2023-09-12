@@ -4,10 +4,11 @@ import type { Ref } from "vue";
 import { TypingEffect } from "@/assets/script/utils/typing";
 import {storage} from "@/assets/script/storage";
 import axios from "axios";
+import {openai_endpoint} from "@/assets/script/config";
 
 const ask = wrap(async (message: string, callback: (response: string) => any) => {
     if (!storage.chatgpt) return;
-    const resp = await axios.post("/gpt", { message })
+    const resp = await axios.post(`${openai_endpoint}/anonymous`, { message, web: false })
     callback(resp.data.message);
 }, 800);
 
