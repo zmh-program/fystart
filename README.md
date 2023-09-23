@@ -1,7 +1,7 @@
 <div align="center"> 
 
 ![fystart](/public/favicon.ico)
-# [Fystart](https://fystart.cn/)
+# [Fyrrum Start · 极目起始页](https://fystart.cn/)
 
 [![GitHub stars](https://img.shields.io/github/stars/zmh-program/fystart?style=flat-square)](https://fystart.cn)
 [![GitHub forks](https://img.shields.io/github/forks/zmh-program/fystart?style=flat-square)](https://fystart.cn)
