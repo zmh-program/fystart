@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import Check from "@/components/icons/check.vue";
 
-const props = defineProps(['modelValue']);
-const emit = defineEmits(['update:modelValue']);
+const props = defineProps(["modelValue"]);
+const emit = defineEmits(["update:modelValue"]);
 
 function toggle() {
-  emit('update:modelValue', !props.modelValue);
+  emit("update:modelValue", !props.modelValue);
 }
 </script>
 
 <template>
   <div class="wrapper" @click="toggle">
-    <check class="check" :class="{'active': props.modelValue}" />
+    <check class="check" :class="{ active: props.modelValue }" />
   </div>
 </template>
 
@@ -30,7 +30,7 @@ function toggle() {
 
 .check {
   opacity: 0;
-  transition: .1s;
+  transition: 0.1s;
   will-change: opacity;
 }
 

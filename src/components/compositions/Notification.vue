@@ -1,6 +1,4 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="notification">
@@ -13,7 +11,8 @@
   0% {
     transform: translate(-50%, -100%);
   }
-  25%, 75% {
+  25%,
+  75% {
     transform: translate(-50%, 25px);
   }
   100% {
@@ -25,7 +24,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(30,30,30,.9);
+  background: rgba(30, 30, 30, 0.9);
   color: #fff;
   padding: 10px 20px;
   border-radius: 50px;

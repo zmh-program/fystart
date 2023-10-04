@@ -12,7 +12,7 @@ const { t } = useI18n();
 const active = ref(false);
 </script>
 <template>
-  <div class="about" :class="{'focus': !input && storage.about}">
+  <div class="about" :class="{ focus: !input && storage.about }">
     <span>© 2023</span>
     <div class="split" />
     <span class="button" @click="active = true">{{ t("about") }}</span>
@@ -45,37 +45,67 @@ const active = ref(false);
     <div class="form">
       <h3>致谢</h3>
       <div class="links">
-        <a href="https://go.itab.link" target="_blank">iTab 起始页</a><div class="split" />
-        <a href="https://hitokoto.cn" target="_blank">Hitokoto 一言</a><div class="split" />
-        <a href="https://limestart.cn" target="_blank">青柠起始页</a><div class="split" />
-        <a href="https://inftab.com" target="_blank">Infinity 起始页</a><div class="split" />
+        <a href="https://go.itab.link" target="_blank">iTab 起始页</a>
+        <div class="split" />
+        <a href="https://hitokoto.cn" target="_blank">Hitokoto 一言</a>
+        <div class="split" />
+        <a href="https://limestart.cn" target="_blank">青柠起始页</a>
+        <div class="split" />
+        <a href="https://inftab.com" target="_blank">Infinity 起始页</a>
+        <div class="split" />
         <a href="https://openai.com" target="_blank">OpenAI</a>
       </div>
-    </div><br>
+    </div>
+    <br />
     <div class="form">
       <h3 class="donate">捐助</h3>
       <span style="text-align: center">他们比我更需要一杯咖啡！</span>
       <div class="links">
-        <a href="https://github.com/vuejs/core" target="_blank">@Vue</a><div class="split" />
-        <a href="https://github.com/vitejs/vite" target="_blank">@Vite</a><div class="split" />
-        <a href="https://github.com/intlify/vue-i18n-next" target="_blank">@Vue-I18n</a><div class="split" />
-        <a href="https://github.com/gin-gonic/gin" target="_blank">@Gin</a><div class="split" />
-        <a href="https://github.com/hitokoto-osc/hitokoto-api" target="_blank">@Hitokoto</a>
+        <a href="https://github.com/vuejs/core" target="_blank">@Vue</a>
+        <div class="split" />
+        <a href="https://github.com/vitejs/vite" target="_blank">@Vite</a>
+        <div class="split" />
+        <a href="https://github.com/intlify/vue-i18n-next" target="_blank"
+          >@Vue-I18n</a
+        >
+        <div class="split" />
+        <a href="https://github.com/gin-gonic/gin" target="_blank">@Gin</a>
+        <div class="split" />
+        <a href="https://github.com/hitokoto-osc/hitokoto-api" target="_blank"
+          >@Hitokoto</a
+        >
       </div>
-    </div><br>
+    </div>
+    <br />
     <div class="form">
       <h3 class="community">社区</h3>
       <div class="links">
-        <a href="https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ASpQxeVFhUb4KTI69XiLwplSS_VTEGWs" target="_blank">
+        <a
+          href="https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=ASpQxeVFhUb4KTI69XiLwplSS_VTEGWs"
+          target="_blank"
+        >
           <qq class="qq" /> Deeptrain 交流群
         </a>
       </div>
-    </div><br><br>
-    <a class="repo" href="https://github.com/zmh-program/fystart" target="_blank"><github />GitHub</a>
-    <a class="author" href="https://deeptrain.net" target="_blank">© Deeptrain Team</a>
+    </div>
+    <br /><br />
+    <a
+      class="repo"
+      href="https://github.com/zmh-program/fystart"
+      target="_blank"
+      ><github />GitHub</a
+    >
+    <a class="author" href="https://deeptrain.net" target="_blank"
+      >© Deeptrain Team</a
+    >
     <div class="license" style="text-align: center; color: #aaa">
       请遵守
-      <a class="link" style="color: #ccc; background: none" href="https://github.com/zmh-program/fystart/blob/main/LICENSE">MIT</a>
+      <a
+        class="link"
+        style="color: #ccc; background: none"
+        href="https://github.com/zmh-program/fystart/blob/main/LICENSE"
+        >MIT</a
+      >
       开源协议分发
     </div>
   </Window>
@@ -114,18 +144,18 @@ const active = ref(false);
   bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   font-family: var(--fonts-cn);
   text-decoration: none;
   opacity: 0;
-  transition: .25s;
+  transition: 0.25s;
   user-select: none;
 }
 
 .split::after {
   content: " | ";
-  color: rgba(255,255,255,.3);
+  color: rgba(255, 255, 255, 0.3);
   padding: 0 4px;
 }
 
@@ -135,14 +165,14 @@ const active = ref(false);
 
 .about .button {
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
 }
 
 .about .button:hover {
   color: #fff;
 }
 
-@media (max-height: 700px) and (max-width: 300px){
+@media (max-height: 700px) and (max-width: 300px) {
   .about {
     opacity: 0;
   }
@@ -166,7 +196,7 @@ const active = ref(false);
 .version {
   top: 8px;
   margin-left: 12px;
-  background: rgb(40,40,40);
+  background: rgb(40, 40, 40);
   width: max-content;
   height: max-content;
   padding: 4px 6px;
@@ -207,7 +237,7 @@ const active = ref(false);
   overflow-wrap: anywhere;
   white-space: break-spaces;
   word-break: break-all;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   font-family: var(--fonts-cn);
   text-align: left;

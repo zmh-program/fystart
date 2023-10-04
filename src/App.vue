@@ -8,13 +8,13 @@ import ToolBox from "@/components/ToolBox.vue";
 import Background from "@/components/Background.vue";
 import InputBox from "@/components/InputBox.vue";
 import AutoUpdater from "@/components/AutoUpdater.vue";
-import {storage} from "@/assets/script/storage";
-
+import { storage } from "@/assets/script/storage";
 
 const focus = ref(false);
-if (storage.focusInput) window.addEventListener('load', () => {
-  focus.value = true;
-});
+if (storage.focusInput)
+  window.addEventListener("load", () => {
+    focus.value = true;
+  });
 </script>
 <template>
   <main>

@@ -1,6 +1,6 @@
 import { solarToLunar } from "lunar-calendar";
 
-const WEEKDAY = ['日', '一', '二', '三', '四', '五', '六'];
+const WEEKDAY = ["日", "一", "二", "三", "四", "五", "六"];
 
 export type Calendar = {
   lunar: string;
@@ -10,7 +10,7 @@ export type Calendar = {
   weekday: string;
   day: number;
   festival?: string;
-}
+};
 
 export function getCalendar(): Calendar {
   const date = new Date();
@@ -19,7 +19,11 @@ export function getCalendar(): Calendar {
   const week = Math.ceil(day / 7);
   const month = date.getUTCMonth();
   const year = date.getUTCFullYear();
-  const calendar = solarToLunar(date.getFullYear(), date.getMonth() + 1, date.getDate());
+  const calendar = solarToLunar(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate(),
+  );
   return {
     lunar: calendar.lunarMonthName + calendar.lunarDayName,
     zodiac: calendar.zodiac,
@@ -28,5 +32,5 @@ export function getCalendar(): Calendar {
     weekday: `星期${weekday}`,
     day,
     festival: calendar.solarFestival,
-  }
+  };
 }

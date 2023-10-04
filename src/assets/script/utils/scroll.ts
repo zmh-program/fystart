@@ -1,11 +1,18 @@
 import { onMounted, ref } from "vue";
 import type { Ref } from "vue";
 import type { Element } from "@/assets/script/utils/base";
-import { contains, getListExcludeSelf, getValueOfRef } from "@/assets/script/utils/base";
+import {
+  contains,
+  getListExcludeSelf,
+  getValueOfRef,
+} from "@/assets/script/utils/base";
 
 const components: Ref<Element>[] = [];
 
-export function registerScrollableComponent(component: Ref<HTMLElement | null>, miniUnit?: boolean) {
+export function registerScrollableComponent(
+  component: Ref<HTMLElement | null>,
+  miniUnit?: boolean,
+) {
   const start = ref<number>(NaN);
   const animationFrame = ref<number>(NaN);
 
@@ -17,7 +24,7 @@ export function registerScrollableComponent(component: Ref<HTMLElement | null>, 
     return contains(
       getListExcludeSelf(getValueOfRef(components), component.value),
       e.target as HTMLElement,
-      true
+      true,
     );
   }
 
@@ -39,7 +46,9 @@ export function registerScrollableComponent(component: Ref<HTMLElement | null>, 
       component.value.scrollTop -= step;
     }
 
-    animationFrame.value = requestAnimationFrame(() => animateScroll(scrollTop));
+    animationFrame.value = requestAnimationFrame(() =>
+      animateScroll(scrollTop),
+    );
   }
 
   return onMounted(() => {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import {ref, watch} from "vue";
+import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { current, icons, set, urls} from "@/assets/script/engine";
+import { current, icons, set, urls } from "@/assets/script/engine";
 import { storage } from "@/assets/script/storage";
 import EngineI18n from "@/i18n/engine";
 import Cover from "@/components/compositions/Cover.vue";
@@ -16,28 +16,28 @@ import Box from "@/components/icons/box.vue";
 import Note from "@/components/icons/note.vue";
 import Info from "@/components/icons/info.vue";
 import Cursor from "@/components/icons/cursor.vue";
-import {auth, token, username} from "@/assets/script/auth";
+import { auth, token, username } from "@/assets/script/auth";
 import { withCdn } from "@/assets/script/utils/base";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
 const images = [
-    "/background.webp",
-    "/background/hills.webp",
-    "/background/lake.webp",
-    "/background/mountain.webp",
-    "/background/morning.webp",
-    "/background/forest.webp",
-    "/background/ocean.webp",
-    "/background/snow.webp",
-    "/background/sunshine.webp",
-]
+  "/background.webp",
+  "/background/hills.webp",
+  "/background/lake.webp",
+  "/background/mountain.webp",
+  "/background/morning.webp",
+  "/background/forest.webp",
+  "/background/ocean.webp",
+  "/background/snow.webp",
+  "/background/sunshine.webp",
+];
 
 function redirect() {
-  location.href = 'https://deeptrain.net/login?app=fystart';
+  location.href = "https://deeptrain.net/login?app=fystart";
 }
 
-watch(locale, () => storage.language = locale.value);
+watch(locale, () => (storage.language = locale.value));
 
 function logout() {
   token.value = "";
@@ -50,23 +50,29 @@ function logout() {
   <settings class="button" @click="active = true" />
   <Window :title="t('settings')" v-model="active">
     <div class="form">
-      <label>{{ t('account') }}</label>
+      <label>{{ t("account") }}</label>
       <div class="column">
-        <button class="login" @click="redirect" v-if="!auth">{{ t('login') }}</button>
+        <button class="login" @click="redirect" v-if="!auth">
+          {{ t("login") }}
+        </button>
         <div class="user" v-else>
-          <img class="avatar" alt="" :src="'https://api.deeptrain.net/avatar/' + username" />
+          <img
+            class="avatar"
+            alt=""
+            :src="'https://api.deeptrain.net/avatar/' + username"
+          />
           <span class="username">{{ username }}</span>
           <div class="grow" />
-          <button class="logout" @click="logout">{{ t('logout') }}</button>
+          <button class="logout" @click="logout">{{ t("logout") }}</button>
         </div>
       </div>
     </div>
     <div class="form">
-      <label>{{ t('general') }}</label>
+      <label>{{ t("general") }}</label>
       <div class="column general">
         <div class="row">
           <international />
-          <span>{{ t('language') }}</span>
+          <span>{{ t("language") }}</span>
           <div class="grow" />
           <select v-model="$i18n.locale">
             <option value="zh">简体中文</option>
@@ -85,72 +91,94 @@ function logout() {
             <div class="grow" />
             <Checkbox v-model="storage.chatgpt" />
           </div>
-          <div class="row"><p>{{ t('openai') }}</p></div>
+          <div class="row">
+            <p>{{ t("openai") }}</p>
+          </div>
         </div>
         <div class="row desc">
           <div class="row">
             <clock />
-            <span>{{ t('time') }}</span>
+            <span>{{ t("time") }}</span>
             <div class="grow" />
             <Checkbox v-model="storage.exactTime" />
           </div>
-          <div class="row"><p>{{ t('time-desc') }}</p></div>
+          <div class="row">
+            <p>{{ t("time-desc") }}</p>
+          </div>
         </div>
         <div class="row desc">
           <div class="row">
             <cursor />
-            <span>{{ t('focus') }}</span>
+            <span>{{ t("focus") }}</span>
             <div class="grow" />
             <Checkbox v-model="storage.focusInput" />
           </div>
-          <div class="row"><p>{{ t('focus-desc') }}</p></div>
+          <div class="row">
+            <p>{{ t("focus-desc") }}</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="form">
-      <label>{{ t('display') }}</label>
+      <label>{{ t("display") }}</label>
       <div class="column general">
         <div class="row">
           <box />
-          <span>{{ t('toolbox') }}</span>
+          <span>{{ t("toolbox") }}</span>
           <div class="grow" />
           <Checkbox v-model="storage.toolbox" />
         </div>
         <div class="row">
           <note />
-          <span>{{ t('quote') }}</span>
+          <span>{{ t("quote") }}</span>
           <div class="grow" />
           <Checkbox v-model="storage.quote" />
         </div>
         <div class="row">
           <info />
-          <span>{{ t('about') }}</span>
+          <span>{{ t("about") }}</span>
           <div class="grow" />
           <Checkbox v-model="storage.about" />
         </div>
       </div>
     </div>
     <div class="form">
-      <label>{{ t('background') }}</label>
-      <div class="column"><br>
+      <label>{{ t("background") }}</label>
+      <div class="column">
+        <br />
         <div class="builtin">
-          <div class="wallpaper" v-for="(image, index) in images" :key="index" @click="storage.background = image">
+          <div
+            class="wallpaper"
+            v-for="(image, index) in images"
+            :key="index"
+            @click="storage.background = image"
+          >
             <img
-                :src="withCdn(image)"
-                :class="{'selected': storage.background === image}"
-                alt="" loading="lazy"
+              :src="withCdn(image)"
+              :class="{ selected: storage.background === image }"
+              alt=""
+              loading="lazy"
             />
             <div class="cover" v-if="storage.background === image" />
             <check class="check" v-if="storage.background === image" />
           </div>
         </div>
-        <input type="url" v-model="storage.background" :placeholder="t('input-background')">
+        <input
+          type="url"
+          v-model="storage.background"
+          :placeholder="t('input-background')"
+        />
       </div>
     </div>
     <div class="form">
-      <label>{{ t('search-engine') }}</label>
+      <label>{{ t("search-engine") }}</label>
       <div class="column">
-        <div class="engine" v-for="(inner, name, index) in icons" :class="{'selected': current === index}" @click="set(index)">
+        <div
+          class="engine"
+          v-for="(inner, name, index) in icons"
+          :class="{ selected: current === index }"
+          @click="set(index)"
+        >
           <div class="icon" v-html="inner" />
           <span class="name">{{ t(name) }}</span>
           <template v-if="current === index">
@@ -317,15 +345,15 @@ function logout() {
   height: 32px;
   border-radius: 6px;
   fill: #fff;
-  background: rgba(0,0,0,.2);
+  background: rgba(0, 0, 0, 0.2);
   top: 26px;
   right: 26px;
-  transition: .25s;
+  transition: 0.25s;
   z-index: 2;
 }
 
 .button:hover {
-  background: rgba(0,0,0,.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .user {
@@ -359,7 +387,7 @@ function logout() {
   border: none;
   color: #fff;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
   margin: 2px auto;
 }
 
@@ -373,7 +401,7 @@ function logout() {
   border: none;
   color: #fff;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
   margin: 6px auto;
 }
 
@@ -405,9 +433,9 @@ function logout() {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,.2);
+  background: rgba(0, 0, 0, 0.2);
   opacity: 0;
-  animation: FadeInAnimation .2s ease-in-out forwards;
+  animation: FadeInAnimation 0.2s ease-in-out forwards;
 }
 
 .builtin .check {
@@ -419,7 +447,7 @@ function logout() {
   width: 42px;
   height: 42px;
   position: absolute;
-  animation: FadeInAnimation .2s ease-in-out forwards;
+  animation: FadeInAnimation 0.2s ease-in-out forwards;
 }
 
 .builtin .wallpaper {
@@ -432,7 +460,7 @@ function logout() {
 }
 
 .builtin .wallpaper .selected {
-  scale: 1.0 !important;
+  scale: 1 !important;
 }
 
 .builtin img {
@@ -440,7 +468,7 @@ function logout() {
   height: 90px;
   aspect-ratio: 1.5;
   object-fit: cover;
-  transition: .15s;
+  transition: 0.15s;
   background-position: center;
 }
 
@@ -454,11 +482,11 @@ function logout() {
   flex-direction: row;
   align-items: center;
   border-radius: 6px;
-  transition: .25s;
+  transition: 0.25s;
 }
 
 .engine:hover {
-  background: rgba(50,50,50);
+  background: rgba(50, 50, 50);
 }
 
 .engine .name {
@@ -477,13 +505,13 @@ function logout() {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  animation: FadeInAnimation .2s ease-in-out;
+  animation: FadeInAnimation 0.2s ease-in-out;
 }
 
 .engine .check {
   width: 26px;
   height: 26px;
-  animation: FadeInAnimation .2s ease-in-out forwards;
+  animation: FadeInAnimation 0.2s ease-in-out forwards;
   margin-right: 8px;
 }
 </style>

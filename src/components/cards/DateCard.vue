@@ -7,21 +7,21 @@ const data = ref<Calendar>(getCalendar());
 </script>
 
 <template>
-<div class="card">
-  <div class="date-top">
-    <span class="date-name">日历</span>
-    <span class="date-solar">{{ data.solar }}</span>
-    <span class="date-zodiac">{{ data.zodiac }}</span>
+  <div class="card">
+    <div class="date-top">
+      <span class="date-name">日历</span>
+      <span class="date-solar">{{ data.solar }}</span>
+      <span class="date-zodiac">{{ data.zodiac }}</span>
+    </div>
+    <div class="date-content">
+      <span class="date-day">{{ data.day }}</span>
+      <span class="date-week">{{ data.weekday }}</span>
+      <span class="date-ganzhi">{{ data.ganzhi }}</span>
+    </div>
+    <div class="date-bottom">
+      <span class="date-lunar">{{ data.lunar }}</span>
+    </div>
   </div>
-  <div class="date-content">
-    <span class="date-day">{{ data.day }}</span>
-    <span class="date-week">{{ data.weekday }}</span>
-    <span class="date-ganzhi">{{ data.ganzhi }}</span>
-  </div>
-  <div class="date-bottom">
-    <span class="date-lunar">{{ data.lunar }}</span>
-  </div>
-</div>
 </template>
 
 <style scoped>
@@ -31,13 +31,13 @@ const data = ref<Calendar>(getCalendar());
   display: flex;
   padding: 4px;
   flex-direction: column;
-  background: rgb(45,45,45,.98);
+  background: rgb(45, 45, 45, 0.98);
   backdrop-filter: blur(2px);
-  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 220px;
   height: 180px;
   margin: 15px 15px 30px 15px;
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 12px;
   overflow: hidden;
   font-family: var(--fonts-cn);
@@ -47,7 +47,7 @@ const data = ref<Calendar>(getCalendar());
 .date-top {
   display: flex;
   flex-direction: row;
-  padding: .5em .7em .3em;
+  padding: 0.5em 0.7em 0.3em;
   height: max-content;
   width: 100%;
 }
@@ -71,7 +71,7 @@ const data = ref<Calendar>(getCalendar());
 .date-content {
   display: flex;
   flex-direction: column;
-  padding: 0 .7em;
+  padding: 0 0.7em;
   flex-grow: 1;
   width: 100%;
 }
@@ -79,7 +79,7 @@ const data = ref<Calendar>(getCalendar());
 .date-bottom {
   display: flex;
   flex-direction: row;
-  padding: .3em .7em .5em;
+  padding: 0.3em 0.7em 0.5em;
   height: max-content;
   width: 100%;
 }

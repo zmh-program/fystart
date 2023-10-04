@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import Close from "@/components/icons/close.vue";
-import {onMounted, ref} from "vue";
-import {registerScrollableComponent} from "@/assets/script/utils/scroll";
+import { onMounted, ref } from "vue";
+import { registerScrollableComponent } from "@/assets/script/utils/scroll";
 
 const props = defineProps<{
-  title: string,
-  modelValue: boolean,
+  title: string;
+  modelValue: boolean;
 }>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 const window = ref<HTMLElement | null>(null);
 registerScrollableComponent(window);
 </script>
 
 <template>
-  <div class="window" :class="{'active': props.modelValue}">
+  <div class="window" :class="{ active: props.modelValue }">
     <h1 class="title">{{ title }}</h1>
-    <close class="close" @click="emit('update:modelValue', false)" viewBox="0 0 512 512" />
+    <close
+      class="close"
+      @click="emit('update:modelValue', false)"
+      viewBox="0 0 512 512"
+    />
     <div class="divider" />
     <div class="main" ref="window">
       <slot />
@@ -100,7 +104,7 @@ registerScrollableComponent(window);
 }
 
 .window select {
-  background: rgb(30,30,30);
+  background: rgb(30, 30, 30);
   border: none;
   font-family: var(--fonts-cn);
   border-radius: 4px;
@@ -109,7 +113,7 @@ registerScrollableComponent(window);
 }
 
 .window select option {
-  background: rgb(40,40,40);
+  background: rgb(40, 40, 40);
   border: none;
   font-family: var(--fonts-cn);
   border-radius: 4px;
@@ -125,10 +129,9 @@ registerScrollableComponent(window);
 .divider {
   width: 100%;
   height: 1px;
-  background: rgb(40,40,40);
+  background: rgb(40, 40, 40);
   margin: 8px 0;
 }
-
 
 .window {
   position: absolute;
@@ -136,11 +139,11 @@ registerScrollableComponent(window);
   border: 0;
   top: 50%;
   left: 50%;
-  transition: .5s;
+  transition: 0.5s;
   transform: translate(-50%, -50%);
   width: calc(100% - 52px);
   height: min(80%, 540px);
-  background: rgb(30,30,30);
+  background: rgb(30, 30, 30);
   border-radius: 10px;
   max-width: 640px;
   z-index: -64;
@@ -163,7 +166,7 @@ registerScrollableComponent(window);
 .window.active {
   z-index: 64;
   opacity: 1;
-  animation: PopupAnimation .5s ease-in-out;
+  animation: PopupAnimation 0.5s ease-in-out;
 }
 
 .main {
@@ -183,14 +186,13 @@ registerScrollableComponent(window);
   right: 18px;
   top: 18px;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
   border-radius: 6px;
-  stroke: rgba(255,255,255,0.8);
+  stroke: rgba(255, 255, 255, 0.8);
 }
 
-
 .close:hover {
-  background: rgb(40,40,40);
+  background: rgb(40, 40, 40);
   stroke: #fff;
 }
 </style>

@@ -1,19 +1,22 @@
 {
   "name": "fystart",
-  "version": "1.8.0",
+  "version": "1.12.3",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier": "prettier --write \"src/**/*.vue\" \"src/**/*.ts\""
   },
   "dependencies": {
     "axios": "^1.4.0",
     "lunar-calendar": "^0.1.4",
+
     "vue": "^3.2.45",
     "vue-i18n": "9.2.2"
   },
   "devDependencies": {
+    "prettier": "^3.0.3",
     "@intlify/unplugin-vue-i18n": "^0.12.0",
     "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",

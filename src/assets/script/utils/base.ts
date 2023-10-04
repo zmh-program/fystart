@@ -2,7 +2,6 @@ import type { Ref } from "vue";
 
 export type Element = HTMLElement | null;
 
-
 export function exportScript(name: string, conf: any) {
   const script = document.createElement("script");
   script.type = "text/javascript";
@@ -18,15 +17,22 @@ export function insertScript(src: string) {
   document.body.appendChild(script);
 }
 
-export const withCdn = (src: string) => (
-  src.startsWith("/") ? `https://cdn.zmh-program.site/fystart${src}` : src
-);
+export const withCdn = (src: string) =>
+  src.startsWith("/") ? `https://cdn.zmh-program.site/fystart${src}` : src;
 
-export function contain(el: Element, target: HTMLElement, exclude?: boolean): boolean {
-  return el ? ((exclude ? el == target : false) || el.contains(target)) : false;
+export function contain(
+  el: Element,
+  target: HTMLElement,
+  exclude?: boolean,
+): boolean {
+  return el ? (exclude ? el == target : false) || el.contains(target) : false;
 }
 
-export function contains(els: Element[], target: HTMLElement, exclude?: boolean): boolean {
+export function contains(
+  els: Element[],
+  target: HTMLElement,
+  exclude?: boolean,
+): boolean {
   return els.some((el: Element) => contain(el, target, exclude));
 }
 

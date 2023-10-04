@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref, watch} from "vue";
-import {context} from "@/assets/script/shared";
-import {storage} from "@/assets/script/storage";
-import {contextTool} from "@/assets/script/tool";
+import { onMounted, reactive, ref, watch } from "vue";
+import { context } from "@/assets/script/shared";
+import { storage } from "@/assets/script/storage";
+import { contextTool } from "@/assets/script/tool";
 import Delete from "@/components/icons/delete.vue";
-import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
 import Edit from "@/components/icons/edit.vue";
-import {getFavicon, swap} from "@/assets/script/utils/base";
+import { getFavicon, swap } from "@/assets/script/utils/base";
 import Window from "@/components/compositions/Window.vue";
 import CardContainer from "@/components/CardContainer.vue";
 import Tool from "@/components/compositions/Tool.vue";
 import Cover from "@/components/compositions/Cover.vue";
-import {registerScrollableComponent} from "@/assets/script/utils/scroll";
+import { registerScrollableComponent } from "@/assets/script/utils/scroll";
 
 const { t } = useI18n();
 const props = defineProps<{
-  focus: boolean,
+  focus: boolean;
 }>();
 
 const popup = ref<boolean>(false);
@@ -27,20 +27,21 @@ const element = ref<HTMLElement | null>(null);
 
 registerScrollableComponent(element);
 
-window.addEventListener('contextmenu', (e: MouseEvent) => {
-  if (!props.focus && (!setting.value)) {
+window.addEventListener("contextmenu", (e: MouseEvent) => {
+  if (!props.focus && !setting.value) {
     e.preventDefault();
     const idx = contextTool(e.target as HTMLElement);
     if (!context.value && idx >= 0) {
-      const x = e.clientX, y = e.clientY;
+      const x = e.clientX,
+        y = e.clientY;
 
       let target = popupEl.value;
       if (target === null) return;
-      target.style.left = x + 'px';
-      target.style.top = y + 'px';
+      target.style.left = x + "px";
+      target.style.top = y + "px";
 
-      target.style.transform = 'scale(1.03)';
-      setTimeout(() => target && (target.style.transform = 'scale(1)'), 250);
+      target.style.transform = "scale(1.03)";
+      setTimeout(() => target && (target.style.transform = "scale(1)"), 250);
       popupIdx.value = idx;
 
       popup.value = true;
@@ -55,11 +56,11 @@ window.addEventListener('contextmenu', (e: MouseEvent) => {
   }
 });
 
-window.addEventListener('click', () => {
+window.addEventListener("click", () => {
   if (popup.value) {
     popup.value = false;
   }
-})
+});
 
 watch(props, () => {
   if (props.focus) {
@@ -71,16 +72,16 @@ watch(popup, () => {
   if (!popup.value) {
     requestAnimationFrame(() => {
       if (!setting.value) popupIdx.value = -1;
-      popupEl.value && (popupEl.value.style.transform = 'scale(.5)');
+      popupEl.value && (popupEl.value.style.transform = "scale(.5)");
       setTimeout(() => {
         let target = popupEl.value;
         if (target === null) return;
-        target.style.removeProperty('left');
-        target.style.removeProperty('top');
+        target.style.removeProperty("left");
+        target.style.removeProperty("top");
       }, 250);
-    })
+    });
   }
-})
+});
 
 function redirect(uri: string) {
   window.location.href = uri;
@@ -96,33 +97,40 @@ function remove() {
 const toolContainer = ref<HTMLElement | null>(null);
 
 onMounted(function () {
-  for (const draggable of document.querySelectorAll('.draggable') as NodeListOf<HTMLElement>) {
-    draggable.addEventListener('dragstart', function (e: DragEvent) {
+  for (const draggable of document.querySelectorAll(
+    ".draggable",
+  ) as NodeListOf<HTMLElement>) {
+    draggable.addEventListener("dragstart", function (e: DragEvent) {
       if (!e.dataTransfer) return;
-      e.dataTransfer.setData('text/plain', draggable.getAttribute("fy-index") as string);
-      e.dataTransfer.dropEffect = 'move';
+      e.dataTransfer.setData(
+        "text/plain",
+        draggable.getAttribute("fy-index") as string,
+      );
+      e.dataTransfer.dropEffect = "move";
     });
 
-    draggable.addEventListener('dragover', function (e: DragEvent) {
+    draggable.addEventListener("dragover", function (e: DragEvent) {
       e.preventDefault();
     });
 
-    draggable.addEventListener('drop', function (e: DragEvent) {
+    draggable.addEventListener("drop", function (e: DragEvent) {
       if (!e.dataTransfer) return;
       e.preventDefault();
-      const before: number = parseInt(e.dataTransfer.getData('text/plain'));
-      const after: number = parseInt(draggable.getAttribute("fy-index") as string);
-      (!(before === after || [before, after].includes(-2))) &&
+      const before: number = parseInt(e.dataTransfer.getData("text/plain"));
+      const after: number = parseInt(
+        draggable.getAttribute("fy-index") as string,
+      );
+      !(before === after || [before, after].includes(-2)) &&
         swap(storage.tools, before, after);
     });
   }
-})
+});
 
 const form = reactive({
-  name: '',
-  link: '',
-  icon: '',
-})
+  name: "",
+  link: "",
+  icon: "",
+});
 
 function activeEdit(type: boolean) {
   setting.value = true;
@@ -131,9 +139,9 @@ function activeEdit(type: boolean) {
   const idx = popupIdx.value;
   if (idx < 0) {
     if (idx !== -2) return;
-    form.name = '';
-    form.link = '';
-    form.icon = '';
+    form.name = "";
+    form.link = "";
+    form.icon = "";
     return;
   }
   const tool = storage.tools[idx];
@@ -150,7 +158,7 @@ function saveEdit() {
       name: form.name,
       link: form.link,
       icon: form.icon.trim().length > 0 ? form.icon : getFavicon(form.link),
-    })
+    });
     setting.value = false;
     return;
   }
@@ -163,50 +171,68 @@ function saveEdit() {
 </script>
 
 <template>
-  <div class="popup" :class="{'active': popup}" ref="popupEl">
-    <div class="row" @click="activeEdit(false)">
-      <edit /><span>编辑</span>
-    </div>
-    <div class="row" @click="remove">
-      <delete /><span>删除</span>
-    </div>
+  <div class="popup" :class="{ active: popup }" ref="popupEl">
+    <div class="row" @click="activeEdit(false)"><edit /><span>编辑</span></div>
+    <div class="row" @click="remove"><delete /><span>删除</span></div>
   </div>
   <Cover :active="setting" :floor="32" />
-  <Window :title="newTab ? t('add') : t('edit')" v-model="setting" class="dialog">
+  <Window
+    :title="newTab ? t('add') : t('edit')"
+    v-model="setting"
+    class="dialog"
+  >
     <div class="form">
       <div class="column">
         <div class="row">
-          <span>{{ t('name') }}</span>
+          <span>{{ t("name") }}</span>
           <div class="grow" />
           <input :placeholder="t('name-desc')" v-model="form.name" />
         </div>
         <div class="row">
-          <span>{{ t('link') }}</span>
+          <span>{{ t("link") }}</span>
           <div class="grow" />
           <input placeholder="https://" v-model="form.link" />
         </div>
         <div class="row">
-          <span>{{ t('icon') }}</span>
+          <span>{{ t("icon") }}</span>
           <div class="grow" />
           <input :placeholder="t('icon-desc')" v-model="form.icon" />
         </div>
         <div class="row">
           <div class="grow" />
-          <button class="button plain" @click="setting = false">{{ t('cancel') }}</button>
-          <button class="button" @click="saveEdit">{{ t('save') }}</button>
+          <button class="button plain" @click="setting = false">
+            {{ t("cancel") }}
+          </button>
+          <button class="button" @click="saveEdit">{{ t("save") }}</button>
         </div>
       </div>
     </div>
   </Window>
-  <div class="scroll" :class="{'focus': props.focus}" ref="element">
+  <div class="scroll" :class="{ focus: props.focus }" ref="element">
     <CardContainer :focus="props.focus" />
-    <div class="tool-container" ref="toolContainer" :class="{'focus': props.focus}" v-show="!context">
-      <Tool class="draggable" :key="idx"
-          :title="tool.name" :src="tool.icon" :index="idx" draggable="true"
-          v-for="(tool, idx) in storage.tools" @click="redirect(tool.link)"
+    <div
+      class="tool-container"
+      ref="toolContainer"
+      :class="{ focus: props.focus }"
+      v-show="!context"
+    >
+      <Tool
+        class="draggable"
+        :key="idx"
+        :title="tool.name"
+        :src="tool.icon"
+        :index="idx"
+        draggable="true"
+        v-for="(tool, idx) in storage.tools"
+        @click="redirect(tool.link)"
       />
 
-      <Tool :title="t('add')" src="/tool/add.svg" :index="-2" @click="activeEdit(true)" />
+      <Tool
+        :title="t('add')"
+        src="/tool/add.svg"
+        :index="-2"
+        @click="activeEdit(true)"
+      />
     </div>
   </div>
 </template>
@@ -319,18 +345,18 @@ button.button {
   outline: 0;
   border-radius: 4px;
   fill: #fff;
-  background: rgb(50,50,50);
-  border: 1px solid rgb(80,80,80);
-  transition: .25s;
+  background: rgb(50, 50, 50);
+  border: 1px solid rgb(80, 80, 80);
+  transition: 0.25s;
 }
 
 button.button.plain {
   background: transparent;
-  fill: rgb(200,200,200);
+  fill: rgb(200, 200, 200);
 }
 
 button.button:hover {
-  background: rgb(60,60,60);
+  background: rgb(60, 60, 60);
 }
 
 .dialog {
@@ -358,17 +384,17 @@ button.button:hover {
 
 .popup {
   position: absolute;
-  background: rgb(30,30,30);
+  background: rgb(30, 30, 30);
   border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0,0,0,.2);
-  transition: .25s cubic-bezier(.60,.05,.1,1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: 0.25s cubic-bezier(0.6, 0.05, 0.1, 1);
   transform-origin: top left;
   opacity: 0;
   pointer-events: none;
   user-select: none;
   z-index: -64;
   padding: 4px;
-  transform: scale(.5);
+  transform: scale(0.5);
 }
 
 .popup .row {
@@ -379,13 +405,13 @@ button.button:hover {
   cursor: pointer;
   width: 100%;
   height: max-content;
-  transition: .25s;
+  transition: 0.25s;
   border-radius: 6px;
   min-width: 100px;
 }
 
 .popup .row:hover {
-  background: rgba(255,255,255,.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .popup .row svg {
@@ -415,10 +441,10 @@ button.button:hover {
   width: max-content;
   max-width: min(90%, 650px);
   height: max-content;
-  transition: .25s;
+  transition: 0.25s;
   justify-content: center;
   pointer-events: all;
-  animation: FadeInAnimation .25s ease-in-out;
+  animation: FadeInAnimation 0.25s ease-in-out;
   margin: 0 auto;
 }
 
@@ -429,8 +455,8 @@ button.button:hover {
 }
 
 .add img {
-  background: rgba(0,0,0,0.5);
-  fill: rgba(255,255,255,0.85);
+  background: rgba(0, 0, 0, 0.5);
+  fill: rgba(255, 255, 255, 0.85);
 }
 
 @media (max-height: 520px) {

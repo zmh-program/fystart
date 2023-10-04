@@ -1,60 +1,45 @@
-import { wrap } from "@/assets/script/engine";
 import { ref } from "vue";
 import type { Ref } from "vue";
-import { TypingEffect } from "@/assets/script/utils/typing";
-import {storage} from "@/assets/script/storage";
-import axios from "axios";
-import {openai_endpoint} from "@/assets/script/config";
+import { connection } from "@/assets/script/connection";
+import type { StreamMessage } from "@/assets/script/connection";
 
-const ask = wrap(async (message: string, callback: (response: string) => any) => {
-    if (!storage.chatgpt) return;
-    const resp = await axios.post(`${openai_endpoint}/anonymous`, { message, web: false })
-    callback(resp.data.message);
-}, 800);
-
-export const finished = ref<boolean>(false);
+export const finished = ref<boolean>(true);
 
 export class OpenAI {
-    private readonly ref: Ref<string>;
-    private effect: TypingEffect | null;
-    public readonly waiting: Ref<boolean>;
+  private readonly ref: Ref<string>;
+  public readonly queue: Ref<string>;
 
-    public constructor() {
-        this.ref = ref("");
-        this.effect = null;
-        this.waiting = ref(false);
-    }
-    public getRef(): Ref<string> {
-        return this.ref;
+  public constructor() {
+    this.ref = ref("");
+    this.queue = ref("");
+
+    connection.setCallback((message: StreamMessage) => {
+      this.ref.value += message.message;
+      finished.value = message.end;
+
+      setTimeout(() => {
+          const data = this.queue.value;
+          if (finished.value && data.length > 0) this.trigger(data);
+      }, 500);
+    });
+  }
+  public getRef(): Ref<string> {
+    return this.ref;
+  }
+
+  public trigger(text: string) {
+    if (!finished.value) {
+      this.queue.value = text;
+      return;
     }
 
-    public trigger(text: string) {
-        const _this = this;
-        this.waiting.value = true;
-        ask(
-            text,
-            (response: string): void => {
-                finished.value = false;
-                return _this.callback(response);
-            },
-        )
-    }
-    public stop(): boolean {
-        this.waiting.value = false;
-        if (this.effect) return this.effect.stop();
-        return false;
-    }
-    public callback(response: string): void {
-        this.stop();
-        this.effect = new TypingEffect(
-            response,
-            50,
-            false,
-            this.ref,
-            (status: boolean) => {
-                if (status) finished.value = true;
-            },
-        );
-        this.effect.run();
-    }
+    finished.value = false;
+    this.ref.value = "";
+    this.queue.value = "";
+    connection.sendWithRetry({
+      message: text,
+      model: "gpt-3.5-turbo-0613",
+      web: false,
+    });
+  }
 }

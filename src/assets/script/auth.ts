@@ -1,4 +1,4 @@
-import {onMounted, ref, watch} from "vue";
+import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 
 export const auth = ref<boolean | undefined>(undefined);
@@ -29,10 +29,10 @@ window.addEventListener("load", () => {
   if (url.has("token")) {
     window.history.replaceState({}, "", "/");
     const client = url.get("token") || "";
-    if (client) axios.post("/login", { token: client })
-      .then((resp) => {
+    if (client)
+      axios.post("/login", { token: client }).then((resp) => {
         token.value = resp.data.token;
-      })
+      });
   }
-  update().then(r => 0);
+  update().then((r) => 0);
 });

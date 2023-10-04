@@ -1,6 +1,6 @@
-import {ref} from "vue";
+import { ref } from "vue";
 import axios from "axios";
-import {DecimalConvert} from "@/assets/script/utils/base";
+import { DecimalConvert } from "@/assets/script/utils/base";
 
 type GithubRepo = {
   user: string;
@@ -11,7 +11,7 @@ type GithubRepo = {
   language: string;
   stars: string;
   color: string;
-}
+};
 
 export const data = ref<GithubRepo[]>([]);
 
@@ -19,7 +19,8 @@ export const loading = ref<boolean>(false);
 export function update() {
   if (loading.value) return;
   loading.value = true;
-  axios.get("/github")
+  axios
+    .get("/github")
     .then((res) => {
       data.value = res.data.data;
       data.value.forEach((repo: GithubRepo) => {
@@ -31,5 +32,5 @@ export function update() {
     .catch((e) => {
       console.debug(e);
       loading.value = false;
-    })
+    });
 }

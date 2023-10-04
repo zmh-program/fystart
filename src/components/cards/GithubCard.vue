@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { data, update, loading } from "@/assets/script/card/github";
 import Star from "@/components/icons/star.vue";
-import {registerScrollableComponent} from "@/assets/script/utils/scroll";
-import {ref} from "vue";
+import { registerScrollableComponent } from "@/assets/script/utils/scroll";
+import { ref } from "vue";
 import Loader from "@/components/icons/loader.vue";
 
 const element = ref<HTMLElement | null>(null);
@@ -32,10 +32,11 @@ update();
           <div class="github-desc">{{ repo.description }}</div>
           <div class="github-footer">
             <star /> <span class="star">{{ repo.stars }}</span>
-            <div class="color" :style="{'background': repo.color}" /> <div class="language">{{ repo.language }}</div>
+            <div class="color" :style="{ background: repo.color }" />
+            <div class="language">{{ repo.language }}</div>
           </div>
         </div>
-        <hr class="github-hr" v-if="idx < data.length - 1">
+        <hr class="github-hr" v-if="idx < data.length - 1" />
       </template>
     </div>
     <div class="github-bottom">
@@ -53,11 +54,11 @@ update();
   flex-direction: column;
   background: rgba(13, 17, 23, 0.98);
   backdrop-filter: blur(2px);
-  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 220px;
   height: 180px;
   margin: 15px 15px 30px 15px;
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 12px;
   overflow: hidden;
   font-family: var(--fonts-cn);
@@ -75,7 +76,7 @@ update();
 .github-top {
   display: flex;
   flex-direction: row;
-  padding: .5em .7em .3em;
+  padding: 0.5em 0.7em 0.3em;
   height: max-content;
   width: 100%;
 }
@@ -86,7 +87,7 @@ update();
   width: 100%;
   height: max-content;
   padding: 6px 4px;
-  animation: FadeInAnimation .25s ease-in-out;
+  animation: FadeInAnimation 0.25s ease-in-out;
 }
 
 .github-header {
@@ -155,7 +156,7 @@ update();
   border-radius: 4px;
   cursor: pointer;
   user-select: none;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 @keyframes ScrollAnimation {
@@ -182,7 +183,7 @@ update();
 .github-content {
   display: flex;
   flex-direction: column;
-  padding: 0 .7em;
+  padding: 0 0.7em;
   flex-grow: 1;
   width: 100%;
   overflow-x: hidden;
@@ -230,7 +231,7 @@ update();
 .github-bottom {
   display: flex;
   flex-direction: row;
-  padding: .3em .7em .5em;
+  padding: 0.3em 0.7em 0.5em;
   height: max-content;
   width: 100%;
 }

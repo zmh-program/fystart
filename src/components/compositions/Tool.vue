@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
-  index: number,
-  src: string,
-  title: string,
+  index: number;
+  src: string;
+  title: string;
 }>();
 </script>
 
@@ -21,20 +21,20 @@ const props = defineProps<{
   width: max-content;
   height: max-content;
   margin: 15px 15px 30px 15px;
-  transition: .25s;
+  transition: 0.25s;
   cursor: pointer;
   user-select: none;
 }
 
 .tool img {
   border-radius: 6px;
-  background: rgba(0,0,0,0.85);
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
   width: 80px;
   height: 80px;
   padding: 20px;
-  fill: rgba(255,255,255,0.85);
-  transition: .2s;
+  fill: rgba(255, 255, 255, 0.85);
+  transition: 0.2s;
   backdrop-filter: blur(4px);
 }
 
@@ -45,14 +45,14 @@ const props = defineProps<{
   bottom: -24px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   font-family: var(--fonts-cn);
   font-size: 14px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .tool:hover img {
-  background: rgba(0,0,0,0.95);
+  background: rgba(0, 0, 0, 0.95);
   transform: scale(1.1);
 }
 

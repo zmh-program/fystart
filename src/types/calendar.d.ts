@@ -1,4 +1,4 @@
-declare module 'lunar-calendar' {
+declare module "lunar-calendar" {
   interface LunarDate {
     GanZhiDay: string;
     GanZhiMonth: string;
@@ -21,5 +21,9 @@ declare module 'lunar-calendar' {
 
   interface CalendarData extends LunarDate, SolarDate {}
 
-  export function solarToLunar(year: number, month: number, day: number): CalendarData;
+  export function solarToLunar(
+    year: number,
+    month: number,
+    day: number,
+  ): CalendarData;
 }

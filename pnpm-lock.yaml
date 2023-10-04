@@ -34,6 +34,9 @@ devDependencies:
   npm-run-all:
     specifier: ^4.1.5
     version: 4.1.5
+  prettier:
+    specifier: ^3.0.3
+    version: 3.0.3
   typescript:
     specifier: ~4.8.4
     version: 4.8.4
@@ -394,6 +397,7 @@ packages:
   /@babel/plugin-proposal-unicode-property-regex@7.18.6(@babel/core@7.22.5):
     resolution: {integrity: sha512-2BShG/d5yoZyXZfVePH91urL5wTG6ASZU9M4o03lKK8u8UW1y08OMttBSOADTcJrnPMpvDXRG3G8fyLh4ovs8w==}
     engines: {node: '>=4'}
+    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-unicode-property-regex instead.
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
@@ -3341,6 +3345,12 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /prettier@3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}

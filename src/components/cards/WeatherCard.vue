@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import "@/assets/style/card/weather.css";
-import {onMounted} from "vue";
+import { onMounted } from "vue";
 import { setupWeatherCard } from "@/assets/script/card/weather";
 
 onMounted(() => {
   setupWeatherCard();
-})
+});
 </script>
 
 <template>
@@ -21,11 +21,11 @@ onMounted(() => {
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 220px;
   height: 180px;
   margin: 15px 15px 30px 15px;
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 12px;
   overflow: hidden;
   text-align: center;
