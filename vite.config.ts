@@ -40,6 +40,16 @@ export default defineConfig({
             cacheName: "fystart-cdn",
             expiration: {
               maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 30,
+            }
+          }
+        }, {
+          urlPattern: new RegExp('^https://open.lightxi.com/'),
+          handler: "CacheFirst",
+          options: {
+            cacheName: "lightxi-cdn",
+            expiration: {
+              maxEntries: 10,
               maxAgeSeconds: 60 * 60 * 24 * 365,
             }
           }
