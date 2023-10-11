@@ -1,12 +1,12 @@
 <div align="center"> 
 
 ![fystart](/public/favicon.ico)
-# [Fyrrum Start · 极目起始页](https://fystart.cn/)
+# [Fyrrum Start · 极目起始页](https://fystart.com/)
 
-[![GitHub stars](https://img.shields.io/github/stars/zmh-program/fystart?style=flat-square)](https://fystart.cn)
-[![GitHub forks](https://img.shields.io/github/forks/zmh-program/fystart?style=flat-square)](https://fystart.cn)
-[![GitHub issues](https://img.shields.io/github/issues/zmh-program/fystart?style=flat-square)](https://fystart.cn)
-[![GitHub license](https://img.shields.io/github/license/zmh-program/fystart?style=flat-square)](https://fystart.cn)
+[![GitHub stars](https://img.shields.io/github/stars/zmh-program/fystart?style=flat-square)](https://fystart.com)
+[![GitHub forks](https://img.shields.io/github/forks/zmh-program/fystart?style=flat-square)](https://fystart.com)
+[![GitHub issues](https://img.shields.io/github/issues/zmh-program/fystart?style=flat-square)](https://fystart.com)
+[![GitHub license](https://img.shields.io/github/license/zmh-program/fystart?style=flat-square)](https://fystart.com)
 
 #### A simple and intuitive browser start page
 #### 一个简洁的起始页
@@ -79,8 +79,9 @@ go run .
 /src/assets/script/config.ts
 ```ts
 export const deploy = true;
-export let endpoint = "https://api.fystart.cn";
-export const qweather = "d25856c083574121a538e53952a2bfff";
+export let endpoint = "https://api.fystart.com";
+export let openai_endpoint = "wss://api.chatnio.net";
+export const qweather = "...";
 
 if (!deploy) endpoint = "http://localhost:8001";
 ```
@@ -88,7 +89,10 @@ if (!deploy) endpoint = "http://localhost:8001";
 /backend/config.yaml
 ```yaml
 debug: true
-api_key: 'sk-...'
+github:
+  endpoint: https://api.github.com
+  token: "ghp_..."
+
 redis:
   host: "localhost"
   port: 6379
@@ -110,6 +114,3 @@ cd backend && go build .
 
 ### Privacy Policy | 隐私政策
 [Privacy Policy](/PRIVACY.md)
-
-### Sponsor | 赞助
-no one

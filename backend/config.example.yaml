@@ -1,6 +1,9 @@
 debug: true
-api_key: 'sk-...'
-token: "ghp_..."
+
+github:
+  endpoint: https://api.github.com
+  token: "ghp_..."
+
 redis:
   host: "localhost"
   port: 6379

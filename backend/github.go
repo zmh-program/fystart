@@ -55,9 +55,11 @@ func GetPopularRepo(page int) ([]PopularRepo, error) {
 	if page*100 > totalPage {
 		page = 1
 	}
-	data, err := Get("https://api.github.com/search/repositories?q=stars:%3E1000&per_page=100&page="+strconv.Itoa(page), map[string]string{
+
+	uri := viper.GetString("github.endpoint") + "/search/repositories?q=stars:%3E1000&per_page=100&page=" + strconv.Itoa(page)
+	data, err := Get(uri, map[string]string{
 		"Accept":        "application/vnd.github.v3+json",
-		"Authorization": "Bearer " + viper.GetString("token"),
+		"Authorization": "Bearer " + viper.GetString("github.token"),
 	})
 
 	if err != nil {

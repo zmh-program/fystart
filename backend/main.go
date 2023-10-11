@@ -33,7 +33,6 @@ func main() {
 		app.POST("/state", StateAPI)
 		app.POST("/sync", SyncStorageAPI)
 		app.GET("/github", GithubExploreAPI)
-		RegisterChatGPTAPI(app)
 	}
 
 	err := app.Run(":8001")
