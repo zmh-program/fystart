@@ -16,6 +16,11 @@ const active = ref(false);
     <span>© 2023</span>
     <div class="split" />
     <span class="button" @click="active = true">{{ t("about") }}</span>
+    <div class="split" />
+    <a class="beian" href="https://beian.miit.gov.cn" target="_blank">
+      <img src="/beian.webp" alt="" />
+      粤ICP备2023066011号-2
+    </a>
   </div>
   <Window :title="t('about')" v-model="active">
     <div class="title">
@@ -151,6 +156,7 @@ const active = ref(false);
   opacity: 0;
   transition: 0.25s;
   user-select: none;
+  white-space: nowrap;
 }
 
 .split::after {
@@ -166,15 +172,48 @@ const active = ref(false);
 .about .button {
   cursor: pointer;
   transition: 0.25s;
+  white-space: nowrap;
 }
 
 .about .button:hover {
   color: #fff;
 }
 
+.beian {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: 0.25s;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.beian img {
+  width: 14px;
+  height: 14px;
+}
+
+.beian:hover {
+  color: #fff;
+}
+
 @media (max-height: 700px) and (max-width: 300px) {
   .about {
     opacity: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .split {
+    display: none;
   }
 }
 
