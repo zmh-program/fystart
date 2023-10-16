@@ -96,7 +96,7 @@ const active = ref(false);
     <br /><br />
     <a
       class="repo"
-      href="https://github.com/zmh-program/fystart"
+      href="https://github.com/Deeptrain-Community/fystart"
       target="_blank"
       ><github />GitHub</a
     >
@@ -108,7 +108,7 @@ const active = ref(false);
       <a
         class="link"
         style="color: #ccc; background: none"
-        href="https://github.com/zmh-program/fystart/blob/main/LICENSE"
+        href="https://github.com/Deeptrain-Community/fystart/blob/main/LICENSE"
         >MIT</a
       >
       开源协议分发

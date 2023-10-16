@@ -3,10 +3,10 @@
 ![fystart](/public/favicon.ico)
 # [Fyrrum Start · 极目起始页](https://fystart.com/)
 
-[![GitHub stars](https://img.shields.io/github/stars/zmh-program/fystart?style=flat-square)](https://fystart.com)
-[![GitHub forks](https://img.shields.io/github/forks/zmh-program/fystart?style=flat-square)](https://fystart.com)
-[![GitHub issues](https://img.shields.io/github/issues/zmh-program/fystart?style=flat-square)](https://fystart.com)
-[![GitHub license](https://img.shields.io/github/license/zmh-program/fystart?style=flat-square)](https://fystart.com)
+[![GitHub stars](https://img.shields.io/github/stars/Deeptrain-Community/fystart?style=flat-square)](https://fystart.com)
+[![GitHub forks](https://img.shields.io/github/forks/Deeptrain-Community/fystart?style=flat-square)](https://fystart.com)
+[![GitHub issues](https://img.shields.io/github/issues/Deeptrain-Community/fystart?style=flat-square)](https://fystart.com)
+[![GitHub license](https://img.shields.io/github/license/Deeptrain-Community/fystart?style=flat-square)](https://fystart.com)
 
 #### A simple and intuitive browser start page
 #### 一个简洁的起始页

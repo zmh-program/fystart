@@ -22,7 +22,7 @@ If you discover any security vulnerabilities or potential security threats relat
 
 To report a security issue, follow these steps:
 
-1. Visit our GitHub repository at [fystart](https://github.com/zmh-program/fystart).
+1. Visit our GitHub repository at [fystart](https://github.com/Deeptrain-Community/fystart).
 2. Go to the "Issues" tab and click on "New Issue."
 3. Provide a detailed description of the security concern or vulnerability.
 4. Submit the issue, and we will review and respond to it as soon as possible.

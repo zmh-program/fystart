@@ -9,7 +9,7 @@ const { t } = useI18n();
 <template>
   <Notification v-if="updater">
     {{ t("update")
-    }}<a class="link" href="https://github.com/zmh-program/fystart">{{
+    }}<a class="link" href="https://github.com/Deeptrain-Community/fystart">{{
       t("check")
     }}</a>
   </Notification>
