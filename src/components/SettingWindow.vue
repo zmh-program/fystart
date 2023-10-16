@@ -17,7 +17,6 @@ import Note from "@/components/icons/note.vue";
 import Info from "@/components/icons/info.vue";
 import Cursor from "@/components/icons/cursor.vue";
 import { auth, token, username } from "@/assets/script/auth";
-import { withCdn } from "@/assets/script/utils/base";
 
 const active = ref(false);
 const { t, locale } = useI18n({ messages: EngineI18n });
@@ -154,7 +153,7 @@ function logout() {
             @click="storage.background = image"
           >
             <img
-              :src="withCdn(image)"
+              :src="image"
               :class="{ selected: storage.background === image }"
               alt=""
               loading="lazy"

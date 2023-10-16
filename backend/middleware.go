@@ -13,6 +13,8 @@ import (
 var allowedOrigins = []string{
 	"https://fystart.com",
 	"https://www.fystart.com",
+	"https://fystart.cn",
+    "https://www.fystart.cn",
 	"https://deeptrain.net",
 	"https://www.deeptrain.net",
 	"http://localhost",

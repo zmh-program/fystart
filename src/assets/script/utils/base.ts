@@ -17,9 +17,6 @@ export function insertScript(src: string) {
   document.body.appendChild(script);
 }
 
-export const withCdn = (src: string) =>
-  src.startsWith("/") ? `https://cdn.zmh-program.site/fystart${src}` : src;
-
 export function contain(
   el: Element,
   target: HTMLElement,

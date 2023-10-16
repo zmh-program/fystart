@@ -2,7 +2,6 @@
 import { storage } from "@/assets/script/storage";
 import Cover from "@/components/compositions/Cover.vue";
 import { ref, watch } from "vue";
-import { withCdn } from "@/assets/script/utils/base";
 
 const props = defineProps<{
   focus: boolean;
@@ -25,7 +24,7 @@ watch(storage, () => {
   <img
     class="background"
     ref="object"
-    :src="withCdn(storage.background)"
+    :src="storage.background"
     :class="{ focus: props.focus }"
     loading="lazy"
     alt
