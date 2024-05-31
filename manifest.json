@@ -1,0 +1,22 @@
+{
+  "index.css": {
+    "file": "assets/index-cb1ee95e.css",
+    "src": "index.css"
+  },
+  "index.html": {
+    "css": [
+      "assets/index-cb1ee95e.css"
+    ],
+    "dynamicImports": [
+      "node_modules/.pnpm/workbox-window@7.0.0/node_modules/workbox-window/build/workbox-window.prod.es5.mjs"
+    ],
+    "file": "assets/index.823e9709.js",
+    "isEntry": true,
+    "src": "index.html"
+  },
+  "node_modules/.pnpm/workbox-window@7.0.0/node_modules/workbox-window/build/workbox-window.prod.es5.mjs": {
+    "file": "assets/workbox-window.prod.es5.6bb6a4de.js",
+    "isDynamicEntry": true,
+    "src": "node_modules/.pnpm/workbox-window@7.0.0/node_modules/workbox-window/build/workbox-window.prod.es5.mjs"
+  }
+}
