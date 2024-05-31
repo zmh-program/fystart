@@ -40,7 +40,7 @@ const data = ref<Calendar>(getCalendar());
   transition: 0.3s;
   border-radius: 12px;
   overflow: hidden;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
   user-select: none;
 }
 

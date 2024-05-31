@@ -11,7 +11,6 @@ import Window from "@/components/compositions/Window.vue";
 import CardContainer from "@/components/CardContainer.vue";
 import Tool from "@/components/compositions/Tool.vue";
 import Cover from "@/components/compositions/Cover.vue";
-import { registerScrollableComponent } from "@/assets/script/utils/scroll";
 
 const { t } = useI18n();
 const props = defineProps<{
@@ -24,8 +23,6 @@ const setting = ref<boolean>(false);
 const popupEl = ref<HTMLElement | null>(null);
 const popupIdx = ref<number>(0);
 const element = ref<HTMLElement | null>(null);
-
-registerScrollableComponent(element);
 
 window.addEventListener("contextmenu", (e: MouseEvent) => {
   if (!props.focus && !setting.value) {

@@ -373,7 +373,7 @@ function logout() {
 .user .username {
   color: #fff;
   font-size: 16px;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
 }
 
 .user .logout {

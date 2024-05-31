@@ -12,7 +12,6 @@ const props = defineProps<{
 <template>
   <div class="card-container" :class="{ focus: props.focus }" v-show="context">
     <DateCard />
-    <WeatherCard />
     <GithubCard />
   </div>
 </template>

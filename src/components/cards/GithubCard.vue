@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { data, update, loading } from "@/assets/script/card/github";
 import Star from "@/components/icons/star.vue";
-import { registerScrollableComponent } from "@/assets/script/utils/scroll";
 import { ref } from "vue";
 import Loader from "@/components/icons/loader.vue";
 
 const element = ref<HTMLElement | null>(null);
-registerScrollableComponent(element, true);
 update();
 </script>
 
@@ -36,7 +34,6 @@ update();
             <div class="language">{{ repo.language }}</div>
           </div>
         </div>
-        <hr class="github-hr" v-if="idx < data.length - 1" />
       </template>
     </div>
     <div class="github-bottom">
@@ -61,16 +58,12 @@ update();
   transition: 0.3s;
   border-radius: 12px;
   overflow: hidden;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
   user-select: none;
 }
 
 .github-name {
   font-family: var(--fonts-en);
-}
-
-.github-hr {
-  color: #30363d;
 }
 
 .github-top {
@@ -88,11 +81,17 @@ update();
   height: max-content;
   padding: 6px 4px;
   animation: FadeInAnimation 0.25s ease-in-out;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.github-repo:last-child {
+  border-bottom: none;
 }
 
 .github-header {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   height: max-content;
   width: 100%;
   text-decoration: none;
@@ -107,9 +106,8 @@ update();
 
 .github-user {
   font-size: 14px;
-  text-align: center;
   vertical-align: center;
-  white-space: nowrap;
+  text-align: left;
   color: #fff;
   text-decoration: none;
 }
@@ -130,9 +128,7 @@ update();
 
 .github-repo-name {
   font-size: 14px;
-  text-align: center;
   vertical-align: center;
-  white-space: nowrap;
   color: #fff;
   text-decoration: none;
 }

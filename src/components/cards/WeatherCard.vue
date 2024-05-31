@@ -29,7 +29,7 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   text-align: center;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
   user-select: none;
 }
 </style>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Close from "@/components/icons/close.vue";
 import { onMounted, ref } from "vue";
-import { registerScrollableComponent } from "@/assets/script/utils/scroll";
 
 const props = defineProps<{
   title: string;
@@ -9,7 +8,6 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(["update:modelValue"]);
 const window = ref<HTMLElement | null>(null);
-registerScrollableComponent(window);
 </script>
 
 <template>
@@ -30,7 +28,7 @@ registerScrollableComponent(window);
 .window * {
   color: #fff;
   user-select: none;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
 }
 
 .window .form {
@@ -106,7 +104,7 @@ registerScrollableComponent(window);
 .window select {
   background: rgb(30, 30, 30);
   border: none;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
   border-radius: 4px;
   padding: 4px 8px 4px 8px;
   outline: none;
@@ -115,7 +113,7 @@ registerScrollableComponent(window);
 .window select option {
   background: rgb(40, 40, 40);
   border: none;
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
   border-radius: 4px;
 }
 </style>
@@ -174,7 +172,7 @@ registerScrollableComponent(window);
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  touch-action: pan-x;
+  touch-action: pan-y;
   padding: 0 26px 36px;
 }
 

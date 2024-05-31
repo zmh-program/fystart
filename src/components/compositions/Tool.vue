@@ -46,7 +46,7 @@ const props = defineProps<{
   left: 50%;
   transform: translateX(-50%);
   color: rgba(255, 255, 255, 0.95);
-  font-family: var(--fonts-cn);
+  font-family: var(--fonts);
   font-size: 14px;
   transition: 0.2s;
 }

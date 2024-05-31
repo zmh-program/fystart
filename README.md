@@ -8,9 +8,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/Deeptrain-Community/fystart?style=flat-square)](https://fystart.com)
 [![GitHub license](https://img.shields.io/github/license/Deeptrain-Community/fystart?style=flat-square)](https://fystart.com)
 
-#### A simple and intuitive browser start page
-#### 一个简洁的起始页
-
 </div>
 
 
