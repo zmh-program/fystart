@@ -49,6 +49,8 @@
     - ✔ 🇯🇵 日本語 (Japanese)
 
 
+> [!warning]
+> 由于和风天气插件产品于2024年5月1日不再提供服务, Fystart 已关闭天气组件！
 
 
 ## ScreenShot | 快照
