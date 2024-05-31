@@ -1,16 +1,16 @@
 {
   "index.css": {
-    "file": "assets/index-cb1ee95e.css",
+    "file": "assets/index-2a396905.css",
     "src": "index.css"
   },
   "index.html": {
     "css": [
-      "assets/index-cb1ee95e.css"
+      "assets/index-2a396905.css"
     ],
     "dynamicImports": [
       "node_modules/.pnpm/workbox-window@7.0.0/node_modules/workbox-window/build/workbox-window.prod.es5.mjs"
     ],
-    "file": "assets/index.823e9709.js",
+    "file": "assets/index.1e544d29.js",
     "isEntry": true,
     "src": "index.html"
   },
