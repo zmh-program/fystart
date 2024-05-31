@@ -4,11 +4,11 @@ Welcome to our fystart. We value your privacy and are committed to protecting yo
 
 ## Information Collection
 
-Our browser start page utilizes a third-party service called ChatGPT, provided by OpenAI, for the search feature. When you use the search functionality, your search queries and related information will be sent to the ChatGPT service to provide search results and relevant suggestions. We do not associate this information with any personally identifiable information.
+Our browser start page utilizes a third-party provided by OpenAI, for the search feature. When you use the search functionality, your search queries and related information will be sent to the OpenAI service to provide search results and relevant suggestions. We do not associate this information with any personally identifiable information.
 
 However, we provide customizable options, and you can choose to disable this feature by adjusting the settings in your browser.
 
-Please note that ChatGPT is an independent third-party service, and its use and protection of personal information are governed by its own privacy policy. We recommend that you read and understand their privacy policy before using the ChatGPT service.
+Please note that OpenAI is an independent third-party service, and its use and protection of personal information are governed by its own privacy policy. We recommend that you read and understand their privacy policy before using the OpenAI service.
 
 ## Log Data
 

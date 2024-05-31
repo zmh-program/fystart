@@ -13,6 +13,7 @@ type StorageRequestBody struct {
 	ToolBox    bool          `json:"toolbox" required:"true"`
 	About      bool          `json:"about" required:"true"`
 	ExactTime  bool          `json:"exactTime" required:"true"`
+	OpenAISecret string     `json:"openaiSecret"`
 	FocusInput bool          `json:"focusInput" required:"true"`
 	Language   string        `json:"language" required:"true"`
 	Background string        `json:"background" required:"true"`

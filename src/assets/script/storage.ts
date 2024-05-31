@@ -36,6 +36,7 @@ export const storage = reactive(
     language: "zh",
     background: "/background.webp",
     stamp: 0,
+    openaiSecret: "",
     tools: [
       {
         type: ToolTypes.BUILTIN,

@@ -55,6 +55,8 @@ const window = ref<HTMLElement | null>(null);
   flex-direction: row;
   flex-wrap: nowrap;
   margin: 2px 0;
+  align-items: center;
+  width: 100%;
 }
 
 .window .form .row.desc {

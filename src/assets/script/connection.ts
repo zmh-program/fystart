@@ -1,4 +1,5 @@
 import { openai_endpoint } from "@/assets/script/config";
+import { storage } from "@/assets/script/storage";
 
 export const endpoint = `${openai_endpoint}/chat`;
 
@@ -10,6 +11,7 @@ export type StreamMessage = {
 };
 
 export type ChatProps = {
+  type: string;
   message: string;
   model: string;
   web?: boolean;
@@ -36,7 +38,7 @@ export class Connection {
     this.connection.onopen = () => {
       this.state = true;
       this.send({
-        token: "anonymous",
+        token: storage.openaiSecret || "anonymous",
         id: this.id,
       });
     };

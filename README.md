@@ -20,8 +20,8 @@
   - 🍊 Calendar
 - 🍋 自定义设置 (账号自动同步)
   - 🍋 Customizable Settings (Account Auto Sync)
-- 🍎 ChatGPT 搜索建议
-  - 🍎 ChatGPT Search Suggestions
+- 🍎 AI 搜索建议 (基于 Chat Nio)
+  - 🍎 AI Search Suggestions (Powered by Chat Nio)
 - 🍉 翻译 / Github 搜索
   - 🍉 Translation / GitHub Search
 - 🍇 工具箱

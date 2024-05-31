@@ -37,8 +37,9 @@ export class OpenAI {
     this.ref.value = "";
     this.queue.value = "";
     connection.sendWithRetry({
+      type: "chat",
       message: text,
-      model: "gpt-3.5-turbo-0613",
+      model: "gpt-3.5-turbo",
       web: false,
     });
   }

@@ -86,12 +86,17 @@ function logout() {
         <div class="row desc">
           <div class="row">
             <openai />
-            <span>ChatGPT</span>
+            <span>Chat Nio AI</span>
             <div class="grow" />
             <Checkbox v-model="storage.chatgpt" />
           </div>
           <div class="row">
-            <p>{{ t("openai") }}</p>
+            <p style="white-space: nowrap; margin-right: 0.5rem">{{ t("openai") }}</p>
+            <input
+              type="password"
+              v-model="storage.openaiSecret"
+              :placeholder="t('openai-secret')"
+            />
           </div>
         </div>
         <div class="row desc">
@@ -204,7 +209,8 @@ function logout() {
     "search-engine": "Search Engine Preferences",
     "language": "Language",
     "input-background": "Input the background url.",
-    "openai": "ChatGPT Search Suggestions",
+    "openai": "AI Search Suggestions",
+    "openai-secret": "Please input the Chat Nio API Key",
     "time": "Exact Time",
     "time-desc": "Show the exact time on the search bar",
     "focus": "Auto Focus",
@@ -224,7 +230,8 @@ function logout() {
     "search-engine": "搜索引擎偏好",
     "language": "语言",
     "input-background": "请输入背景图片的链接",
-    "openai": "ChatGPT 搜索建议",
+    "openai": "AI 搜索建议",
+    "openai-secret": "请输入 Chat Nio API 密钥",
     "time": "精确时间",
     "time-desc": "搜索栏上方显示的时间精确到秒",
     "focus": "自动聚焦",
@@ -244,7 +251,8 @@ function logout() {
     "search-engine": "搜尋引擎偏好",
     "language": "語言",
     "input-background": "請輸入背景圖片的連結",
-    "openai": "ChatGPT 搜尋建議",
+    "openai": "AI 搜尋建議",
+    "openai-secret": "請輸入 Chat Nio API 金鑰",
     "time": "精確時間",
     "time-desc": "搜尋欄上方顯示的時間精確到秒",
     "focus": "自動聚焦",
@@ -264,7 +272,8 @@ function logout() {
     "search-engine": "Настройки поисковой системы",
     "language": "Язык",
     "input-background": "Введите URL-адрес фона",
-    "openai": "Поисковые предложения ChatGPT",
+    "openai": "Поисковые предложения AI",
+    "openai-secret": "Пожалуйста, введите ключ API Chat Nio",
     "time": "Точное время",
     "time-desc": "Показывать точное время в строке поиска",
     "focus": "Автофокус",
@@ -284,7 +293,8 @@ function logout() {
     "search-engine": "Suchmaschinenpräferenzen",
     "language": "Sprache",
     "input-background": "Geben Sie die URL des Hintergrunds ein",
-    "openai": "ChatGPT-Suchvorschläge",
+    "openai": "AI-Suchvorschläge",
+    "openai-secret": "Bitte geben Sie den Chat Nio API-Schlüssel ein",
     "time": "Exakte Zeit",
     "time-desc": "Zeigen Sie die genaue Zeit in der Suchleiste an",
     "focus": "Autofokus",
@@ -304,7 +314,8 @@ function logout() {
     "search-engine": "Préférences du moteur de recherche",
     "language": "Langue",
     "input-background": "Entrez l'URL de l'arrière-plan",
-    "openai": "Suggestions de recherche ChatGPT",
+    "openai": "Suggestions de recherche AI",
+    "openai-secret": "Veuillez saisir la clé API Chat Nio",
     "time": "Heure exacte",
     "time-desc": "Afficher l'heure exacte dans la barre de recherche",
     "focus": "Mise au point automatique",
@@ -324,7 +335,8 @@ function logout() {
     "search-engine": "検索エンジンの設定",
     "language": "言語",
     "input-background": "背景のURLを入力してください",
-    "openai": "ChatGPT検索の提案",
+    "openai": "AI 検索の提案",
+    "openai-secret": "Chat Nio API キーを入力してください",
     "time": "正確な時間",
     "time-desc": "検索バーに正確な時間を表示します",
     "focus": "オートフォーカス",
