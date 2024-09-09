@@ -10,8 +10,8 @@
 
 </div>
 
-> [[TIP]]
-> 此项目已停止开发，新起始页：[冰糖桌面 (bingtang.com)](https://bingtang.com)！
+> [!note]
+> ## 此项目已停止开发，新起始页：[冰糖桌面 (bingtang.com)](https://bingtang.com)！
 
 
 ## Features | 功能
